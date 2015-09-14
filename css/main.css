@@ -1,0 +1,135 @@
+body {
+    background-color: #ECF0F1;
+    font-family: Circular,Helvetica,Arial,sans-serif;
+    font-weight: 200;
+    margin: 0;
+}
+
+h2 {
+    color: #2e2f33;
+    font-size: 1.2em;
+    height: 50px;
+    left: 0;
+    margin: 0;
+    padding: 20px 0 0 20px;
+    right: 0;
+    z-index: 9999;
+}
+header {
+    background-color: #2980B9;
+    height: 50px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+header a {
+    color:#ECF0F1;
+    padding: 16px;
+    text-decoration: none;
+}
+header a:hover {
+    background-color: #3498DB;
+    color:#FFFFFF;
+}
+header i {
+    margin-right: 5px;
+}
+
+
+main {
+    margin: 50px 0 0 150px;
+}
+section {
+    margin-left: 20px;
+}
+
+#main-nav{
+    background-color: #FFFFFF;
+    height: 100%;
+    left: 0;
+    position:static;
+    position: fixed;
+    right: 0;
+    top: 50px;
+    width: 170px;
+    z-index: 9999;
+}
+/*******************************************/
+/*    Affichage des listes de film         */
+/*******************************************/
+.list-movie {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+.movie-item {
+    background-color: #ECF0F1;
+    box-shadow: 0 0 5px #888888;
+    color:#2e2f33;
+    font-size: 0.7em;
+    font-weight: bold;
+    margin-top: 10px;
+    padding:5px;
+    position:relative;
+    text-align: left;
+    width: 12%;
+}
+.movie-item:hover {
+    background-color: #3498DB;
+    cursor: pointer;
+}
+.movie-item img {
+    width:100%;
+}
+.movie-description {
+    background-color: #FFFFFF;
+    bottom: 0px;
+    display: block;
+    height: 50px;
+    margin-top: -7px;
+    width: 100%;
+}
+.movie-title {
+    display: block;
+    margin: 5px;
+}
+.movie-description small {
+    color:#666666;
+    display: block;
+    margin: 5px;
+
+}
+
+.desktop-hidden {
+    display:none;
+}
+
+@media (max-width: 1000px) {
+    .movie-item {
+        width: 25%;
+    }
+
+}
+
+@media (max-width: 800px) {
+    main {
+        margin: 50px 0 0 10px;
+    }
+    #main-nav{
+        display:none;
+    }
+    .desktop-hidden {
+        display:initial;
+    }
+
+}

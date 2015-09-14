@@ -1,0 +1,35 @@
+/*******************************************/
+/*          Header navigation              */
+/*******************************************/
+header nav ul {
+    text-align: right;
+}
+
+header nav li {
+    display: inline;
+    height: 50px;
+    list-style-type: none;
+    width: 150px;
+}
+
+/*******************************************/
+/*          Main navigation              */
+/*******************************************/
+#main-nav {
+    background-color: #FFFFFF;
+    height: 100%;
+    left: 0;
+    position: static;
+    position: fixed;
+    right: 0;
+    top: 50px;
+    width: 170px;
+    z-index: 9999;
+}
+
+@media (max-width: 800px) {
+    #main-nav {
+        display: none;
+    }
+
+}
