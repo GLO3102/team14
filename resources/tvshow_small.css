@@ -1,6 +1,6 @@
 /* RESPONSIVE CSS*/
 /* Phone */
-@media (max-width: 360px) {
+@media (max-width: 600px) {
     .showInfoSection {
         width: 300px;
         padding: 0px;
