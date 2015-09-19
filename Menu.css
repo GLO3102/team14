@@ -1,6 +1,6 @@
 #Menu
 {
-    background: blue;
+    /*background: blue;*/
     display: inline;
     width: 200px;
     height: 100%;
@@ -22,7 +22,7 @@
 
 .movieTitle, .movieInfos, .movieContainer, .movieLink
 {
-    background: darkblue;
+    /*background: darkblue;*/
     display: inline-block;
     width: 100%;
 }
