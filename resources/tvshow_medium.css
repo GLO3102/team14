@@ -1,0 +1,35 @@
+/* RESPONSIVE CSS */
+/* Tablet */
+@media (max-width: 768px) {
+    .showInfoSection {
+        width: 700px;
+    }
+
+    .showInfoSection .showInfoBox {
+        width: 590px;
+    }
+
+    .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent {
+        padding-left: 0px;
+    }
+
+    .showInfoSection .showEpisodeListContainer {
+        width: 600px;
+    }
+
+    .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList {
+        float: none;
+        width: 600px;
+    }
+
+    .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showOrderedList {
+        -webkit-column-count: 2;
+    }
+
+    .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover {
+        margin-bottom: 10px;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
