@@ -1,6 +1,6 @@
 /* RESPONSIVE CSS */
 /* Tablet */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 361px) {
     .showInfoSection {
         width: 700px;
     }

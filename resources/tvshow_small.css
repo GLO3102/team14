@@ -12,12 +12,31 @@
 
     .showInfoSection .showVideoPreviewContainer .showCover {
         float: none;
+        width: 212px;
+        margin: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-bottom: 10px;
+    }
+
+    .showInfoSection .showVideoPreviewContainer {
+        margin-bottom: 20px;
     }
 
     .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent {
         padding-left: 0px;
+        padding-right: 0px;
         float: none;
-        width: 300px;
+        width: 252px;
+        height: 189px;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent .videoPlayer {
+        width: 252px;
+        height: 189px;
+        margin: auto;
     }
 
     .showInfoSection .showEpisodeListContainer {
