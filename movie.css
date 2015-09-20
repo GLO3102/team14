@@ -1,0 +1,61 @@
+h2 {
+    color: crimson;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+h3 {
+    color: crimson;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+p {
+    color: crimson;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:link {
+    color:green;
+    background-color:transparent;
+    text-decoration:none;
+}
+
+a:visited {
+    color: crimson;
+    background-color:transparent;
+    text-decoration:none;
+}
+
+a:hover {
+    color: darkred;
+    background-color:transparent;
+    text-decoration:underline;
+}
+
+a:active {
+    color: darkred;
+    background-color:transparent;
+    text-decoration:underline;
+}
+
+.movieInfosContainer {
+    display: inline-block;
+}
+
+.description {
+    display: inline-block;
+    width: 60%;
+    vertical-align:top;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.rating {
+    display: inline-block;
+}
+
+div.actorsList li {
+    color: crimson;
+}
