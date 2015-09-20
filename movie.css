@@ -4,6 +4,12 @@ h2 {
     text-decoration: none;
 }
 
+h3 {
+    color: crimson;
+    background-color: transparent;
+    text-decoration: none;
+}
+
 p {
     color: crimson;
     background-color: transparent;
@@ -34,8 +40,16 @@ a:active {
     text-decoration:underline;
 }
 
-.movieInfos {
+.movieInfosContainer {
     display: inline-block;
+}
+
+.description {
+    display: inline-block;
+    width: 60%;
+    vertical-align:top;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .rating {
