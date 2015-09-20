@@ -1,4 +1,7 @@
 #############
 ## Webstorm
 #############
-.idea
+
+.idea/*
+.idea/workspace.xml
+
