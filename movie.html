@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="movie.css">
+    <link rel="stylesheet" href="movie.css">
+    <link rel="stylesheet" href="Menu.css" />
+    <script src="Menu.js"></script>
     <title>Movie</title>
 </head>
 <body bgcolor="#000000">
 
+<div id="Menu">
+    <input type="button" value="Option 1">
+</div>
 <div id="mainContainer">
+        <div><input type="button" value="Show Menu" onclick="ToggleMenu()"></div>
         <div class="movieTitle">
             <h2>The Hunger Games: Mockingjay - Part 1</h2>
+            <div class="infos">
+                <h3>Genre: Action & Adventure</h3>
+                <p>Release date: 2014</p>
+            </div>
             <div class="rating">
-                <p>Rating: </p>
+                <h3>Rating: </h3>
                 <img src="images/5-star.png" style="width: 10%; height: 10%" />
             </div>
         </div>
-    <div class="movieInfos">
+    <div class="movieInfosContainer">
         <div class="coverPhoto">
             <input id="cover" type="image" src="http://a4.mzstatic.com/us/r30/Video2/v4/14/1b/8a/141b8afb-daa1-a66e-240f-02dd3ef74c2c/poster227x227.jpeg" />
-            <p>Release date: 2014</p>
-            <p>Genre: Action & Adventure</p>
+            <div class="description">
+                <h3>Synopsis</h3>
+                <p>Katniss Everdeen, girl on fire, has survived. She awakens from the cruel and haunting Quarter Quell
+                    deep inside the bunkered catacombs of District 13. Separated from some of her closest allies and
+                    fearing for their safety in the Capitol, Katniss finally agrees to be the Mockingjay, the symbolic
+                    leader of the rebellion. Still uncertain as to whom she can trust, Katniss must help 13 rise from the
+                    shadows, all the while knowing that President Snow has focused his hatred into a personal vendetta
+                    against her—and her loved ones.</p>
+            </div>
         </div>
-        <div class="description">
-            <p>Katniss Everdeen, girl on fire, has survived. She awakens from the cruel and haunting Quarter Quell
-                deep inside the bunkered catacombs of District 13. Separated from some of her closest allies and
-                fearing for their safety in the Capitol, Katniss finally agrees to be the Mockingjay, the symbolic
-                leader of the rebellion. Still uncertain as to whom she can trust, Katniss must help 13 rise from the
-                shadows, all the while knowing that President Snow has focused his hatred into a personal vendetta
-                against her—and her loved ones.</p>
-        </div>
+
+<!---
         <div class="actorsList">
             <ul>
                 <li>Jennifer Lawrence</li>
@@ -42,7 +53,7 @@
             </ul>
         </div>
     </div>
-
+--->
     <div class="movieContainer">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/3PkkHsuMrho" frameborder="0" allowfullscreen></iframe>
     </div>
@@ -54,6 +65,5 @@
     </div>
 
 </div>
-
 </body>
 </html>
