@@ -1,14 +1,14 @@
 .userStyle{
     top:12%;
     left:1%;
-    position: fixed;
+    position: absolute;
     overflow: hidden;
 
 }
 .optionStyle{
-    top: 50%;
+    top: 40%;
     left: 0;
-position: fixed;
+position: absolute;
 overflow: hidden;
 
 }
@@ -20,11 +20,22 @@ overflow: hidden;
 
 }
 
+.bouton{
+    width: 200px;
+    height: 50px;
+    align-self: center;
+    margin-top: 100px;
+    overflow: hidden;
+}
+
 .menuWidth{
     witdth: 200px;
 }
 @media screen and (max-width: 640px) {
     .menuWidth{
+        width: 100px;
+    }
+    .bouton{
         width: 100px;
     }
 
