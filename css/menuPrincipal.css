@@ -1,4 +1,9 @@
+
+.menuBody{
+    background-color: lightgray;
+}
 .userStyle{
+
     top:12%;
     left:1%;
     position: absolute;
@@ -6,6 +11,7 @@
 
 }
 .optionStyle{
+
     top: 40%;
     left: 0;
 position: absolute;
@@ -13,6 +19,7 @@ overflow: hidden;
 
 }
 .search{
+
     top: 5%;
     left: 1%;
     position: fixed;
@@ -20,7 +27,19 @@ overflow: hidden;
 
 }
 
-.bouton{
+.boutonUser{
+    background-color: #2980B9;
+    color: #FFFFFF;
+    font-size: medium;
+
+
+}
+.boutonMenu{
+
+    background-color: #2980B9;
+    color: #FFFFFF;
+    font-size: medium;
+
     width: 200px;
     height: 50px;
     align-self: center;
@@ -30,6 +49,7 @@ overflow: hidden;
 
 .menuWidth{
     witdth: 200px;
+    background-color: burlywood;
 }
 @media screen and (max-width: 640px) {
     .menuWidth{

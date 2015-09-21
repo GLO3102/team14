@@ -30,7 +30,7 @@
     </nav>
 
 </header>
-
+<body class="menuBody">
 <div class="search">
     <input type="image" src="images/film.jpg"  onclick="onMenuBouton('index')" name="MainPageButton" value="Main Page">
 </div>
@@ -38,8 +38,8 @@
     <img src="images/user.jpg"><br>
     <input type="text" id="userIdentity" value=""  readonly="true" style="border: hidden"/>
     <br><br>
-    <input id="disconnectButton" type="button" value="Disconnect" onclick="disconnectUser()"/><br>
-    <input id="watchListButton" type="button" value="watchList"/><br>
+    <input id="disconnectButton" type="button" class="boutonUser" value="Disconnect" onclick="disconnectUser()"/><br>
+    <input id="watchListButton" type="button"class="boutonUser" value="watchList"/><br>
     <br><br>
 </section>
 <section id="userConnection" class="userStyle">
@@ -47,17 +47,17 @@
     <input id="userInput" type="text"/><br>
     password <br>
     <input type="password"  id="passWordInput" /><br>
-    <input type="button" id="passWordButton" value="Enter" onclick="passwordValidation()">
+    <input type="button" id="passWordButton" class="boutonUser" value="Enter" onclick="passwordValidation()">
 
 </section>
 
 
 <div class="optionStyle">
-    <input name="moviesButton" type="button"  class="bouton" value="Movies" onclick="onMenuBouton('movie')"><br><br>
-    <input name="TvSeriesButton"  type="button" class="bouton" value="Tv Series" onclick="onMenuBouton('tv')"></input><br><br>
-    <input id="actorButton"  type="button" class="bouton" value="Actor">
+    <input name="moviesButton" type="button"  class="boutonMenu" value="Movies" onclick="onMenuBouton('movie')"><br><br>
+    <input name="TvSeriesButton"  type="button" class="boutonMenu""bouton" value="Tv Series" onclick="onMenuBouton('tv')"></input><br><br>
+    <input id="actorButton"  type="button" class="boutonMenu""bouton" value="Actor">
 </div>
-</div>
+
 <iframe id="contenuFrame" src="index.html" width="85%" align="right" height="1000px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 
 </body>
