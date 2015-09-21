@@ -1,16 +1,4 @@
-/*******************************************/
-/*          Header navigation              */
-/*******************************************/
-header nav ul {
-    text-align: right;
-}
 
-header nav li {
-    display: inline;
-    height: 50px;
-    list-style-type: none;
-    width: 150px;
-}
 
 /*******************************************/
 /*          Main navigation              */

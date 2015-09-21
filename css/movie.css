@@ -1,17 +1,17 @@
 h2 {
-    color: crimson;
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
 h3 {
-    color: crimson;
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
 p {
-    color: crimson;
+    color: black;
     background-color: transparent;
     text-decoration: none;
 }
@@ -23,19 +23,19 @@ a:link {
 }
 
 a:visited {
-    color: crimson;
+    color: black;
     background-color:transparent;
     text-decoration:none;
 }
 
 a:hover {
-    color: darkred;
+    color: grey;
     background-color:transparent;
     text-decoration:underline;
 }
 
 a:active {
-    color: darkred;
+    color: grey;
     background-color:transparent;
     text-decoration:underline;
 }
@@ -57,5 +57,5 @@ a:active {
 }
 
 div.actorsList li {
-    color: crimson;
+    color: black;
 }
