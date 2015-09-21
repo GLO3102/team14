@@ -1,0 +1,36 @@
+header {
+    background-color: #2980B9;
+    height: 50px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+header a {
+    color:#ECF0F1;
+    padding: 16px;
+    text-decoration: none;
+}
+
+header a:hover {
+    background-color: #3498DB;
+    color:#FFFFFF;
+}
+
+header i {
+    margin-right: 5px;
+}
+
+header nav ul {
+    text-align: right;
+}
+
+header nav li {
+    display: inline;
+    height: 50px;
+    list-style-type: none;
+    width: 150px;
+}
