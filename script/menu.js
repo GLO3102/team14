@@ -16,3 +16,4 @@ function ToggleMenu() {
         mainContainerElement.style.left = 0;
     }
 }
+

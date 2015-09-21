@@ -1,0 +1,31 @@
+.userStyle{
+    top:12%;
+    left:1%;
+    position: fixed;
+    overflow: hidden;
+
+}
+.optionStyle{
+    top: 50%;
+    left: 0;
+position: fixed;
+overflow: hidden;
+
+}
+.search{
+    top: 5%;
+    left: 1%;
+    position: fixed;
+    overflow: hidden;
+
+}
+
+.menuWidth{
+    witdth: 200px;
+}
+@media screen and (max-width: 640px) {
+    .menuWidth{
+        width: 100px;
+    }
+
+}
