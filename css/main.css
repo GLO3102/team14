@@ -6,12 +6,12 @@ body {
 }
 
 h2 {
+    border-bottom: 1px #dddddd solid;
     color: #2e2f33;
-    font-size: 1.2em;
-    height: 50px;
+    font-size: 1.5em;
     left: 0;
-    margin: 0;
-    padding: 20px 0 0 20px;
+    margin: 0 20px;
+    padding-top: 20px;
     right: 0;
     z-index: 9999;
 }
@@ -92,6 +92,12 @@ section {
 .desktop-hidden {
     display:none;
 }
+.mobile-hidden {
+    display:initial;
+}
+.hidden {
+    display:none;
+}
 
 @media (max-width: 1000px) {
     .movie-item {
@@ -109,6 +115,9 @@ section {
     }
     .desktop-hidden {
         display:initial;
+    }
+    .mobile-hidden {
+        display:none;
     }
 
 }

@@ -1,0 +1,45 @@
+#welcome-message  {
+    margin-top: 100px;
+}
+
+#welcome-message p {
+    color: #888888;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#search-home {
+    display: table;
+    margin: auto;
+}
+
+#search {
+    background:rgba(50, 50, 50, 0.2);
+    border:0px solid #dbdbdb;
+    font-size: 2em;
+    padding:6px 15px;
+}
+.search-button {
+    background-color:#207cca;
+    border:2px solid #207cca;
+    color:#fafafa;
+    font: 2em FontAwesome;
+    left:-8px;
+    padding:6px 15px;
+    position:relative;
+}
+.search-button:hover  {
+    cursor: pointer;
+}
+
+
+@media (max-width: 800px) {
+    #search {
+        font-size: 1.2em;
+    }
+    .search-button {
+
+        font: 1.2em FontAwesome;
+    }
+
+}

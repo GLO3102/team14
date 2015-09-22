@@ -6,6 +6,7 @@
     <title>UMovie</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/header.css">
 </head>
@@ -13,22 +14,24 @@
 <header>
     <nav>
         <ul>
+            <li class="home-btn"><a href="#"><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
             <li class="desktop-hidden"><a href="#"><i class="fa fa-bars"></i></a></li>
             <li><input id="searchInput" type="search" value="search"/></li>
-            <li><a href="#"><i class="fa fa-user"></i>UserName</a></li>
+            <li><a href="#"><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></a></li>
         </ul>
     </nav>
 </header>
-<!--
-<nav id="main-nav">
-    <ul>
-        <li><a href="movie.html">Movie page</a></li>
-        <li><a href="tvshow.html">TV show page</a></li>
-        <li><a href="actor.html">Actor page</a></li>
-    </ul>
-</nav>
--->
 <main>
+    <h1 class="hidden">UMovie</h1>
+    <div id="welcome-message">
+        <p>Bienvenue dans UMovie</p>
+        <p>Quel film souhaitez-vous visionner?</p>
+        <form id="search-home" >
+            <label for="search" class="hidden">Rechercher</label>
+            <input type="input" name="search" id="search" placeholder="Rechercher un film"   />
+            <input class="search-button" type="submit" value=" &#xf002">
+        </form>
+    </div>
     <section>
         <h2>Les nouveautés</h2>
         <ul class="list-movie">
