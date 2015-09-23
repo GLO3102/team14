@@ -17,21 +17,33 @@ function ToggleMenu() {
     }
 }
 
-function windowConnection(){
+
+function connectionWindow(){
    // alert("bonjour les tous petit");
 
     window.open("connection.html","Connection", 'height=150,width=200,top=110,left=1600,resizable=no' );
+}
+function userWindow(){
+
+    window.open("userWindow.html", "_blank", "location=no,menubar=no,scrollbars=no,status=no,titlebar=no,toolbar=no, top=100, left=1600, width=200, height=100");
+
+
 }
 
 function passwordValidation()
 {
     var userName = document.getElementById("userInput");
     var password = document.getElementById("passWordInput");
+
+    console.log("allo la terre");
     if(userName.value==="serea" && password.value==="12345"){
 
-        alert("Bienvenue Sebastien");
+
         window.close();
-        document.getElementById("userMenu").style.opacity=100;
+        var test = document.getElementById("userMenu");
+
+
+        test.style.opacity=100;
         document.getElementById("connection").style.opacity=0;
         console.log(document.getElementById("userMenu").style.opacity);
         
