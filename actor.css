@@ -54,7 +54,7 @@ h1{
     padding: 30px;
     width: 700px;
     background-color:bisque;
-    margin: 0 auto;
+    margin: auto;
     border-style: solid;
     border-color: black;
 }
