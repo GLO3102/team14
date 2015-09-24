@@ -1,4 +1,6 @@
-main {
+
+
+movie {
     background-color: #FFFFFF;
     height: 100%;
     left: 0;
@@ -9,53 +11,53 @@ main {
     margin: 50px 50px 50px 50px;
 }
 
-main h2 {
+movie h2 {
     color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
-main h3 {
+movie h3 {
     color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
-main p {
+movie p {
     color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
-main a:link {
+movie a:link {
     color:green;
     background-color:transparent;
     text-decoration:none;
 }
 
-main a:visited {
+movie a:visited {
     color: black;
     background-color:transparent;
     text-decoration:none;
 }
 
-main a:hover {
+movie a:hover {
     color: grey;
     background-color:transparent;
     text-decoration:underline;
 }
 
-main a:active {
+movie a:active {
     color: grey;
     background-color:transparent;
     text-decoration:underline;
 }
 
-main .movieInfosContainer {
+movie .movieInfosContainer {
     display: inline-block;
 }
 
-main .description {
+movie .description {
     display: inline-block;
     width: 60%;
     vertical-align:top;
@@ -63,10 +65,10 @@ main .description {
     padding-right: 5%;
 }
 
-main .rating {
+movie .rating {
     display: inline-block;
 }
 
-main div.actorsList li {
+movie div.actorsList li {
     color: black;
 }
