@@ -79,6 +79,10 @@
     width: 340px;
 }
 
+.showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showSeasonHeader{
+    text-align: center;
+}
+
 .showInfoSection .showEpisodeListContainer .showSeasonEpisodeList p {
     text-align: center;
 }

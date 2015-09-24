@@ -16,6 +16,30 @@ h2 {
     z-index: 9999;
 }
 
+h3 {
+    color: #2e2f33;
+    font-size: 1.3em;
+    left: 0;
+    margin: 0 0px;
+    padding-top: 0px;
+    right: 0;
+    z-index: 9999;
+}
+
+h4 {
+    color: #2e2f33;
+    font-size: 1.1em;
+    left: 0;
+    margin: 0 0px;
+    padding-top: 0px;
+    right: 0;
+    z-index: 9999;
+}
+
+h4 span {
+    font-weight: normal;
+}
+
 
 
 main {
