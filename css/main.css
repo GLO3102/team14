@@ -49,17 +49,7 @@ section {
     margin-left: 10px;
 }
 
-#main-nav{
-    background-color: #FFFFFF;
-    height: 100%;
-    left: 0;
-    position:static;
-    position: fixed;
-    right: 0;
-    top: 50px;
-    width: 170px;
-    z-index: 9999;
-}
+
 /*******************************************/
 /*    Affichage des listes de film         */
 /*******************************************/
@@ -116,6 +106,9 @@ section {
 .desktop-hidden {
     display:none;
 }
+.tablet-hidden {
+    display:initial;
+}
 .mobile-hidden {
     display:initial;
 }
@@ -123,25 +116,34 @@ section {
     display:none;
 }
 
-@media (max-width: 1000px) {
+/*******************************************/
+/*              Tablette                   */
+/*******************************************/
+@media (max-width: 1024px) {
+    .desktop-hidden {
+        display:initial;
+    }
+    .tablet-hidden {
+        display:none;
+    }
     .movie-item {
         width: 25%;
     }
 
 }
-
-@media (max-width: 800px) {
+/*******************************************/
+/*                Mobile                   */
+/*******************************************/
+@media (max-width: 480px) {
     main {
         margin: 50px 0 0 10px;
     }
-    #main-nav{
-        display:none;
-    }
-    .desktop-hidden {
-        display:initial;
-    }
+
     .mobile-hidden {
         display:none;
+    }
+    .mobile-visible {
+        display:initial;
     }
 
 }

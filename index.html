@@ -9,31 +9,45 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/header.css">
+
 </head>
 <body>
 <header>
     <nav>
         <ul>
             <li class="home-btn"><a href="#"><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
-            <li class="desktop-hidden"><a href="#"><i class="fa fa-bars"></i></a></li>
-            <li><input id="searchInput" type="search" value="search"/></li>
-            <li><a href="#"><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></a></li>
+            <li class="mobile-hidden"><input  type="text" placeholder="Search ..."/><button id="search-btn"><i class="fa fa-search"></i></button></li>
+            <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
+                <ul id="bar-nav" class="hidden">
+                    <li  class="tablet-hidden mobile-visible"><input  type="text" placeholder="Search ..."/><button ><i class="fa fa-search"></i></button></li>
+                    <li><a href="#">My Account (userName)</a></li>
+                    <li><a href="#">My Watchlist</a></li>
+                    <li><a href="#">Log out</a></li>
+                </ul>
+            </li>
+            <li class="tablet-hidden" ><button id="user-btn" ><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></button>
+                <ul id="user-nav" class="hidden">
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">My Watchlist</a></li>
+                    <li><a href="#">Log out</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     <h1 class="hidden">UMovie</h1>
     <div id="welcome-message">
-        <p>Bienvenue dans UMovie</p>
-        <p>Quel film souhaitez-vous visionner?</p>
+        <p>Welcome to UMovie</p>
+        <p>Which movie do you want to watch?</p>
         <form id="search-home" >
-            <label for="search" class="hidden">Rechercher</label>
-            <input type="input" name="search" id="search" placeholder="Rechercher un film"   />
+            <label for="search" class="hidden">Search</label>
+            <input type="input" name="search" id="search" placeholder="Search a movie"   />
             <input class="search-button" type="submit" value=" &#xf002">
         </form>
     </div>
     <section>
-        <h2>Les nouveautés</h2>
+        <h2>Movies</h2>
         <ul class="list-movie">
             <li class="movie-item"><a href="movie.html"><img src="http://a4.mzstatic.com/us/r30/Video2/v4/14/1b/8a/141b8afb-daa1-a66e-240f-02dd3ef74c2c/poster227x227.jpeg" alt="The Hunger Games: Mockingjay - Part 1" /></a><span class="movie-description"> <span class="movie-title">The Hunger Games: Mockingjay - Part 1</span><small>Fiction</small></span></li>
             <li class="movie-item"><img src="images/movies/jurassique.jpg" alt="Le monde Jurassique" /><span class="movie-description"><span class="movie-title">Le monde Jurassique</span><small>Action</small></span></li>
@@ -70,5 +84,7 @@
 
 
 </main>
+
+<script type="text/javascript" src="scripts/menu.js"></script>
 </body>
 </html>
