@@ -19,11 +19,12 @@
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList {
         float: none;
-        width: 600px;
+        margin: auto;
+        width: 400px;
     }
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showOrderedList {
-        -webkit-column-count: 2;
+
     }
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover {
