@@ -1,7 +1,7 @@
 .showInfoSection {
     display: block;
     position: relative;
-    width: 800px;
+    /*width: 800px;*/
     padding: 10px;
     margin-bottom: 20px;
 }
@@ -14,73 +14,81 @@
 }
 
 .showInfoSection .showInfoBox {
-    width: 690px;
+    width: 86.25%;
     float: left;
     height: 50px;
 }
 
 .showInfoSection .showLink {
-    width: 110px;
+    width: 13.75%;
     float: right;
     height: 50px;
 }
 
 .showInfoSection .showDescription {
-    width: 100%;
+    width: 95%;
+    margin-right: 5%;
     margin-bottom: 20px;
 }
 
 .showInfoSection .showVideoPreviewContainer {
+    width: 100%;
     margin-bottom: 120px;
 }
 
 .showInfoSection .showVideoPreviewContainer .showCover {
     float: left;
-    padding-left: 20px;
-    margin: auto;
+    width: 37.5%;
+    padding-left: 10%;
     margin-bottom: 40px;
 }
 
 .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent {
     float: right;
-    padding-left: 100px;
-    padding-right: 20px;
-    margin: auto;
+    width: 37.5%;
+    padding-right: 10%;
+    padding-left: 5%;
     margin-bottom: 40px;
 }
 
 .showInfoSection .showEpisodeListContainer {
     display: block;
     position: relative;
-    width: 700px;
-    margin: auto;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .showInfoSection .showEpisodeListContainer .showSeasonContainer {
-    margin-bottom: 45px;
+    width: 100%;
+    height: 575px;
 }
 
 .showInfoSection .showEpisodeListContainer .showEpisodeListHeader {
      width: 100%;
      margin: auto;
      text-align: center;
-     margin-bottom: 10px;
+     margin-bottom: 30px;
  }
 
 .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover {
-    width: 360px;
+    position: relative;
+    width: 30%;
     height: 500px;
+    margin-left: 5%;
+    margin-right: 15%;
     float: left;
     margin-bottom: 45px;
 }
 
 .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList {
+    position: relative;
     float: right;
-    width: 300px;
+    width: 50%;
+    margin-bottom: 45px;
 }
 
 .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showSeasonHeader{
-    text-align: center;
 }
 
 .showInfoSection .showEpisodeListContainer .showSeasonEpisodeList p {

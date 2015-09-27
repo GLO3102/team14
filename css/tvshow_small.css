@@ -2,18 +2,30 @@
 /* Phone */
 @media (max-width: 480px) {
     .showInfoSection {
-        width: 300px;
+        width: 100%;
         padding: 0px;
     }
 
     .showInfoSection .showInfoBox {
-        width: 190px;
+        width: 58%;
+    }
+
+    .showInfoSection .showLink {
+        width: 42%;
+    }
+
+    .showInfoSection .showDescription {
+        width: 95%;
+        margin-left: 0%;
+        margin-right: 5%;
+        margin-bottom: 20px;
     }
 
     .showInfoSection .showVideoPreviewContainer .showCover {
         float: none;
         width: 212px;
-        margin: auto;
+        margin-left: auto;
+        margin-right: auto;
         padding-left: 0px;
         padding-right: 0px;
         margin-bottom: 10px;
@@ -45,7 +57,8 @@
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList {
         float: none;
-        width: 300px;
+        width: 75%;
+        margin: auto;
     }
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showOrderedList {
@@ -55,7 +68,7 @@
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover {
         margin-bottom: 10px;
         float: none;
-        width: 252px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         height: 350px;

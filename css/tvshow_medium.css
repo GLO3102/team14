@@ -2,35 +2,75 @@
 /* Tablet */
 @media (max-width: 1024px) {
     .showInfoSection {
-        width: 700px;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 
-    .showInfoSection .showInfoBox {
-        width: 590px;
+    .showInfoSection .showDescription {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .showInfoSection .showVideoPreviewContainer .showCover {
+        float: left;
+        width: 10%;
+        padding-left: 11.5%;
+        margin-bottom: 40px;
+    }
+
+    .showInfoSection .showVideoPreviewContainer .showCover .showCoverImage {
+        width: 127px;
+        height: 189px;
+        margin: auto;
+    }
+
+    .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent .videoPlayer {
+        width: 252px;
+        height: 189px;
+        margin: auto;
     }
 
     .showInfoSection .showVideoPreviewContainer .showVideoPreviewContent {
-        padding-left: 0px;
+        float: right;
+        width: 30%;
+        padding-right: 11.5%;
+        margin-left: 27%;
+        margin-bottom: 40px;
     }
 
     .showInfoSection .showEpisodeListContainer {
-        width: 600px;
+        width: 86%;
+        margin-left: 7%;
+        margin-right: 7%;
+    }
+
+
+    .showInfoSection .showEpisodeListContainer .showSeasonContainer {
+        height: auto;
     }
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList {
         float: none;
-        margin: auto;
-        width: 400px;
-    }
-
-    .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonEpisodeList .showOrderedList {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
 
     }
+
+
 
     .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         float: none;
+        width: 288px;
         margin-left: auto;
         margin-right: auto;
+        height: 400px;
+    }
+
+    .showInfoSection .showEpisodeListContainer .showSeasonContainer .showSeasonCover .cover {
+        width: 288px;
+        height: 400px;
     }
 }
