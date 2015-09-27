@@ -88,3 +88,21 @@ body {
 {
     margin-bottom: 20px;
 }
+
+.actorContainer .filmList ol li ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.actorContainer .filmList ol li ul .title {
+    font-weight: bold;
+}
+
+.actorContainer .showList ol li ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.actorContainer .showList ol li ul .title {
+    font-weight: bold;
+}
