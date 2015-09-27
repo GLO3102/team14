@@ -1,18 +1,20 @@
 
-.desktop-hidden {
-    display:none;
-}
-
-.mobile-hidden {
-    display:initial;
-}
-
-.hidden {
-    display:none;
-}
 
 body {
     font-family: Circular,Helvetica,Arial,sans-serif;
     font-weight: 200;
     margin: 0;
+}
+
+.desktop-hidden {
+    display:none;
+}
+.tablet-hidden {
+    display:initial;
+}
+.mobile-hidden {
+    display:initial;
+}
+.hidden {
+    display:none;
 }

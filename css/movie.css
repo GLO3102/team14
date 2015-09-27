@@ -1,13 +1,17 @@
 
+body {
+    background-color: #ECF0F1;
+    font-family: Circular,Helvetica,Arial,sans-serif;
+    font-weight: 200;
+    margin: 0;
+}
 
-movie {
-    background-color: #FFFFFF;
+#mainContainer {
     height: 100%;
     left: 0;
-    position:static;
-    position: fixed;
     right: 0;
-    z-index: 9999;
+    position: relative;
+    /*z-index: 9999;*/
     margin: 50px 50px 50px 50px;
 }
 
@@ -71,4 +75,36 @@ movie .rating {
 
 movie div.actorsList li {
     color: black;
+}
+
+/*******************************************/
+/*              Tablette                   */
+/*******************************************/
+@media (max-width: 1024px) {
+    .desktop-hidden {
+        display:initial;
+    }
+    .tablet-hidden {
+        display:none;
+    }
+    .movie-item {
+        width: 25%;
+    }
+
+}
+/*******************************************/
+/*                Mobile                   */
+/*******************************************/
+@media (max-width: 480px) {
+    main {
+        margin: 50px 0 0 10px;
+    }
+
+    .mobile-hidden {
+        display:none;
+    }
+    .mobile-visible {
+        display:initial;
+    }
+
 }
