@@ -16,11 +16,9 @@ h1{
         height: 200px;
     }
 
-    .actorContainer{
-        width: 500px;
-    }
-
-
+    /*.actorContainer{
+        width: 380px;
+    }*/
 
 }
 
@@ -30,9 +28,9 @@ h1{
         color: #2980B9;
 
     }
-    .actorContainer {
-        width: 480px;
-    }
+    /*.actorContainer {
+        width: 380px;
+    }*/
 
     .filmList{
         width: 300px;
@@ -48,38 +46,19 @@ h1{
     }
 
     iframe{
-
-       /*width: 50%;*/
         width: 265px;
         height: 150px;
-        /*margin-left: 0;*/
     }
-
-    img{
-        max-width: 10%;
-       max-height: 50%;
-    }
-
-
 }
 
-
-
-
 .actorContainer{
-    /*position: fixed;*/
-    /*top: 100px;*/
     right: auto;
-    padding:30px;
-    width: 700px;
-    /*background-color:#ECF01;;*/
-    /*margin-top: 100px;*/
-    /*margin: 0 auto ;*/
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    /*border-style: solid;
-    border-color: black;*/
+    padding-top:20px;
+    /*width: 700px;*/
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+    min-width: 380px;
 }
 
 body {
@@ -87,4 +66,25 @@ body {
     font-family: Circular,Helvetica,Arial,sans-serif;
     font-weight: 200;
     margin: 0;
+}
+
+.actorLink
+{
+    float: right;
+}
+
+.actorName
+{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.actorPhoto
+{
+    margin-bottom: 20px;
+}
+
+.primaryGenre
+{
+    margin-bottom: 20px;
 }

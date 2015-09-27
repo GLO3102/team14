@@ -1,19 +1,3 @@
-/*function ToggleMenu() {
-    var menuElement = document.getElementById('Menu');
-    var mainContainerElement = document.getElementById('mainContainer');
-
-    if (mainContainerElement.style.left === '0px')
-    {
-        menuElement.style.display = 'inline';
-        mainContainerElement.style.left = menuElement.style.width;
-    }
-    else
-    {
-        menuElement.style.display = 'none';
-        mainContainerElement.style.left = 0;
-    }
-}*/
-
 var userButton = document.getElementById("user-btn");
 userButton.onclick = toggleUserMenu;
 
