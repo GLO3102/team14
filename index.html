@@ -21,14 +21,14 @@
                 <ul id="bar-nav" class="hidden">
                     <li  class="tablet-hidden mobile-visible"><input  type="text" placeholder="Search ..."/><button ><i class="fa fa-search"></i></button></li>
                     <li><a href="#">My Account (userName)</a></li>
-                    <li><a href="#">My Watchlist</a></li>
+                    <li><a href="#/watchlists">My Watchlist</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
             </li>
             <li class="tablet-hidden" ><button id="user-btn" ><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></button>
                 <ul id="user-nav" class="hidden">
                     <li><a href="#">My Account</a></li>
-                    <li><a href="#">My Watchlist</a></li>
+                    <li><a href="#/watchlists">My Watchlist</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
             </li>
@@ -46,6 +46,36 @@
             <input class="search-button" type="submit" value=" &#xf002">
         </form>
     </div>
+
+    <div class="container">
+        <hr />
+        <div class="page"></div>
+    </div>
+
+    <script type="text/template" id="watchlist-list-template">
+        <a href="#/new" class="btn btn-primary">New watchlist</a>
+        <br><br>
+        <!-- <hr /> -->
+        <table class="table striped">
+            <thead>
+            <tr>
+                <th>Watchlist</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% watchlists.each( function( list ){ %>
+            <tr>
+                <td><%= list.get( 'name' ) %></td>
+                <td><a href="#/watchlist<%= list.id %>" class="btn btn-primary" role="button">Create</a></td>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </script>
+
+
+<!--
     <section>
         <h2>Movies</h2>
         <ul class="list-movie">
@@ -82,9 +112,14 @@
         </ul>
     </section>
 
-
+-->
 </main>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+<script type="text/javascript" src="scripts/watchlist.js"></script>
+<script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
+
 </body>
 </html>
