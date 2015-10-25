@@ -1,4 +1,4 @@
-1. Lancer index.html dans votre Google Chrome
+1. Lancer index.html dans Google Chrome
 2. Apprécier le site
 
 Note:
