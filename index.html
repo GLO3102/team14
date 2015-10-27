@@ -65,12 +65,24 @@
             <tbody>
             <% watchlists.each( function( list ){ %>
             <tr>
-                <td><%= list.get( 'name' ) %></td>
-                <td><a href="#/watchlist<%= list.id %>" class="btn btn-primary" role="button">Create</a></td>
+                <td><%= list.get("name") %></td>
+                <td><a href="#/watchlists/<%= list.id %>" class="btn btn-primary" role="button">Edit</a></td>
             </tr>
             <% }); %>
             </tbody>
         </table>
+    </script>
+
+    <script type="text/template" id="watchlist-edit-template">
+        <h4><%= watchlist ?  'Edit' : 'Create new' %> Watchlist</h4>
+        <h5><%= watchlist ? '':'Enter watchlist name:' %></h5>
+        <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
+        <hr>
+        <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
+        <button class="addSubmit">Submit</button>
+        <% if(watchlist) { %>
+            <button class="btn delete">Delete</button>
+        <% }; %>
     </script>
 
 

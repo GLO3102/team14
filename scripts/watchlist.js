@@ -67,3 +67,71 @@ var WatchlistListView = Backbone.View.extend({
         })
     }
 });
+
+//*Simon: je commence le WatchlistEditView//
+
+var watchlists = new Watchlists();
+
+var WatchlistEditView = Backbone.View.extend({
+    'el': '.page',
+    'render': function(options) {
+        var self = this;
+        //si la requête est faite avec un ID, c'est qu'on veut aller chercher une watchlist en particulier (*Edit
+        // Watchlist*)
+        if(options.id) {
+
+            var watchlist = new Watchlist({id: options.id});
+            watchlist.fetch({
+                beforeSend: setHeader,
+                success: function(watchlist) {
+                    var template= _.template($("#watchlist-edit-template").html(), {watchlist: watchlist.toJSON()});
+                    self.$el.html(template);
+                }
+            });
+        }
+        //sinon, c'est qu'on crée une nouvelle watchlist (*New Watchlist*)
+        else {
+            {
+                var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
+                this.$el.html(template);
+            }
+        }
+    },
+    'events': {
+        'click .addSubmit': 'saveWatchlist',
+        'click .delete': 'deleteWatchlist'
+    },
+    'saveWatchlist': function(event) {
+        var currentId = $('#hiddenWatchlistId').text();
+        if(currentId == 0) {
+            //c'est alors une nouvelle watchlist
+            var checkValid = watchlists.create({
+                name: $('#watchlistName').val()
+            }, {
+                beforeSend: setHeader,
+                type: 'POST',
+                validate: true,
+                success: function(watchlist) {
+                    router.navigate('watchlists', {trigger:true});
+                }
+            });
+        } else {
+            //on veut plutôt modifier une watchlist existante
+            var watchlist = new Watchlist();
+            var checkValid = watchlist.save({
+                id: currentId,
+                name: $("#watchlistName").val()
+            }, {
+                beforeSend: setHeader,
+                validate: true,
+                success: function(watchlist) {
+                    router.navigate('watchlists', {trigger: true});
+                }
+            });
+            return false;
+        }
+    },
+    'deleteWatchlist': function(event) {
+
+    }
+});

@@ -5,6 +5,7 @@
 var Router = Backbone.Router.extend({
     routes: {
         '' : 'home', // intentionally blank for the home page
+        'new': 'editWatchlist',
         'watchlists' : 'watchlists',
         'watchlists/:id' : 'editWatchlist'
     }
@@ -12,7 +13,7 @@ var Router = Backbone.Router.extend({
 
 // Display logic
 var watchlistListView = new WatchlistListView({ });
-//var watchlistEditView = new WatchlistEditView({ });
+var watchlistEditView = new WatchlistEditView({ });
 var router = new Router();
 
 router.on('route:home', function() {
@@ -26,7 +27,8 @@ router.on('route:watchlists', function() {
 
 router.on('route:editWatchlist', function(id) {
     console.log("routing to editWachlist");
-    //watchlistEditView.render({id: id});
+    console.log(id);
+    watchlistEditView.render({id: id});
 });
 
 var formData = {email:"david.mercier@gmail.com", password:"123456"};
