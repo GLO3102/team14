@@ -132,6 +132,14 @@ var WatchlistEditView = Backbone.View.extend({
         }
     },
     'deleteWatchlist': function(event) {
-
+        var watchlist = new Watchlist();
+        watchlist.id = $('#hiddenWatchlistId').text();
+        watchlist.destroy({
+            beforeSend: setHeader,
+            success: function() {
+                router.navigate('watchlists', {trigger: true});
+            }
+        });
+        return false;
     }
 });
