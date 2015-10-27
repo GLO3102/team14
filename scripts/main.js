@@ -29,4 +29,22 @@ router.on('route:editWatchlist', function(id) {
     //watchlistEditView.render({id: id});
 });
 
+var formData = {email:"david.mercier@gmail.com", password:"123456"};
+var loginObj;
+
+$.ajax({
+    url : "https://umovie.herokuapp.com/login",
+    type: "POST",
+    data : formData,
+    success: function(data, textStatus, jqXHR)
+    {
+        loginObj = data;
+        alert(loginObj["token"]);
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+
+    }
+});
+
 Backbone.history.start();

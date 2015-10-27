@@ -35,7 +35,10 @@ var Watchlist = Backbone.Model.extend({
     }
 });
 
-
+var setHeader = function (xhr) {
+    xhr.setRequestHeader('authorization', loginObj["token"]);
+    //xhr.setRequestHeader('X-Parse-REST-API-Key', 'gvT2Isd5vAvjgq*****************');
+}
 
 var Watchlists = Backbone.Collection.extend({
     'url': 'http://umovie.herokuapp.com/watchlists',
@@ -57,6 +60,7 @@ var WatchlistListView = Backbone.View.extend({
         var watchlists = new Watchlists();
 
         watchlists.fetch( {
+            beforeSend: setHeader,
             success: function() {
                 that.$el.html( that.template( { 'watchlists': watchlists } ) );
             }
