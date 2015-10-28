@@ -41,7 +41,7 @@ $.ajax({
     success: function(data, textStatus, jqXHR)
     {
         loginObj = data;
-        alert(loginObj["token"]);
+        //alert(loginObj["token"]);
     },
     error: function (jqXHR, textStatus, errorThrown)
     {

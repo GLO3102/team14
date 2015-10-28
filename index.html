@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Welcome to UMovie</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
@@ -55,22 +56,11 @@
         <a href="#/new" class="btn btn-primary">New watchlist</a>
         <br><br>
         <!-- <hr /> -->
-        <table class="table striped">
-            <thead>
-            <tr>
-                <th>Watchlist</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="list-group">
             <% watchlists.each( function( list ){ %>
-            <tr>
-                <td><%= list.get("name") %></td>
-                <td><a href="#/watchlists/<%= list.id %>" class="btn btn-primary" role="button">Edit</a></td>
-            </tr>
+                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
             <% }); %>
-            </tbody>
-        </table>
+        </div>
     </script>
 
     <script type="text/template" id="watchlist-edit-template">
@@ -79,9 +69,11 @@
         <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
         <hr>
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
-        <button class="addSubmit">Submit</button>
+        <br><br>
+
+        <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
-            <button class="btn delete">Delete</button>
+            <button class="btn btn-delete delete">Delete</button>
         <% }; %>
     </script>
 
