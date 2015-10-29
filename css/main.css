@@ -147,3 +147,7 @@ section {
     }
 
 }
+
+.searchResultTitle {
+    font-weight: bold;
+}

@@ -71,10 +71,64 @@
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
         <br><br>
 
+        <button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
             <button class="btn btn-delete delete">Delete</button>
         <% }; %>
+        <div id="watchlistSearchContainer" style="display:none">
+            <textarea id="watchlistMovieSearch" cols="50" rows="1"
+                      placeholder="Search for a movie to add to your watchlist!"></textarea>
+            <button class="btn-xs btn-primary" id="btnWatchlistMovieSearch">Search</button>
+            <div id="watchlistMovieSearchResults" style="display:none">
+                <table class="table watchlistSearchResults">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Results</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="searchResultItem" id="rowResult1" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult1">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult1"></span>:
+                                <span class="searchResultDescription" id="descriptionResult1"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult1" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult2" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult2">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult2"></span>:
+                                <span class="searchResultDescription" id="descriptionResult2"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult2" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult3" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult3">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult3"></span>:
+                                <span class="searchResultDescription" id="descriptionResult3"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult3" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult4" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult4">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult4"></span>:
+                                <span class="searchResultDescription" id="descriptionResult4"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult4" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult5" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult5">Add to
+                            Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult5"></span>:
+                                <span class="searchResultDescription" id="descriptionResult5"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult5" style="display:none"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </script>
 
 

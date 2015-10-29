@@ -2,6 +2,7 @@
  * Created by dmercier on 2015-10-18.
  */
 
+
 var Movie = Backbone.Model.extend({
     //'urlRoot': 'http://localhost:5000/watchlists',
 });
@@ -68,8 +69,6 @@ var WatchlistListView = Backbone.View.extend({
     }
 });
 
-//*Simon: je commence le WatchlistEditView//
-
 var watchlists = new Watchlists();
 
 var WatchlistEditView = Backbone.View.extend({
@@ -79,7 +78,6 @@ var WatchlistEditView = Backbone.View.extend({
         //si la requête est faite avec un ID, c'est qu'on veut aller chercher une watchlist en particulier (*Edit
         // Watchlist*)
         if(options.id) {
-
             var watchlist = new Watchlist({id: options.id});
             watchlist.fetch({
                 beforeSend: setHeader,
@@ -99,7 +97,10 @@ var WatchlistEditView = Backbone.View.extend({
     },
     'events': {
         'click .addSubmit': 'saveWatchlist',
-        'click .delete': 'deleteWatchlist'
+        'click .delete': 'deleteWatchlist',
+        'click .addMovieToWL': 'addMovieToWatchlist',
+        'click #btnWatchlistMovieSearch': 'searchMoviesForWatchlist'
+
     },
     'saveWatchlist': function(event) {
         var currentId = $('#hiddenWatchlistId').text();
@@ -141,5 +142,43 @@ var WatchlistEditView = Backbone.View.extend({
             }
         });
         return false;
+    },
+    'addMovieToWatchlist': function(event) {
+        $("#watchlistSearchContainer").show(200);
+    },
+    'searchMoviesForWatchlist': function(event) {
+        var self = this;
+        var searchword = $("#watchlistMovieSearch").val();
+        searchword = searchword.trim();
+        if(searchword==="") {
+            alert("Please enter some search text and try again");
+        }
+        else {
+            var movies = new Movies();
+            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            console.log(reqUrl);
+            movies.url = reqUrl;
+            movies.fetch({
+                beforeSend: setHeader,
+                success: function(movies) {
+                    self.$("#watchlistMovieSearchResults").show();
+                    displaySearchResults(movies.toJSON()[0]);
+                }
+            });
+
+
+        }
+
+
     }
 });
+
+function displaySearchResults(results) {
+    var numResults = results.resultCount;
+    for (i=1; i<=numResults; i++) {
+        $("#rowResult"+i).show();
+        $("#titleResult"+i).text(results.results[i-1].trackName);
+        $("#descriptionResult"+i).text(results.results[i-1].longDescription);
+        $("#idResult"+i).text(results.results[i-1].trackId);
+    }
+};
