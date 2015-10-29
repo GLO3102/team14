@@ -2,6 +2,7 @@
  * Created by dmercier on 2015-10-18.
  */
 
+var watchlistSearchResults = [];
 
 var Movie = Backbone.Model.extend({
     //'urlRoot': 'http://localhost:5000/watchlists',
@@ -99,7 +100,8 @@ var WatchlistEditView = Backbone.View.extend({
         'click .addSubmit': 'saveWatchlist',
         'click .delete': 'deleteWatchlist',
         'click .addMovieToWL': 'addMovieToWatchlist',
-        'click #btnWatchlistMovieSearch': 'searchMoviesForWatchlist'
+        'click #btnWatchlistMovieSearch': 'searchMoviesForWatchlist',
+        'click .addSearchResult' : 'addSearchResultToWatchlist'
 
     },
     'saveWatchlist': function(event) {
@@ -147,6 +149,7 @@ var WatchlistEditView = Backbone.View.extend({
         $("#watchlistSearchContainer").show(200);
     },
     'searchMoviesForWatchlist': function(event) {
+        $(".searchResultItem").hide();
         var self = this;
         var searchword = $("#watchlistMovieSearch").val();
         searchword = searchword.trim();
@@ -162,14 +165,29 @@ var WatchlistEditView = Backbone.View.extend({
                 beforeSend: setHeader,
                 success: function(movies) {
                     self.$("#watchlistMovieSearchResults").show();
+                    watchlistSearchResults = movies.toJSON()[0].results;
                     displaySearchResults(movies.toJSON()[0]);
                 }
             });
 
 
         }
-
-
+    },
+    'addSearchResultToWatchlist': function(event) {
+        var currentId = $('#hiddenWatchlistId').text();
+        var clickId = event.target.id;
+        var id = Number(clickId.substr(clickId.length-1));
+        var movieToAdd = watchlistSearchResults[id-1];
+        $.ajax({
+            beforeSend: setHeader,
+            type: "POST",
+            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
+            data: JSON.stringify(movieToAdd),
+            success: function() {
+                router.navigate('watchlists/'+currentId, {trigger: true})
+            },
+            contentType: 'application/json'
+        } );
     }
 });
 

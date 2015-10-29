@@ -71,7 +71,7 @@
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
         <br><br>
 
-        <button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>
+        <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
             <button class="btn btn-delete delete">Delete</button>
