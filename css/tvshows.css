@@ -1,0 +1,10 @@
+.description img   {
+    float:left;
+    margin-right: 20px;
+}
+.description {
+    min-height: 175px;
+}
+.description p  {
+    padding: 10px;
+}
