@@ -1,4 +1,4 @@
-**
+/**
 * Created by Sebastien on 2015-10-26.
 */
 
@@ -10,6 +10,8 @@ MovieView = Backbone.View.extend({
         var that = this;
         if(options.id) {
             var v_trackId= options.id;
+            console.log(options);
+            console.log(options.id);
             var movie = new MovieModel({trackId: v_trackId});
             movie.urlRoot += "/" + v_trackId;
             movie.fetch({beforeSend: setHeader,
