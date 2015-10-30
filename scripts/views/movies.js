@@ -1,6 +1,9 @@
 **
 * Created by Sebastien on 2015-10-26.
 */
+
+MovieView = Backbone.View.extend({
+});
 MovieView = Backbone.View.extend({
     el: "#movies-lists",
     render: function(options){
@@ -19,9 +22,8 @@ MovieView = Backbone.View.extend({
                 }
             })
         }
-    }});
-
-
+    }
+});
 var changeFilmStatsFormat = function(filmArray){
     var date =  filmArray.releaseDate;
     filmArray.releaseDate = date.slice(0,10);

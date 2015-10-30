@@ -171,6 +171,57 @@
     </section>
 
 -->
+    <div id = "movies_container">
+    <div id="movies-lists"></div>
+</div>
+    <script type="text/template" id="movie-template">
+        <movie>
+            <div id="mainContainer">
+                <div class="movieTitle">
+                    <h2><%= movie.trackName %></h2>
+                    <div class="coverPhoto">
+                        <input id="cover" type="image" height="300" src=<%= movie.artworkUrl100%> />
+                    </div>
+                </div>
+                <div class="description">
+                    <h3>Synopsis</h3>
+                    <p><%= movie.longDescription%></p>
+                </div>
+                <div class="infos">
+                    <h5>Genre: <span><%= movie.primaryGenreName %></span></h5>
+                    <h5>Release date: <span><%= movie.releaseDate%></span></h5>
+                    <h5>Country: <span><%= movie.country%></span></h5>
+                    <h5>Director: <span><%= movie.artistName%></span></h5>
+                    <h5>Duration: <span><%= movie.trackTimeMillis %> minutes</span></h5>
+                </div>
+                <div class="rating">
+                    <h4>Rating: <span><%= movie.contentAdvisoryRating%></span></h4></div>
+
+
+                <div class="movieContainer">
+                    <video width="320" height="240" controls>
+                        <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
+                    </video>
+
+                    <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
+                    <iframe width="560" height="315"  frameborder="0" allowfullscreen src=<%= movie.previewUrl %>></iframe>
+
+                </div>
+                <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button></div>
+                <div id="containerBuy class="container">
+                <button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button>
+                <button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button>
+
+            </div>
+            <div id="rentContainer" class="container">
+                <button id="rentMovie" class="btn btn-primary">Rental(SD):<%= movie.trackRentalPrice %></button>
+                <button id="rentHdMovie" class="btn btn-primary">Rental(HD :<%= movie.trackHdRentalPrice %></button>
+            </div>
+            </div>
+        </movie>
+    </script>
+
+
 </main>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
