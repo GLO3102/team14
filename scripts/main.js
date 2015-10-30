@@ -7,7 +7,9 @@ var Router = Backbone.Router.extend({
         '' : 'home', // intentionally blank for the home page
         'new': 'editWatchlist',
         'watchlists' : 'watchlists',
-        'watchlists/:id' : 'editWatchlist'
+        'watchlists/:id' : 'editWatchlist',
+        'movies/:id': 'showMovieData'
+
     }
 });
 
@@ -29,6 +31,14 @@ router.on('route:editWatchlist', function(id) {
     console.log("routing to editWachlist");
     console.log(id);
     watchlistEditView.render({id: id});
+});
+/**
+ * Created by Sebastien on 2015-10-30.
+ */
+router.on('route:showMovieData', function(id)
+{
+    var movieVue = new MovieView();
+    movieVue.render({id: id});
 });
 
 var formData = {email:"david.mercier@gmail.com", password:"123456"};
