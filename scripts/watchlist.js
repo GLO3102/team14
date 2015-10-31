@@ -5,7 +5,7 @@
 var watchlistSearchResults = [];
 
 var Watchlist = Backbone.Model.extend({
-    'urlRoot': 'http://umovie.herokuapp.com/unsecure/watchlists',
+    'urlRoot': 'http://umovie.herokuapp.com/watchlists',
 
     'defaults': {
         id: null,
@@ -28,12 +28,11 @@ var Watchlist = Backbone.Model.extend({
 });
 
 var setHeader = function (xhr) {
-    //xhr.setRequestHeader('authorization', loginObj["token"]);
-    //xhr.setRequestHeader('X-Parse-REST-API-Key', 'gvT2Isd5vAvjgq*****************');
+    xhr.setRequestHeader('authorization', loginObj["token"]);
 }
 
 var Watchlists = Backbone.Collection.extend({
-    'url': 'http://umovie.herokuapp.com/unsecure/watchlists',
+    'url': 'http://umovie.herokuapp.com/watchlists',
     'model': Watchlist,
 
     'parse': function( apiResponse ){
@@ -150,8 +149,8 @@ var WatchlistEditView = Backbone.View.extend({
             alert("Please enter some search text and try again");
         }
         else {
-            var movies = new Movies();
-            var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            var movies = new MoviesCollection();
+            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
             console.log(reqUrl);
             movies.url = reqUrl;
             movies.fetch({
@@ -172,7 +171,7 @@ var WatchlistEditView = Backbone.View.extend({
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
-            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
+            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
                 router.navigate('watchlists/'+currentId, {trigger: true})
