@@ -3,8 +3,6 @@
 */
 
 MovieView = Backbone.View.extend({
-});
-MovieView = Backbone.View.extend({
     el: "#movies-lists",
     render: function(options){
         var that = this;
