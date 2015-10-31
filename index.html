@@ -6,6 +6,7 @@
     <title>Welcome to UMovie</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" src="css/movie.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
@@ -74,10 +75,64 @@
         <span><a href="/movies/blah">movie 3</a></span>
 
 
+        <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
             <button class="btn btn-delete delete">Delete</button>
         <% }; %>
+        <div id="watchlistSearchContainer" style="display:none">
+            <textarea id="watchlistMovieSearch" cols="50" rows="1"
+                      placeholder="Search for a movie to add to your watchlist!"></textarea>
+            <button class="btn-xs btn-primary" id="btnWatchlistMovieSearch">Search</button>
+            <div id="watchlistMovieSearchResults" style="display:none">
+                <table class="table watchlistSearchResults">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Results</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="searchResultItem" id="rowResult1" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult1">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult1"></span>:
+                                <span class="searchResultDescription" id="descriptionResult1"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult1" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult2" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult2">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult2"></span>:
+                                <span class="searchResultDescription" id="descriptionResult2"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult2" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult3" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult3">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult3"></span>:
+                                <span class="searchResultDescription" id="descriptionResult3"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult3" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult4" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult4">Add to
+                                Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult4"></span>:
+                                <span class="searchResultDescription" id="descriptionResult4"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult4" style="display:none"></span></td>
+                        </tr>
+                        <tr class="searchResultItem" id="rowResult5" style="display:none">
+                            <td><button class="btn-xs btn-primary addSearchResult" id="addResult5">Add to
+                            Watchlist</button></td>
+                            <td><span class="searchResultTitle" id="titleResult5"></span>:
+                                <span class="searchResultDescription" id="descriptionResult5"></span></td>
+                            <td><span class="hiddenMovieId" id="idResult5" style="display:none"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </script>
 
 
@@ -119,12 +174,65 @@
     </section>
 
 -->
+    <div id = "movies_container">
+    <div id="movies-lists"></div>
+</div>
+    <script type="text/template" id="movie-template">
+        <movie>
+            <div id="mainContainer">
+                <div class="movieTitle">
+                    <h2><%= movie.trackName %></h2>
+                    <div class="coverPhoto">
+                        <input id="cover" type="image" height="300" src=<%= movie.artworkUrl100%> />
+                    </div>
+                </div>
+                <div class="description">
+                    <h3>Synopsis</h3>
+                    <p><%= movie.longDescription%></p>
+                </div>
+                <div class="infos">
+                    <h5>Genre: <span><%= movie.primaryGenreName %></span></h5>
+                    <h5>Release date: <span><%= movie.releaseDate%></span></h5>
+                    <h5>Country: <span><%= movie.country%></span></h5>
+                    <h5>Director: <span><%= movie.artistName%></span></h5>
+                    <h5>Duration: <span><%= movie.trackTimeMillis %> minutes</span></h5>
+                </div>
+                <div class="rating">
+                    <h4>Rating: <span><%= movie.contentAdvisoryRating%></span></h4></div>
+
+
+                <div class="movieContainer">
+                    <video width="320" height="240" controls>
+                        <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
+                    </video>
+
+                    <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
+                    <iframe width="560" height="315"  frameborder="0" allowfullscreen src=<%= movie.previewUrl %>></iframe>
+
+                </div>
+                <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button></div>
+                <div id="containerBuy class="container">
+                <button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button>
+                <button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button>
+
+            </div>
+            <div id="rentContainer" class="container">
+                <button id="rentMovie" class="btn btn-primary">Rental(SD):<%= movie.trackRentalPrice %></button>
+                <button id="rentHdMovie" class="btn btn-primary">Rental(HD :<%= movie.trackHdRentalPrice %></button>
+            </div>
+            </div>
+        </movie>
+    </script>
+
+
 </main>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 <script type="text/javascript" src="scripts/watchlist.js"></script>
+<script type="text/javascript" src="scripts/models/movie.js"></script>
+<script type="text/javascript" src="scripts/views/movies.js"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
 

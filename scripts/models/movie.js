@@ -1,3 +1,11 @@
-/**
- * Created by Sebastien on 2015-10-19.
- */
+MovieModel = Backbone.Model.extend({
+    urlRoot: "http://umovie.herokuapp.com/movies",
+    defaults: {
+        trackId: "",
+        nameId: ""
+    },
+    parse: function(response){
+        this.trackId=response.trackId;
+        return response;
+    }
+})
