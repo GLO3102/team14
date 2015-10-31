@@ -140,6 +140,7 @@
             </div>
         </div>
     </script>
+
     <div id = "movies_container">
         <div id="movies-lists"></div>
     </div>
@@ -169,12 +170,18 @@
 
                 <div class="movieContainer">
                     <video width="320" height="240" controls>
-                        <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2" src=<%= movie.previewUrl %>>
+                        <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
                     </video>
                     <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
                 </div>
-                <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button></div>
-                <div id="containerBuy" class="container">
+                <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button>
+                    <select>
+                        <% _.each(watchlists, function(list) { %>
+                        <option value=<%= list.id %>><%= list.name %></option>
+                        <% });%>
+                    </select>
+                </div>
+                <div id="containerBuy class="container">
                 <button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button>
                 <button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button>
 
@@ -186,7 +193,20 @@
             </div>
         </movie>
     </script>
+    <script type="text/template" id="watchLists-menu-template">
+        <div>
+            <select>
 
+                <% _.each(watchlists, function(list) { %>
+                <option value=<%= list.id %>><%= list.name %></option>
+                <% });%>
+            </select>
+
+
+
+
+        </div>
+    </script>
 
 </main>
 

@@ -11,15 +11,22 @@ MovieView = Backbone.View.extend({
             console.log(options.id);
             var movie = new MovieModel({trackId: v_trackId});
             movie.urlRoot += "/" + v_trackId;
-            movie.fetch({
+            movie.fetch({beforeSend: setHeader,
                 success: function (data) {
                     var film = data.toJSON();
                     var result = film.results[0];
                     result =  changeFilmStatsFormat(result);
                     var template = _.template($("#movie-template").html());
                     that.$el.html(template({movie: result}));
-
-
+                    var watchListMovie = new Watchlists;
+                    self = that;
+                    watchListMovie.fetch({beforeSend: setHeader,
+                        success: function (data) {
+                            console.log(data.toJSON());
+                            var templateWatchList = _.template($("#watchLists-menu-template").html());
+                            self.$el.html(template({movie: result,watchlists: data.toJSON()}))
+                        }
+                    })
                 }
             })
         }
