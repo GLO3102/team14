@@ -70,9 +70,11 @@
         <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
         <hr>
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
-        <span><a href="/movies/blah">movie 1</a></span>
-        <span><a href="/movies/blah">movie 2</a></span>
-        <span><a href="/movies/blah">movie 3</a></span>
+        <div class="list-group">
+            <% watchlist.movies.forEach( function( item ){ %>
+            <a href="#" class="list-group-item"><%= item.trackName %></a>
+            <% }); %>
+        </div>
 
 
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
@@ -230,9 +232,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
-<script type="text/javascript" src="scripts/watchlist.js"></script>
+
 <script type="text/javascript" src="scripts/models/movie.js"></script>
+<script type="text/javascript" src="scripts/collection/movies.js"></script>
 <script type="text/javascript" src="scripts/views/movies.js"></script>
+<script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
 

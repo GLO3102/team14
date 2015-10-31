@@ -4,50 +4,40 @@
 
 var watchlistSearchResults = [];
 
-var Movie = Backbone.Model.extend({
-    //'urlRoot': 'http://localhost:5000/watchlists',
-});
-
-var Movies = Backbone.Collection.extend({
-    //'url': 'http://localhost:5000/watchlists',
-    'model': Movie,
-
-    'parse': function( apiResponse ){
-        console.log("parsing collection");
-        console.log(apiResponse);
-        return apiResponse;
-    }
-});
-
 var Watchlist = Backbone.Model.extend({
-    'urlRoot': 'http://umovie.herokuapp.com/watchlists',
+    'urlRoot': 'http://umovie.herokuapp.com/unsecure/watchlists',
 
     'defaults': {
-        id: null
+        id: null,
     },
 
     'initialize': function() {
-        this.set('movies', new Movies());
+        this.set('movies', new MoviesCollection());
     },
 
     'parse': function( apiResponse ){
-        console.log("parsing model");
+        console.log("parsing wlist model");
         console.log(apiResponse);
+
+        apiResponse.movies.forEach( function(item) {
+            console.log(item.trackName);
+        });
+
         return apiResponse;
     }
 });
 
 var setHeader = function (xhr) {
-    xhr.setRequestHeader('authorization', loginObj["token"]);
+    //xhr.setRequestHeader('authorization', loginObj["token"]);
     //xhr.setRequestHeader('X-Parse-REST-API-Key', 'gvT2Isd5vAvjgq*****************');
 }
 
 var Watchlists = Backbone.Collection.extend({
-    'url': 'http://umovie.herokuapp.com/watchlists',
+    'url': 'http://umovie.herokuapp.com/unsecure/watchlists',
     'model': Watchlist,
 
     'parse': function( apiResponse ){
-        console.log("parsing collection");
+        console.log("parsing wlist collection");
         console.log(apiResponse);
         return apiResponse;
     }
@@ -83,7 +73,8 @@ var WatchlistEditView = Backbone.View.extend({
             watchlist.fetch({
                 beforeSend: setHeader,
                 success: function(watchlist) {
-                    var template= _.template($("#watchlist-edit-template").html(), {watchlist: watchlist.toJSON()});
+                    obj = watchlist.toJSON();
+                    var template= _.template($("#watchlist-edit-template").html(), {watchlist: obj});
                     self.$el.html(template);
                 }
             });
@@ -107,6 +98,7 @@ var WatchlistEditView = Backbone.View.extend({
     'saveWatchlist': function(event) {
         var currentId = $('#hiddenWatchlistId').text();
         if(currentId == 0) {
+            console.log("Creating a watchlist");
             //c'est alors une nouvelle watchlist
             var checkValid = watchlists.create({
                 name: $('#watchlistName').val()
@@ -120,6 +112,7 @@ var WatchlistEditView = Backbone.View.extend({
             });
         } else {
             //on veut plutôt modifier une watchlist existante
+            console.log("Modifying a watchlist");
             var watchlist = new Watchlist();
             var checkValid = watchlist.save({
                 id: currentId,
@@ -158,7 +151,7 @@ var WatchlistEditView = Backbone.View.extend({
         }
         else {
             var movies = new Movies();
-            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
             console.log(reqUrl);
             movies.url = reqUrl;
             movies.fetch({
@@ -169,8 +162,6 @@ var WatchlistEditView = Backbone.View.extend({
                     displaySearchResults(movies.toJSON()[0]);
                 }
             });
-
-
         }
     },
     'addSearchResultToWatchlist': function(event) {
@@ -181,7 +172,7 @@ var WatchlistEditView = Backbone.View.extend({
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
-            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
+            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
                 router.navigate('watchlists/'+currentId, {trigger: true})
