@@ -207,10 +207,7 @@
                     <video width="320" height="240" controls>
                         <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
                     </video>
-
                     <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
-                    <iframe width="560" height="315"  frameborder="0" allowfullscreen src=<%= movie.previewUrl %>></iframe>
-
                 </div>
                 <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button></div>
                 <div id="containerBuy class="container">
@@ -233,12 +230,17 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 
+<script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/models/movie.js"></script>
 <script type="text/javascript" src="scripts/collection/movies.js"></script>
 <script type="text/javascript" src="scripts/views/movies.js"></script>
-<script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
+
+
+
+
+
 
 </body>
 </html>
