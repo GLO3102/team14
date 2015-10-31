@@ -69,7 +69,10 @@
         <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
         <hr>
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
-        <br><br>
+        <span><a href="/movies/blah">movie 1</a></span>
+        <span><a href="/movies/blah">movie 2</a></span>
+        <span><a href="/movies/blah">movie 3</a></span>
+
 
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
