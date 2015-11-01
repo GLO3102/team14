@@ -12,7 +12,7 @@ var Watchlist = Backbone.Model.extend({
     },
 
     'initialize': function() {
-        this.set('movies', new MoviesCollection());
+        this.set('movies', new MoviesCollection(this.get('movies')));
     },
 
     'parse': function( apiResponse ){
