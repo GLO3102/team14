@@ -1,11 +1,8 @@
 /**
 * Created by Sebastien on 2015-10-26.
 */
-
 MovieView = Backbone.View.extend({
-});
-MovieView = Backbone.View.extend({
-    el: "#movies-lists",
+    el: ".page",
     render: function(options){
         var that = this;
         if(options.id) {
@@ -21,6 +18,15 @@ MovieView = Backbone.View.extend({
                     result =  changeFilmStatsFormat(result);
                     var template = _.template($("#movie-template").html());
                     that.$el.html(template({movie: result}));
+                    var watchListMovie = new Watchlists;
+                    self = that;
+                    watchListMovie.fetch({beforeSend: setHeader,
+                        success: function (data) {
+                            console.log(data.toJSON());
+                            var templateWatchList = _.template($("#watchLists-menu-template").html());
+                            self.$el.html(template({movie: result,watchlists: data.toJSON()}))
+                        }
+                    })
                 }
             })
         }

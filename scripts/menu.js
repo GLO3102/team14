@@ -1,3 +1,16 @@
+var MainMenuView = Backbone.View.extend({
+    template: _.template($('#MainMenu-Template').html()),
+    initialize: function () {
+        _.bindAll(this, 'render');
+    },
+    render: function () {
+        this.$el.html(this.template({}));
+    }
+});
+
+var appMainMenuView = new MainMenuView({el: $('#MainMenu')});
+appMainMenuView.render();
+
 var userButton = document.getElementById("user-btn");
 userButton.onclick = toggleUserMenu;
 
@@ -24,7 +37,3 @@ function toggleBarMenu(even){
         barMenu.className = "hidden";
     }
 }
-
-
-
-
