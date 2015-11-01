@@ -4,7 +4,12 @@ body {
     font-weight: 200;
     margin: 0;
 }
-
+h1 {
+    border-bottom: 1px #dddddd solid;
+    color: #2e2f33;
+    font-size: 2em;
+    padding-top: 20px;
+}
 h2 {
     border-bottom: 1px #dddddd solid;
     color: #2e2f33;
@@ -148,6 +153,9 @@ section {
 
 }
 
+.searchResultTitle {
+    font-weight: bold;
+}
 .searchResultTitle {
     font-weight: bold;
 }
