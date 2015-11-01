@@ -174,8 +174,8 @@
                     </video>
                     <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
                 </div>
-                <div><button id="addWatchList" class="btn btn-primary">Add to the watchList</button>
-                    <select>
+                <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
+                    <select id="menuWatchlistMovie">
                         <% _.each(watchlists, function(list) { %>
                         <option value=<%= list.id %>><%= list.name %></option>
                         <% });%>
@@ -193,21 +193,6 @@
             </div>
         </movie>
     </script>
-    <script type="text/template" id="watchLists-menu-template">
-        <div>
-            <select>
-
-                <% _.each(watchlists, function(list) { %>
-                <option value=<%= list.id %>><%= list.name %></option>
-                <% });%>
-            </select>
-
-
-
-
-        </div>
-    </script>
-
 </main>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
