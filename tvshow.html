@@ -6,6 +6,7 @@
 		<title>UMovie: TV Show</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/header.css">
@@ -45,7 +46,7 @@
 
         <section class="showInfoSection">
             <div id="list-tvshows"></div>
-            <div id="list-episodes"></div>
+            <div id="list-episodes" class="col-md-12"></div>
 
         </section>
 
@@ -57,26 +58,30 @@
             <% _.each(results, function(result) { %>
                 <h1><%= result.collectionName %></h1>
                 <div class="description">
-                    <img class="cover" src="<%= result.artworkUrl100 %>" >
-                    <p><%= result.longDescription %></p>
+                    <div class="col-md-2">
+                        <img class="cover" src="<%= result.artworkUrl100 %>" >
+                         <div>
+                             <p><small><strong>Genre :</strong> <%= result.primaryGenreName %></small></p>
+                             <p><small><strong>Released :</strong> <%= result.releaseDate %></small></p>
+                             <p><small><a href="<%= result.collectionViewUrl %>" > View in Itunes</a></small></p>
+                         </div>
+
+                    </div>
+                    <div class="col-md-10">
+                        <p><%= result.longDescription %></p>
+
+                    </div>
                 </div>
-                <table>
-                    <tr>
-                        <th>Genre</th>
-                        <td><%= result.primaryGenreName %></td>
-                    </tr>
-                    <tr>
-                        <th>Date de sortie</th>
-                        <td><%= result.releaseDate %></td>
-                    </tr>
-                </table>
+
 
 
             <% }); %>
 
         </script>
         <script type="text/template" id="episodes-list-template"  >
-            <ul>
+
+            <h2>Episodes</h2>
+            <ul class="list-unstyled">
             <% _.each(results, function(result) { %>
                <li><img src="<%= result.artworkUrl30 %>" alt="<%= result.artistName %>" > <%= result.trackName %></li>
             <% }); %>

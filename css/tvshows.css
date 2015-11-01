@@ -1,10 +1,4 @@
-.description img   {
-    float:left;
-    margin-right: 20px;
-}
-.description {
-    min-height: 175px;
-}
-.description p  {
-    padding: 10px;
+#list-episodes li {
+    padding: 5px 0;
+    border-bottom: #dddddd 1px solid;
 }
