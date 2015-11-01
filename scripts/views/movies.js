@@ -23,7 +23,7 @@ MovieView = Backbone.View.extend({
                     self = that;
                     watchListMovie.fetch({beforeSend: setHeader,
                         success: function (data) {
-                            console.log(data.toJSON());
+
                             var templateWatchList = _.template($("#movie-template").html());
                             self.$el.html(templateWatchList({movie: result,watchlists: data.toJSON()}))
                         }
@@ -43,11 +43,13 @@ MovieView = Backbone.View.extend({
             url: "https://umovie.herokuapp.com/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(filmPresent),
             success: function() {
+                self.$el.html("");
+                router.navigate('');
                 alert("vous avez ajouter le film" + filmPresent.trackName + "dans la watchlist #"+ idWatchList);
+
             },
             contentType: 'application/json'
         } );
-        console.log(filmPresent);
     }
 });
 var changeFilmStatsFormat = function(filmArray){
