@@ -37,15 +37,19 @@ router.on('route:editWatchlist', function(id) {
  */
 router.on('route:showMovieData', function(id)
 {
-    var movieVue = new MovieView();
+
+    var movieCollection = new MoviesCollection();
+    movieCollection.url = 'http://umovie.herokuapp.com/movies/';
+    var movieVue = new MovieView({
+        collection:movieCollection
+    });
     movieVue.render({id: id});
 });
 
-var formData = {email:"david.mercier@gmail.com", password:"123456"};
+var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;
 
 $.ajax({
-    url : "https://umovie.herokuapp.com/login",
     type: "POST",
     data : formData,
     success: function(data, textStatus, jqXHR)
