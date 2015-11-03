@@ -14,7 +14,9 @@ body {
     /*z-index: 9999;*/
     margin: 50px 50px 50px 50px;
 }
-
+button{
+    margin-left: 5%;
+}
 movie h2 {
     color: black;
     background-color: transparent;
