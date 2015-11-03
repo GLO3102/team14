@@ -1,12 +1,14 @@
 $(function (){
     EpisodesCollection =  Backbone.Collection.extend({
         model: EpisodesModel,
-        getCollectionId: function (response) {
-            return 0;
+        collectionId: "",
+        initialize: function(data) {
+            collectionId = data.collectionId;
         },
+
         parse: function(response) {
             var filterBySeason = response.results.filter(function (el) {
-                return el.collectionId == 533936970;
+                return el.collectionId == this.collectionId;
             });
             filterBySeason.forEach(function(obj) {
                 var trackName = obj.trackName;
@@ -18,4 +20,5 @@ $(function (){
             return filterBySeason;
         }
     });
+
 });

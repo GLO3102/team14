@@ -1,6 +1,7 @@
 $(function (){
     TvShowsCollection =  Backbone.Collection.extend({
         model: TVShowsModel,
+
         parse: function(response) {
             response = response.results;
 

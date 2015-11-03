@@ -7,14 +7,27 @@ $(function (){
     var tvShowsView = new TvShowsView({
         collection: tvShowsCollection
     });
-    tvShowsCollection.fetch();
-
-    var episodesCollection =  new EpisodesCollection({});
-    episodesCollection.url = 'https://umovie.herokuapp.com/unsecure/search/tvshows/episodes?q=Breaking Bad&limit=1000';
-    //episodesCollection.bySeason(533936970);
-    var episodesView = new EpisodesView({
-        collection: episodesCollection
+    tvShowsCollection.fetch({
+        success: function (model, response) {
+            createEpisodesListe();
+        },
+        error: function (model, response) {
+            console.log("error");
+        }
     });
-    episodesCollection.fetch();
+
+
+    function createEpisodesListe(){
+        var collectionId = tvShowsCollection.toJSON()[0].collectionId;
+        var episodesCollection =  new EpisodesCollection({"collectionId" : collectionId});
+        episodesCollection.url = 'https://umovie.herokuapp.com/unsecure/search/tvshows/episodes?q=Breaking Bad&limit=1000';
+        //episodesCollection.bySeason(533936970);
+        var episodesView = new EpisodesView({
+            collection: episodesCollection
+        });
+        console.log(tvShowsCollection.model.collectionId);
+        episodesCollection.fetch();
+    }
+
 
 });
