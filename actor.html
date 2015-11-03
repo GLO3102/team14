@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>UMovie : Actor</title>
+    <title>Actor page</title>
     <meta name="viewport" content="width=device-width ,initial-scale=1.0">
     <meta name="description" content="">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/actor.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="actor.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="myscript.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -18,7 +25,7 @@
 <header>
     <nav>
         <ul>
-            <li class="home-btn"><a href="index.html"><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
+            <li class="home-btn"><a href="#"><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
             <li class="mobile-hidden"><input  type="text" placeholder="Search ..."/><button id="search-btn"><i class="fa fa-search"></i></button></li>
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
@@ -43,22 +50,26 @@
 
 
   <div class="actorContainer">
+
+
+
       <div class="actorName">
-        <h2>Idris Elba</h2>
+          Name : <span > Idriss Elba1 </span><span><a href=" https://www.apple.com/ca/itunes/link/" ><img src="images\link-badge-itunes.png"></a> </span>
       </div>
+
+
 
       <div class="primaryGenre">
-          <h4>Primary genre :<span > Action </span></h4>
+          Primary genre :<span > Action </span>
       </div>
-
-      <div class="actorLink"><a href="https://itunes.apple.com/us/artist/idris-elba/id264778865" ><img src="images\link-badge-itunes.png"></a></div>
 
       <div  class="actorPhoto">
-          <img src="images\pic2.jpg">
+          Picture :<img src="images\pic2.jpg">
       </div>
 
+
       <div class="filmList">
-           <h4>Films List :</h4>
+           <h1>Films List :</h1>
 
 
               <ol>
@@ -66,7 +77,7 @@
                       <ul>
                          <li class="title"> Takers </li>
                           <li class="releaseDate">Release Date : 2010</li>
-                          <li class="preview"><iframe width="560" height="315" src="https://www.youtube.com/embed/SicGk3-bP58" frameborder="0" allowfullscreen></iframe></li>
+                          <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/SicGk3-bP58" frameborder="0" allowfullscreen></iframe></li>
                       </ul>
                   </li>
 
@@ -74,7 +85,7 @@
                       <ul>
                           <li class="title"> Thor </li>
                           <li class="releaseDate">Release Date : 2011</li>
-                          <li class="preview"><iframe width="560" height="315" src="https://www.youtube.com/embed/YSC9CjSYvYA" frameborder="0" allowfullscreen></iframe> </li>
+                          <li class="preview">preview :  <iframe width="560" height="315" src="https://www.youtube.com/embed/YSC9CjSYvYA" frameborder="0" allowfullscreen></iframe> </li>
                       </ul>
                   </li>
 
@@ -82,7 +93,7 @@
                       <ul>
                           <li class="title"> Mandela: Long Walk to Freedom </li>
                           <li class="releaseDate">Release Date : 2013</li>
-                          <li class="preview"><iframe width="560" height="315" src="https://www.youtube.com/embed/GAglZjX3HOk" frameborder="0" allowfullscreen></iframe> </li>
+                          <li class="preview">preview :  <iframe width="560" height="315" src="https://www.youtube.com/embed/GAglZjX3HOk" frameborder="0" allowfullscreen></iframe> </li>
                       </ul>
                   </li>
 
@@ -93,15 +104,15 @@
 
 
       <div class="showList">
-          <h4>Tv Shows List :</h4>
+          <h1>Tv Shows List :</h1>
 
 
           <ol>
               <li>
                   <ul>
                       <li class="title"> The Wire </li>
-                      <li class="releaseDate">Release Date : 2002 </li>
-                      <li class="preview"><iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe></li>
+                      <li class="releaseDate">Release Date:2002 </li>
+                      <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe></li>
                   </ul>
               </li>
 
@@ -109,7 +120,7 @@
                   <ul>
                       <li class="title"> Luther </li>
                       <li class="releaseDate">Release Date : 2010</li>
-                      <li class="preview"><iframe width="560" height="315" src="https://www.youtube.com/embed/bmy62bTeakg" frameborder="0" allowfullscreen></iframe></li>
+                      <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/bmy62bTeakg" frameborder="0" allowfullscreen></iframe></li>
                   </ul>
               </li>
 
@@ -117,7 +128,7 @@
                   <ul>
                       <li class="title"> CSI: Miami</li>
                       <li class="releaseDate">Release Date : 2003</li>
-                      <li class="preview"><iframe width="560" height="315"src="https://www.youtube.com/embed/x2n-h9E8_ck" frameborder="0" allowfullscreen></iframe></li>
+                      <li class="preview">preview : <iframe width="560" height="315"src="https://www.youtube.com/embed/x2n-h9E8_ck" frameborder="0" allowfullscreen></iframe></li>
                   </ul>
               </li>
 
@@ -128,6 +139,27 @@
 
 
   </div>
+
+<script id="actors-tpl" type="text/template">
+    <div class="actorName">
+        Name : <span ><%= actor.results.artistName %></span>
+    </div>
+
+    <div class="primaryGenre">
+        Primary genre :<span > <%= actor.results.primaryGenreName %></span>
+    </div>
+
+    <div  class="actorPhoto">
+        Picture :<img src="<%= actor.results.artistLinkUrl %>">
+    </div>
+
+</script>
+
+<!-- Scripts need to be at the end for templating ! -->
+<script src="js/models/actor.js"></script>
+
+<script src="js/views/actors.js"></script>
+<script src="js/app.js"></script>
 
 <script type="text/javascript" src="scripts/menu.js"></script>
 
