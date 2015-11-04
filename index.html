@@ -20,7 +20,12 @@
 </header>
 <main>
     <h1 class="hidden">UMovie</h1>
-    <div id="welcome-message">
+
+    <div id="PageContent">
+
+    </div>
+
+    <!--div id="welcome-message">
         <p>Welcome to UMovie</p>
         <p>Which movie do you want to watch?</p>
         <form id="search-home" >
@@ -28,16 +33,11 @@
             <input type="input" name="search" id="search" placeholder="Search a movie"   />
             <input class="search-button" type="submit" value=" &#xf002">
         </form>
-    </div>
-
-    <div class="container">
-        <hr />
-        <div class="page"></div>
-    </div>
+    </div-->
 
     <script type="text/template" id="MainMenu-Template">
         <ul>
-            <li class="home-btn"><a href="#"><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
+            <li class="home-btn"><a href=""><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
             <li class="mobile-hidden"><input  type="text" placeholder="Search ..."/><button id="search-btn"><i class="fa fa-search"></i></button></li>
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
@@ -65,6 +65,13 @@
             <% watchlists.each( function( list ){ %>
                 <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
             <% }); %>
+        </div>
+        <div class="container">
+            <hr />
+            <div class="page"></div>
+        </div>
+        <div id = "movies_container">
+            <div id="movies-lists"></div>
         </div>
     </script>
 
@@ -141,9 +148,6 @@
         </div>
     </script>
 
-    <div id = "movies_container">
-        <div id="movies-lists"></div>
-    </div>
     <script type="text/template" id="movie-template">
         <movie>
             <div id="mainContainer">
@@ -206,49 +210,15 @@
 <script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
 
+<script type="text/javascript">
+    function LoadMainScreen() {
+        $.get('mainpage.html', function(data) {
+            $("#PageContent").html(data);
+        });
+    }
 
-
-
-
+    LoadMainScreen();
+</script>
 
 </body>
 </html>
-
-<!--
-    <section>
-        <h2>Movies</h2>
-        <ul class="list-movie">
-            <li class="movie-item"><a href="movie.html"><img src="http://a4.mzstatic.com/us/r30/Video2/v4/14/1b/8a/141b8afb-daa1-a66e-240f-02dd3ef74c2c/poster227x227.jpeg" alt="The Hunger Games: Mockingjay - Part 1" /></a><span class="movie-description"> <span class="movie-title">The Hunger Games: Mockingjay - Part 1</span><small>Fiction</small></span></li>
-            <li class="movie-item"><img src="images/movies/jurassique.jpg" alt="Le monde Jurassique" /><span class="movie-description"><span class="movie-title">Le monde Jurassique</span><small>Action</small></span></li>
-            <li class="movie-item"><img src="images/movies/sens_dessus_dessous.jpg" alt="Sens dessus dessous" /><span class="movie-description"><span class="movie-title">Sens dessus dessous</span><small>Comedy</small></span></li>
-            <li class="movie-item"><img src="images/movies/sinistre2.jpg" alt="Sinisté 2" /><span class="movie-description"><span class="movie-title">Sinistré 2</span><small>Horror</small></span></li>
-            <li class="movie-item"><img src="images/movies/uncle.jpg" alt="U.N.C.L.E." /><span class="movie-description"><span class="movie-title">U.N.C.L.E</span><small>Action</small></span></li>
-            <li class="movie-item"><img src="images/movies/visite.jpg" alt="La visite" /><span class="movie-description"><span class="movie-title">La visite</span><small>Horror</small></span></li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Popular TV Series</h2>
-        <ul class="list-movie">
-            <li class="movie-item"><a href="tvshow.html"><img src="images/series/myNameIsEarl.jpg" alt="My name is Earl" /></a><span class="movie-description"><span class="movie-title">My name is Earl</span><small>Comedy</small></span></li>
-            <li class="movie-item"><img src="images/series/breakingBad.jpg" alt="Breaking Bad" /><span class="movie-description"> <span class="movie-title">Breaking Bad</span><small>Drama</small></span></li>
-            <li class="movie-item"><img src="images/series/desperateHousewives.jpg" alt="Desperate Housewives" /><span class="movie-description"><span class="movie-title">Desperate Housewives</span><small>Drame</small></span></li>
-            <li class="movie-item"><img src="images/series/simpsons.jpg" alt="Simpsons" /><span class="movie-description"><span class="movie-title">Simspons</span><small>Comedy</small></span></li>
-            <li class="movie-item"><img src="images/series/walkingDead.jpg" alt="Walking Dead" /><span class="movie-description"><span class="movie-title">Walking Dead</span><small>Horror</small></span></li>
-            <li class="movie-item"><img src="images/series/horrorStory.jpg" alt="American Horror Story" /><span class="movie-description"><span class="movie-title">American Horror Story</span><small>Horror</small></span></li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Stars</h2>
-        <ul class="list-movie">
-            <li class="movie-item"><a href="actor.html"><img src="images/actors/idrisElba.jpg" alt="Idris Elba" /></a><span class="movie-description"><span class="movie-title">Idris Elba</span></span></li>
-            <li class="movie-item"><img src="images/actors/angelinaJolie.jpg" alt="Angelina jolie" /><span class="movie-description"> <span class="movie-title">Angelina jolie</span></span></li>
-            <li class="movie-item"><img src="images/actors/bradPitt.jpg" alt="Brad Pitt" /><span class="movie-description"><span class="movie-title">Brad Pitt</span></span></li>
-            <li class="movie-item"><img src="images/actors/JenniferLawrence.jpg" alt="Jennifer Lawrence" /><span class="movie-description"><span class="movie-title">Jennifer Lawrence</span></span></li>
-            <li class="movie-item"><img src="images/actors/scarlettJohanson.jpg" alt="Scarlette Johanson" /><span class="movie-description"><span class="movie-title">Scarlette Johanson</span></span></li>
-            <li class="movie-item"><img src="images/actors/chrissPratt.jpg" alt="Chris Pratt" /><span class="movie-description"><span class="movie-title">Chris Pratt</span></span></li>
-        </ul>
-    </section>
-
--->

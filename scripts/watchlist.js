@@ -43,7 +43,7 @@ var Watchlists = Backbone.Collection.extend({
 });
 
 var WatchlistListView = Backbone.View.extend({
-    'el': '.page',
+    'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
 
     'render': function() {

@@ -14,8 +14,6 @@ var Router = Backbone.Router.extend({
 });
 
 // Display logic
-var watchlistListView = new WatchlistListView({ });
-var watchlistEditView = new WatchlistEditView({ });
 var router = new Router();
 
 router.on('route:home', function() {
@@ -24,12 +22,16 @@ router.on('route:home', function() {
 
 router.on('route:watchlists', function() {
     console.log("routing to watchlists");
+
+    var watchlistListView = new WatchlistListView({ });
     watchlistListView.render();
 });
 
 router.on('route:editWatchlist', function(id) {
     console.log("routing to editWachlist");
     console.log(id);
+
+    var watchlistEditView = new WatchlistEditView({ });
     watchlistEditView.render({id: id});
 });
 /**
