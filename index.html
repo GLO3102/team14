@@ -32,8 +32,21 @@
             <label for="search" class="hidden">Search</label>
             <input type="input" name="search" id="search" placeholder="Search a movie"   />
             <input class="search-button" type="submit" value=" &#xf002">
+
         </form>
+<<<<<<< .merge_file_a11964
     </div-->
+=======
+    </div>
+    <div>
+        <button id="showAMovie"> Movie</button>
+    </div>
+
+    <div class="container">
+        <hr />
+        <div class="page"></div>
+    </div>
+>>>>>>> .merge_file_a09568
 
     <script type="text/template" id="MainMenu-Template">
         <ul>
@@ -153,49 +166,57 @@
             <div id="mainContainer">
                 <div class="movieTitle">
                     <h2><%= movie.trackName %></h2>
-                    <div class="coverPhoto">
-                        <input id="cover" type="image" height="300" src=<%= movie.artworkUrl100%> />
-                    </div>
                 </div>
-                <div class="description">
+                <div class="coverPhoto">
+                    <img id="cover" src=<%= movie.artworkUrl100%>>
+                </div>
+                <div>
                     <h3>Synopsis</h3>
                     <p><%= movie.longDescription%></p>
                 </div>
-                <div class="infos">
-                    <h5>Genre: <span><%= movie.primaryGenreName %></span></h5>
-                    <h5>Release date: <span><%= movie.releaseDate%></span></h5>
-                    <h5>Country: <span><%= movie.country%></span></h5>
-                    <h5>Director: <span><%= movie.artistName%></span></h5>
-                    <h5>Duration: <span><%= movie.trackTimeMillis %> minutes</span></h5>
+
+                <div class="mobile-visible">
+                    <h5><label>Genre: </label><span><%= movie.primaryGenreName %></span></h5>
+                    <h5><label>Release date: </label> <span><%= movie.releaseDate%></span></h5>
+                    <h5><label>Country: </label><span><%= movie.country%></span></h5>
+                    <h5><label>Director: </label><span><%= movie.artistName%></span></h5>
+                    <h5><label>Duration: </label><span><%= movie.trackTimeMillis %> minutes</span></h5>
+                    <h5><label>Rating:</label> <span><%= movie.contentAdvisoryRating%></span></h5>
                 </div>
-                <div class="rating">
-                    <h4>Rating: <span><%= movie.contentAdvisoryRating%></span></h4></div>
 
 
-                <div class="movieContainer">
+
+                <div id="movieContainer">
                     <video width="320" height="240" controls>
-                        <source  type="video/mp4"; codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
+                        <source  type="video/mp4"codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
                     </video>
                     <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
                 </div>
+
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
+                        test
                         <% _.each(watchlists, function(list) { %>
                         <option value=<%= list.id %>><%= list.name %></option>
                         <% });%>
                     </select>
                 </div>
-                <div id="containerBuy class="container">
-                <button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button>
-                <button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button>
 
-            </div>
-            <div id="rentContainer" class="container">
-                <button id="rentMovie" class="btn btn-primary">Rental(SD):<%= movie.trackRentalPrice %></button>
-                <button id="rentHdMovie" class="btn btn-primary">Rental(HD :<%= movie.trackHdRentalPrice %></button>
-            </div>
+                <div id="containerBuy class="table-stripped">
+                    <table>
+                        <tr>
+                            <td><button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button></td>
+                            <td><button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button></td>
+                        </tr>
+                        <tr>
+                            <td> <button id="rentMovie" class="btn btn-primary">Rental(SD):<%= movie.trackRentalPrice %></button></td>
+                            <td> <button id="rentHdMovie" class="btn btn-primary">Rental(HD) :<%= movie.trackHdRentalPrice %></button></td>
+                        </tr>
+
+                    </table>
             </div>
         </movie>
+
     </script>
 </main>
 

@@ -5,7 +5,7 @@
 var watchlistSearchResults = [];
 
 var Watchlist = Backbone.Model.extend({
-    'urlRoot': 'http://umovie.herokuapp.com/watchlists',
+    'urlRoot': 'http://umovie.herokuapp.com/unsecure/watchlists',
 
     'defaults': {
         id: null,
@@ -32,7 +32,7 @@ var setHeader = function (xhr) {
 }
 
 var Watchlists = Backbone.Collection.extend({
-    'url': 'http://umovie.herokuapp.com/watchlists',
+    'url': 'http://umovie.herokuapp.com/unsecure/watchlists',
     'model': Watchlist,
 
     'parse': function( apiResponse ){
