@@ -94,11 +94,15 @@
         <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
         <hr>
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
+
         <div class="list-group">
-            <% watchlist.movies.forEach( function( item ){ %>
-            <a href="#" class="list-group-item"><%= item.trackName %></a>
-            <% }); %>
+            <% if(watchlist) { %>
+                <% watchlist.movies.forEach( function( item ){ %>
+                <a href="#" class="list-group-item"><%= item.trackName %></a>
+                <% }); %>
+            <% }; %>
         </div>
+
 
 
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
