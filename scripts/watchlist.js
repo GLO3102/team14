@@ -122,8 +122,8 @@ var WatchlistEditView = Backbone.View.extend({
                     router.navigate('watchlists', {trigger: true});
                 }
             });
-            return false;
         }
+        return false;
     },
     'deleteWatchlist': function(event) {
         var watchlist = new Watchlist();
