@@ -16,13 +16,14 @@ MovieView = Backbone.View.extend({
 
     },
     render: function(){
-        var modelJson =  this.model.toJSON();
-        var indexArray=0;
-        var movie =modelJson.results[indexArray];
-        movie =  this.changeFilmStatsFormat(movie);
+        var modelJson = this.model.toJSON();
+        var indexArray = 0;
+        var movie = modelJson.results[indexArray];
+        movie = this.changeFilmStatsFormat(movie);
+        this.searchVideoYoutube(movie.trackName);
         if(this.first){
             this.first = false;
-            this.searchVideoYoutube(movie);
+
         }
 
         var watchListMovie = new Watchlists;
@@ -54,11 +55,11 @@ MovieView = Backbone.View.extend({
             contentType: 'application/json'
         } );
     },
-    searchVideoYoutube: function(filmArray){
+    searchVideoYoutube: function(title){
         // 3. This function creates an <iframe> (and YouTube player)
         //    after the API code downloads.
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
-        var urlMiddle =  filmArray.trackName+'official trailer';
+        var urlMiddle =  title+'official trailer';
         var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
         var urlComplete = urlBegin + urlMiddle + urlEnd;
         var player;
