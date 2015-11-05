@@ -222,11 +222,57 @@
         </movie>
 
     </script>
+
+    <script type="text/template" id="TVShows-list-template"  >
+
+
+        <% _.each(results, function(result) { %>
+
+        <div class="movieTitle">
+            <h1><%= result.collectionName %></h1>
+        </div>
+
+        <div class="infos">
+            <p><strong>Genre:</strong> <span><%= result.primaryGenreName %></span></p>
+            <p><strong>Release date:</strong> <span><%= result.releaseDate%></span></p>
+            <p><span><a href="<%= result.collectionViewUrl %>">View in Itunes</a></span></p>
+        </div>
+        <div class="coverPhoto col-md-2">
+            <img src="<%= result.artworkUrl100 %>" />
+        </div>
+        <div class="description col-md-10">
+            <h3>Synopsis</h3>
+            <p><%= result.longDescription%></p>
+        </div>
+
+        <% }); %>
+
+    </script>
+    <script type="text/template" id="episodes-list-template"  >
+
+        <h2>Episodes</h2>
+        <ul class="list-unstyled">
+            <% _.each(results, function(result) { %>
+            <li><span><%= result.trackNumber %> - <%= result.trackCensoredName %></span></li>
+            <% }); %>
+
+        </ul>
+    </script>
+
 </main>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+
+<script type="text/javascript" src="scripts/models/tvshows.js"></script>
+<script type="text/javascript" src="scripts/collection/tvshows.js"></script>
+<script type="text/javascript" src="scripts/views/tvshows.js"></script>
+<script type="text/javascript" src="scripts/models/episodes.js"></script>
+<script type="text/javascript" src="scripts/collection/episodes.js"></script>
+<script type="text/javascript" src="scripts/views/episodes.js"></script>
+<script type="text/javascript" src="scripts/tvshows.js"></script>
+<!--script type="text/javascript" src="scripts/video.js"></script-->
 
 <script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/models/movie.js"></script>

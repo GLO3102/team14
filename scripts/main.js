@@ -8,8 +8,8 @@ var Router = Backbone.Router.extend({
         'new': 'editWatchlist',
         'watchlists' : 'watchlists',
         'watchlists/:id' : 'editWatchlist',
-        'movies/:id': 'showMovieData'
-
+        'movies/:id': 'showMovieData',
+        'tvshow/:id': 'tvshow'
     }
 });
 
@@ -56,6 +56,30 @@ router.on('route:showMovieData', function(id){
         }
     })
     console.log(movieView.model.toJSON());
+});
+
+router.on('route:tvshow', function(id){
+
+    $.get('tvshow.html', function(data) {
+        $("#PageContent").html(data);
+    }).done(function(){
+        var tvShowsCollection =  new TvShowsCollection({});
+        //http://umovie.herokuapp.com/unsecure/tvshows/season/271383858
+        tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
+        console.log('Log Patrick tvshow URL : ' + tvShowsCollection.url);
+        var tvShowsView = new TvShowsView({
+            collection: tvShowsCollection
+        });
+        tvShowsCollection.fetch({
+            success: function (model, response) {
+                tvShowsView.render();
+                createEpisodesListe(model);
+            },
+            error: function (model, response) {
+                console.log("error");
+            }
+        });
+    });
 });
 
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
