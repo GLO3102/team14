@@ -169,6 +169,7 @@ var WatchlistEditView = Backbone.View.extend({
         var clickId = event.target.id;
         var id = Number(clickId.substr(clickId.length-1));
         var movieToAdd = watchlistSearchResults[id-1];
+        var self = this;
         console.log("adding search result to wl");
         console.log(movieToAdd);
         $.ajax({
@@ -178,7 +179,8 @@ var WatchlistEditView = Backbone.View.extend({
             data: JSON.stringify(movieToAdd),
             success: function() {
                 console.log("post successful, adding 1 item");
-                router.navigate('watchlists/'+currentId, {trigger: true})
+                options = {'id': currentId};
+                self.render(options);
             },
             contentType: 'application/json'
         } );
@@ -188,14 +190,15 @@ var WatchlistEditView = Backbone.View.extend({
         var currentWLID = $('#hiddenWatchlistId').text();
         var currentMovieID = event.currentTarget.id;
         console.log("got a click from the delete button for " + currentWLID + " and " + currentMovieID);
-
+        var self = this;
         $.ajax({
             url: "https://umovie.herokuapp.com/unsecure/watchlists/" + currentWLID + "/movies/" + currentMovieID,
             type: 'DELETE',
             success: function(result) {
                 console.log("successful in deleting movie in WL");
                 console.log(result);
-                router.navigate('watchlists/' + currentWLID, {trigger: true})
+                options = {'id': currentWLID};
+                self.render(options);
             }
         });
 
