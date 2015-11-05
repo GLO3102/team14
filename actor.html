@@ -51,7 +51,8 @@
 
   <div class="actorContainer">
 
-
+      <div class="actorInfo"></div>
+      <div class="movieInfo"></div>
 
       <div class="actorName">
           Name : <span > Idriss Elba1 </span><span><a href=" https://www.apple.com/ca/itunes/link/" ><img src="images\link-badge-itunes.png"></a> </span>
@@ -142,7 +143,7 @@
 
 <script id="actors-tpl" type="text/template">
     <div class="actorName">
-        Name : <span ><%= actor.results.artistName %></span>
+        Name : <span ><%= actor.results[0].artistName %></span>
     </div>
 
     <div class="primaryGenre">
@@ -155,11 +156,36 @@
 
 </script>
 
+
+<script id="movies-tpl" type="text/template">
+
+    <li>
+        <ul>
+            <li class="title"><%=movies[0].results[0].trackName %> </li>
+            <li class="releaseDate">Release Date:2002 </li>
+            <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe></li>
+        </ul>
+    </li>
+
+
+</script>
+
 <!-- Scripts need to be at the end for templating ! -->
 <script src="js/models/actor.js"></script>
 
 <script src="js/views/actors.js"></script>
-<script src="js/app.js"></script>
+
+
+<script src="collection/movies.js"></script>
+<script src="movie.js"></script>
+
+<script src="scripts/views/movies.js"></script>
+
+
+<script src="app.js"></script>
+
+
+
 
 <script type="text/javascript" src="scripts/menu.js"></script>
 
