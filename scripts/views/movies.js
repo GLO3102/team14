@@ -3,21 +3,17 @@
 */
 MovieView = Backbone.View.extend({
     template: _.template($("#movie-template").html()),
-    filmPresent: "",
-    el: ".page",
+    el: "#PageContent",
+
     render: function(){
-        alert("Je suis dans le render");
         var modelJson =  this.model.toJSON();
         var indexArray=0;
         var movie =modelJson.results[indexArray];
-        console.log("Le film dans la vue");
-        console.log(movie)
         movie =  changeFilmStatsFormat(movie);
         var watchListMovie = new Watchlists;
         self = this;
         watchListMovie.fetch({
             success: function (data){
-                $("#welcome-message").opacity=0;
                 var templateWatchList = _.template($("#movie-template").html());
                 self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
             }
@@ -29,7 +25,7 @@ MovieView = Backbone.View.extend({
     addMovieWatchlist: function(event){
         var modelJson =  this.model.toJSON();
         var indexArray=0;
-        var movie =modelJson.results[indexArray];
+        var movie = modelJson.results[indexArray];
         var idWatchList = $( "#menuWatchlistMovie" ).val();
         var that= this;
         $.ajax({
@@ -37,13 +33,8 @@ MovieView = Backbone.View.extend({
             url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(movie),
             success: function() {
-                console.log(that.model);
                 alert("vous avez ajouter le film " +movie.trackName + " dans la watchlist #"+ idWatchList);
-                self.$el.html("");
                 router.navigate('');
-                $("#welcome-message").opacity=100;
-
-
             },
             contentType: 'application/json'
         } );
@@ -56,5 +47,8 @@ var changeFilmStatsFormat = function(filmArray){
     var millisInMinute = 60000;
     filmTime = (filmTime /millisInMinute);
     filmArray.trackTimeMillis = Math.round(filmTime);
+    moviePhoto = filmArray.artworkUrl100;
+    moviePhoto = moviePhoto.replace("100x100bb","300x300bb");
+    filmArray.artworkUrl100 = moviePhoto;
     return filmArray;
 };

@@ -171,12 +171,14 @@
                 <div class="movieTitle">
                     <h2><%= movie.trackName %></h2>
                 </div>
-                <div class="coverPhoto">
-                    <img id="cover" src=<%= movie.artworkUrl100%>>
+                <div class="coverPhoto col-md-2">
+                    <img src="<%= movie.artworkUrl100 %>" />
                 </div>
                 <div>
-                    <h3>Synopsis</h3>
                     <p><%= movie.longDescription%></p>
+                </div>
+                <div>
+                    <p><span><a href="<%= movie.trackViewUrl %>">View in Itunes</a></span></p>
                 </div>
 
                 <div class="mobile-visible">
@@ -187,7 +189,6 @@
                     <h5><label>Duration: </label><span><%= movie.trackTimeMillis %> minutes</span></h5>
                     <h5><label>Rating:</label> <span><%= movie.contentAdvisoryRating%></span></h5>
                 </div>
-
 
 
                 <div id="movieContainer">

@@ -98,11 +98,6 @@ $.ajax({
 
     }
 });
-$("#showAMovie").click(function(){
-    var tabMovie=[365647689,380239015,380040080,287984473,301963538,279588778,430024279,532285804,303821906,872652035];
-    var idMovie = tabMovie[Math.floor((Math.random()*10)+1)-1]
-    console.log("id du film " +idMovie)
-    router.navigate('movies/'+idMovie, {trigger: true});
-});
+
 
 Backbone.history.start();
