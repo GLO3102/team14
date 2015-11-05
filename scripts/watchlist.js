@@ -188,7 +188,17 @@ var WatchlistEditView = Backbone.View.extend({
         var currentWLID = $('#hiddenWatchlistId').text();
         var currentMovieID = event.currentTarget.id;
         console.log("got a click from the delete button for " + currentWLID + " and " + currentMovieID);
-        console.log(event);
+
+        $.ajax({
+            url: "https://umovie.herokuapp.com/unsecure/watchlists/" + currentWLID + "/movies/" + currentMovieID,
+            type: 'DELETE',
+            success: function(result) {
+                console.log("successful in deleting movie in WL");
+                console.log(result);
+                router.navigate('watchlists/'+currentId, {trigger: true})
+            }
+        });
+
         return false;
     }
 });
