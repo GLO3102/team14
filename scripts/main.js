@@ -24,6 +24,7 @@ router.on('route:home', function() {
 
 router.on('route:watchlists', function() {
     console.log("routing to watchlists");
+    toggleUserMenu(null);
 
     var watchlistListView = new WatchlistListView({ });
     watchlistListView.render();

@@ -91,8 +91,8 @@ var WatchlistEditView = Backbone.View.extend({
         'click .delete': 'deleteWatchlist',
         'click .addMovieToWL': 'addMovieToWatchlist',
         'click #btnWatchlistMovieSearch': 'searchMoviesForWatchlist',
-        'click .addSearchResult' : 'addSearchResultToWatchlist'
-
+        'click .addSearchResult' : 'addSearchResultToWatchlist',
+        'click .deleteMovieFromWL' : 'deleteMovieFromWL'
     },
     'saveWatchlist': function(event) {
         var currentId = $('#hiddenWatchlistId').text();
@@ -139,6 +139,7 @@ var WatchlistEditView = Backbone.View.extend({
     },
     'addMovieToWatchlist': function(event) {
         $("#watchlistSearchContainer").show(200);
+        return false;
     },
     'searchMoviesForWatchlist': function(event) {
         $(".searchResultItem").hide();
@@ -150,7 +151,7 @@ var WatchlistEditView = Backbone.View.extend({
         }
         else {
             var movies = new MoviesCollection();
-            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
             console.log(reqUrl);
             movies.url = reqUrl;
             movies.fetch({
@@ -162,22 +163,33 @@ var WatchlistEditView = Backbone.View.extend({
                 }
             });
         }
+        return false;
     },
     'addSearchResultToWatchlist': function(event) {
         var currentId = $('#hiddenWatchlistId').text();
         var clickId = event.target.id;
         var id = Number(clickId.substr(clickId.length-1));
         var movieToAdd = watchlistSearchResults[id-1];
+        console.log("adding search result to wl");
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
-            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
+            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
+                console.log("post successful, adding 1 item");
                 router.navigate('watchlists/'+currentId, {trigger: true})
             },
             contentType: 'application/json'
         } );
+        return false;
+    },
+    'deleteMovieFromWL': function(event) {
+        var currentWLID = $('#hiddenWatchlistId').text();
+        var currentMovieID = event.currentTarget.id;
+        console.log("got a click from the delete button for " + currentWLID + " and " + currentMovieID);
+        console.log(event);
+        return false;
     }
 });
 

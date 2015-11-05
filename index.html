@@ -34,19 +34,7 @@
             <input class="search-button" type="submit" value=" &#xf002">
 
         </form>
-<<<<<<< .merge_file_a11964
     </div-->
-=======
-    </div>
-    <div>
-        <button id="showAMovie"> Movie</button>
-    </div>
-
-    <div class="container">
-        <hr />
-        <div class="page"></div>
-    </div>
->>>>>>> .merge_file_a09568
 
     <script type="text/template" id="MainMenu-Template">
         <ul>
@@ -97,13 +85,25 @@
 
         <div class="list-group">
             <% if(watchlist) { %>
+            <table>
+                <thead>
+                <tr>
+                    <th>Movies in this watchlist</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
                 <% watchlist.movies.forEach( function( item ){ %>
-                <a href="#" class="list-group-item"><%= item.trackName %></a>
+                <tr>
+                    <th><%= item.trackName %></th>
+                    <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X <%= item.trackId%></button></th>
+                    <input type="hidden" name="hiddenMovieId" value="<%= item.trackId%>" />
+                </tr>
                 <% }); %>
+                </tbody>
+                </table>
             <% }; %>
         </div>
-
-
 
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
