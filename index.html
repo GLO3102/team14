@@ -24,6 +24,7 @@
     <div id="PageContent">
 
     </div>
+    <div id="videoContainer"></div>
 
     <!--div id="welcome-message">
         <p>Welcome to UMovie</p>
@@ -178,7 +179,7 @@
                     <p><%= movie.longDescription%></p>
                 </div>
                 <div>
-                    <p><span><a href="<%= movie.trackViewUrl %>">View in Itunes</a></span></p>
+                    <span><a style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;" href="<%= movie.trackViewUrl %>"></a></span>
                 </div>
 
                 <div class="mobile-visible">
@@ -189,15 +190,6 @@
                     <h5><label>Duration: </label><span><%= movie.trackTimeMillis %> minutes</span></h5>
                     <h5><label>Rating:</label> <span><%= movie.contentAdvisoryRating%></span></h5>
                 </div>
-
-
-                <div id="movieContainer">
-                    <video width="320" height="240" controls>
-                        <source  type="video/mp4"codecs="avc1.42E01E, mp4a.40.2"' src=<%= movie.previewUrl %>>
-                    </video>
-                    <a href="https://geo.itunes.apple.com/ca/movie/hunger-games-mockingjay-part/id934521922?mt=6" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;width:165px;height:40px;"></a>
-                </div>
-
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
                         test
@@ -261,6 +253,10 @@
     </script>
 
 </main>
+
+
+</body>
+</html>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
