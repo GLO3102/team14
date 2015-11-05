@@ -46,6 +46,7 @@ var WatchlistListView = Backbone.View.extend({
     'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
 
+
     'render': function() {
         var that = this;
         var watchlists = new Watchlists();
@@ -80,10 +81,8 @@ var WatchlistEditView = Backbone.View.extend({
         }
         //sinon, c'est qu'on crée une nouvelle watchlist (*New Watchlist*)
         else {
-            {
-                var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
-                this.$el.html(template);
-            }
+            var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
+            this.$el.html(template);
         }
     },
     'events': {
@@ -171,6 +170,7 @@ var WatchlistEditView = Backbone.View.extend({
         var id = Number(clickId.substr(clickId.length-1));
         var movieToAdd = watchlistSearchResults[id-1];
         console.log("adding search result to wl");
+        console.log(movieToAdd);
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
@@ -195,7 +195,7 @@ var WatchlistEditView = Backbone.View.extend({
             success: function(result) {
                 console.log("successful in deleting movie in WL");
                 console.log(result);
-                router.navigate('watchlists/'+currentId, {trigger: true})
+                router.navigate('watchlists/' + currentWLID, {trigger: true})
             }
         });
 

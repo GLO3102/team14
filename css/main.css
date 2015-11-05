@@ -53,7 +53,9 @@ main {
 section {
     margin-left: 10px;
 }
-
+.infos  {
+    margin-bottom: 10px;
+}
 
 /*******************************************/
 /*    Affichage des listes de film         */
