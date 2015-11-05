@@ -6,12 +6,12 @@
 		<title>UMovie: TV Show</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/header.css">
-        <link rel="stylesheet" type="text/css" href="css/home.css">
-        <link rel="stylesheet" type="text/css" href="css/tvshows.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/movie.css">
+        <link rel="stylesheet" href="css/header.css">
 
 	</head>
 
@@ -46,9 +46,11 @@
 
         <section class="showInfoSection">
             <div id="list-tvshows"></div>
-            <div id="list-episodes" class="col-md-12"></div>
-
+            <div id="list-episodes" class="col-md-4"></div>
+            <div id="player" class="col-md-8"></div>
         </section>
+
+
 
 
 
@@ -56,26 +58,23 @@
 
 
             <% _.each(results, function(result) { %>
+
+            <div class="movieTitle">
                 <h1><%= result.collectionName %></h1>
-                <div class="description">
-                    <div class="col-md-2">
-                        <img class="cover" src="<%= result.artworkUrl100 %>" >
-                         <div>
-                             <p><small><strong>Genre :</strong> <%= result.primaryGenreName %></small></p>
-                             <p><small><strong>Released :</strong> <%= result.releaseDate %></small></p>
-                             <p><small><a href="<%= result.collectionViewUrl %>" > View in Itunes</a></small></p>
-                         </div>
+            </div>
 
-                    </div>
-                    <div class="col-md-10">
-                        <p><%= result.longDescription %></p>
-                    </div>
-                    <video src="<%= result.previewUrl %>" controls>
-                        Votre navigateur ne gère pas l'élément <code>video</code>.
-                    </video>
-                </div>
-
-
+            <div class="infos">
+                <p><strong>Genre:</strong> <span><%= result.primaryGenreName %></span></p>
+                <p><strong>Release date:</strong> <span><%= result.releaseDate%></span></p>
+                <p><span><a href="<%= result.collectionViewUrl %>">View in Itunes</a></span></p>
+            </div>
+            <div class="coverPhoto col-md-2">
+                <img src="<%= result.artworkUrl100 %>" />
+            </div>
+            <div class="description col-md-10">
+                <h3>Synopsis</h3>
+                <p><%= result.longDescription%></p>
+            </div>
 
             <% }); %>
 
@@ -103,6 +102,7 @@
     <script type="text/javascript" src="scripts/collection/episodes.js"></script>
     <script type="text/javascript" src="scripts/views/episodes.js"></script>
     <script type="text/javascript" src="scripts/tvshows.js"></script>
+    <script type="text/javascript" src="scripts/video.js"></script>
 	</body>
 
 </html>
