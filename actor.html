@@ -52,90 +52,10 @@
   <div class="actorContainer">
 
       <div class="actorInfo"></div>
+      <h1>Films List :</h1>
       <div class="movieInfo"></div>
 
-      <div class="actorName">
-          Name : <span > Idriss Elba1 </span><span><a href=" https://www.apple.com/ca/itunes/link/" ><img src="images\link-badge-itunes.png"></a> </span>
-      </div>
 
-
-
-      <div class="primaryGenre">
-          Primary genre :<span > Action </span>
-      </div>
-
-      <div  class="actorPhoto">
-          Picture :<img src="images\pic2.jpg">
-      </div>
-
-
-      <div class="filmList">
-           <h1>Films List :</h1>
-
-
-              <ol>
-                  <li>
-                      <ul>
-                         <li class="title"> Takers </li>
-                          <li class="releaseDate">Release Date : 2010</li>
-                          <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/SicGk3-bP58" frameborder="0" allowfullscreen></iframe></li>
-                      </ul>
-                  </li>
-
-                  <li>
-                      <ul>
-                          <li class="title"> Thor </li>
-                          <li class="releaseDate">Release Date : 2011</li>
-                          <li class="preview">preview :  <iframe width="560" height="315" src="https://www.youtube.com/embed/YSC9CjSYvYA" frameborder="0" allowfullscreen></iframe> </li>
-                      </ul>
-                  </li>
-
-                  <li>
-                      <ul>
-                          <li class="title"> Mandela: Long Walk to Freedom </li>
-                          <li class="releaseDate">Release Date : 2013</li>
-                          <li class="preview">preview :  <iframe width="560" height="315" src="https://www.youtube.com/embed/GAglZjX3HOk" frameborder="0" allowfullscreen></iframe> </li>
-                      </ul>
-                  </li>
-
-              </ol>
-
-      </div>
-
-
-
-      <div class="showList">
-          <h1>Tv Shows List :</h1>
-
-
-          <ol>
-              <li>
-                  <ul>
-                      <li class="title"> The Wire </li>
-                      <li class="releaseDate">Release Date:2002 </li>
-                      <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe></li>
-                  </ul>
-              </li>
-
-              <li>
-                  <ul>
-                      <li class="title"> Luther </li>
-                      <li class="releaseDate">Release Date : 2010</li>
-                      <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/bmy62bTeakg" frameborder="0" allowfullscreen></iframe></li>
-                  </ul>
-              </li>
-
-              <li>
-                  <ul>
-                      <li class="title"> CSI: Miami</li>
-                      <li class="releaseDate">Release Date : 2003</li>
-                      <li class="preview">preview : <iframe width="560" height="315"src="https://www.youtube.com/embed/x2n-h9E8_ck" frameborder="0" allowfullscreen></iframe></li>
-                  </ul>
-              </li>
-
-          </ol>
-
-      </div>
 
 
 
@@ -147,7 +67,7 @@
     </div>
 
     <div class="primaryGenre">
-        Primary genre :<span > <%= actor.results.primaryGenreName %></span>
+        Primary genre :<span > <%= actor.results[0].primaryGenreName %></span>
     </div>
 
     <div  class="actorPhoto">
@@ -159,27 +79,30 @@
 
 <script id="movies-tpl" type="text/template">
 
-    <li>
-        <ul>
-            <li class="title"><%=movies[0].results[0].trackName %> </li>
-            <li class="releaseDate">Release Date:2002 </li>
-            <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe></li>
-        </ul>
-    </li>
+    <ol>
+    <% _.each(movies[0].results, function(movie){ %>
+        <li>
+            <ul>
+
+                <li class="title"><%=movie.trackName %> </li>
+                <li class="releaseDate"><%=movie.releaseDate %></li>
+                <!--  <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe> </li> -->
+             </ul>
+         </li>
+     <% }); %>
+     </ol>
+ </script>
+
+<!-- Scripts need to be at the end for templating ! <%=movies[0].results[0].trackName %>-->
+<script src="scripts/models/actor.js"></script>
+
+<script src="scripts/views/actor.js"></script>
 
 
-</script>
+<script src="scripts/collections/actorMovies.js"></script>
+<script src="scripts/models/actorMovie.js"></script>
 
-<!-- Scripts need to be at the end for templating ! -->
-<script src="js/models/actor.js"></script>
-
-<script src="js/views/actors.js"></script>
-
-
-<script src="collection/movies.js"></script>
-<script src="movie.js"></script>
-
-<script src="scripts/views/movies.js"></script>
+<script src="scripts/views/actorMovies.js"></script>
 
 
 <script src="app.js"></script>
