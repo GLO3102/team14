@@ -46,6 +46,7 @@ var WatchlistListView = Backbone.View.extend({
     'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
 
+
     'render': function() {
         var that = this;
         var watchlists = new Watchlists();
@@ -80,10 +81,8 @@ var WatchlistEditView = Backbone.View.extend({
         }
         //sinon, c'est qu'on crée une nouvelle watchlist (*New Watchlist*)
         else {
-            {
-                var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
-                this.$el.html(template);
-            }
+            var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
+            this.$el.html(template);
         }
     },
     'events': {
@@ -150,7 +149,7 @@ var WatchlistEditView = Backbone.View.extend({
         }
         else {
             var movies = new MoviesCollection();
-            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
             console.log(reqUrl);
             movies.url = reqUrl;
             movies.fetch({
@@ -168,16 +167,18 @@ var WatchlistEditView = Backbone.View.extend({
         var clickId = event.target.id;
         var id = Number(clickId.substr(clickId.length-1));
         var movieToAdd = watchlistSearchResults[id-1];
+        console.log(movieToAdd);
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
-            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
+            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
-                router.navigate('watchlists/'+currentId, {trigger: true})
+                //router.navigate('watchlists/'+currentId, {trigger: true})
             },
             contentType: 'application/json'
         } );
+        console.log("ok done adding")
     }
 });
 
