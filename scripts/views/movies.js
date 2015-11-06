@@ -94,9 +94,8 @@ MovieView = Backbone.View.extend({
         return trackTime;
     },
     changeCoverPhotoDefinition: function(coverPhoto){
-        moviePhoto = coverPhoto;
-        moviePhoto = moviePhoto.replace("100x100bb","300x300bb");
-        return moviePhoto;
+        coverPhoto = coverPhoto.replace("100x100bb","300x300bb");
+        return coverPhoto;
     }
 
 });
