@@ -7,33 +7,22 @@ MovieView = Backbone.View.extend({
     first: true,
 
     initialize: function (){
-        var tag =document.createElement('script');
+        var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-
     },
     render: function(){
         var modelJson = this.model.toJSON();
         var indexArray = 0;
         var movie = modelJson.results[indexArray];
-        movie = this.changeFilmStatsFormat(movie);
+
+        movie.artworkUrl100 = this.changeCoverPhotoDefinition(movie.artworkUrl100);
+        movie.releaseDate = this.changeDateFormat(movie.releaseDate);
+        movie.trackTimeMillis = this.changeTimeTrackFormat(movie.trackTimeMillis);
+
         this.searchVideoYoutube(movie.trackName);
-        if(this.first){
-            this.first = false;
-
-        }
-
-        var watchListMovie = new Watchlists;
-        self = this;
-        watchListMovie.fetch({
-            success: function (data){
-                var templateWatchList = _.template($("#movie-template").html());
-                self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
-            }
-        })
+        this.getWatchlitsForAddWatchistButton(movie);
     },
     events:{
         "click #btnAddWatchList": "addMovieWatchlist"
@@ -42,22 +31,9 @@ MovieView = Backbone.View.extend({
         var modelJson =  this.model.toJSON();
         var indexArray=0;
         var movie = modelJson.results[indexArray];
-        var idWatchList = $( "#menuWatchlistMovie" ).val();
-        var that= this;
-        $.ajax({
-            type: "POST",
-            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
-            data: JSON.stringify(movie),
-            success: function() {
-                alert("vous avez ajouter le film " +movie.trackName + " dans la watchlist #"+ idWatchList);
-                LoadMainScreen();
-            },
-            contentType: 'application/json'
-        } );
+        this.addMovieInWatchList(movie);
     },
     searchVideoYoutube: function(title){
-        // 3. This function creates an <iframe> (and YouTube player)
-        //    after the API code downloads.
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
         var urlMiddle =  title+'official trailer';
         var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
@@ -74,24 +50,53 @@ MovieView = Backbone.View.extend({
                 width: '640',
                 videoId: data.items[0].id.videoId
             });
-            console.log("************************************* youtube Function *******************");
-            console.log(player);
-            console.log("***************************************************************************");
         });
-
+    },
+    addMovieInWatchList: function(movie){
+        console.log($("#menuWatchlistMovie").find(":selected").index());
+        var idWatchList = $("#menuWatchlistMovie").val();
+        var that= this;
+        $.ajax({
+            type: "POST",
+            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
+            data: JSON.stringify(movie),
+            success: function() {
+                alert("The movie " +movie.trackName + "  #"+ idWatchList);
+                LoadMainScreen();
+            },
+            contentType: 'application/json'
+        } );
+    },
+    getWatchlitsForAddWatchistButton: function(movie){
+        self = this;
+        var watchListMovie = new Watchlists;
+        watchListMovie.fetch({
+            success: function (data){
+                var templateWatchList = _.template($("#movie-template").html());
+                self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
+            }
+        })
 
     },
-    changeFilmStatsFormat: function(filmArray){
-        var date =  filmArray.releaseDate;
-        filmArray.releaseDate = date.slice(0,10);
-        var filmTime = filmArray.trackTimeMillis;
+    changeDateFormat: function (dateRelease) {
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+            var releaseDate = new Date(dateRelease);
+            releaseDate = monthNames[releaseDate.getMonth()] + " "+releaseDate.getUTCDate() + ", "+releaseDate.getUTCFullYear() ;
+            return releaseDate;
+    },
+    changeTimeTrackFormat: function(trackTimeMillis){
+        var trackTime = trackTimeMillis;
         var millisInMinute = 60000;
-        filmTime = (filmTime /millisInMinute);
-        filmArray.trackTimeMillis = Math.round(filmTime);
-        moviePhoto = filmArray.artworkUrl100;
+        trackTime = (trackTime /millisInMinute);
+        trackTime = Math.round(trackTime);
+        return trackTime;
+    },
+    changeCoverPhotoDefinition: function(coverPhoto){
+        moviePhoto = coverPhoto;
         moviePhoto = moviePhoto.replace("100x100bb","300x300bb");
-        filmArray.artworkUrl100 = moviePhoto;
-        return filmArray;
+        return moviePhoto;
     }
 
 });
