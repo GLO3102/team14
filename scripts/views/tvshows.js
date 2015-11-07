@@ -31,8 +31,8 @@ var TvShowsView = Backbone.View.extend({
             contentType: 'application/json'
         }).done(function(data) {
             player = new YT.Player('TVShows-list-template', {
-                height: '390',
-                width: '640',
+                height: '220',
+                width: '400',
                 videoId: data.items[0].id.videoId
             });
         });
