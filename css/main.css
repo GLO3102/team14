@@ -118,7 +118,16 @@ section {
     margin: 5px;
 
 }
-
+/*******************************************/
+/*    Affichage des listes des épisodes    */
+/*******************************************/
+#list-episodes li {
+    padding: 5px 0;
+    border-bottom: #dddddd 1px solid;
+}
+/*******************************************/
+/*           style pour responsive         */
+/*******************************************/
 .desktop-hidden {
     display:none;
 }

@@ -248,9 +248,9 @@
     <script type="text/template" id="episodes-list-template"  >
 
         <h2>Episodes</h2>
-        <ul class="list-unstyled">
+        <ul class="list-unstyled list-episodes">
             <% _.each(results, function(result) { %>
-            <li><span><%= result.trackNumber %> - <%= result.trackCensoredName %></span></li>
+            <li><span><img src="<%= result.artworkUrl30 %>" > <%= result.trackCensoredName %></span></li>
             <% }); %>
 
         </ul>
