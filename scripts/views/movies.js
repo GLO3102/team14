@@ -4,8 +4,6 @@
 MovieView = Backbone.View.extend({
     template: _.template($("#movie-template").html()),
     el: "#PageContent",
-    first: true,
-
     initialize: function (){
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -46,8 +44,8 @@ MovieView = Backbone.View.extend({
             contentType: 'application/json'
         }).done(function(data) {
             player = new YT.Player('movie-template', {
-                height: '390',
-                width: '640',
+                height: '220',
+                width: '400',
                 videoId: data.items[0].id.videoId
             });
         });

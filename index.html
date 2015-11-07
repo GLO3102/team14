@@ -20,11 +20,12 @@
 </header>
 <main>
     <h1 class="hidden">UMovie</h1>
+    <div id="PageContent"></div>
 
-    <div id="PageContent">
 
-    </div>
-    <div id="videoContainer"></div>
+
+
+
 
     <!--div id="welcome-message">
         <p>Welcome to UMovie</p>
@@ -105,7 +106,7 @@
                 </table>
             <% }; %>
         </div>
-
+        
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
@@ -170,19 +171,18 @@
         <movie>
             <div id="mainContainer">
                 <div class="movieTitle">
-                    <h2><%= movie.trackName %></h2>
+                    <h1><%= movie.trackName %></h1>
                 </div>
                 <div class="coverPhoto col-md-2">
                     <img src="<%= movie.artworkUrl100 %>" />
                 </div>
-                <div>
+                <div class="description col-md-10">
                     <p><%= movie.longDescription%></p>
                 </div>
                 <div>
                     <span><a  class="btn-itunes" href="<%= movie.trackViewUrl %>"></a></span>
                 </div>
-
-                <div class="mobile-visible">
+                <div class="infos">
                     <p><strong>Genre:</strong><span>   <%= movie.primaryGenreName %></span></p>
                     <p><strong>Release date:</strong><span>    <%= movie.releaseDate%></span></p>
                     <p><strong>Country:</strong><span>   <%= movie.country%></span></p>
@@ -192,7 +192,6 @@
                 </div>
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
-                        test
                         <% _.each(watchlists, function(list) { %>
                         <option value=<%= list.id %>><%= list.name %></option>
                         <% });%>
@@ -200,29 +199,10 @@
                 </div>
                 <div id="videoMovieContainer">
                 </div>
-                <!--
-                <div id="containerBuy class="table-stripped">
-                    <table>
-                        <tr>
-                            <td><button id="buyMovie" class="btn btn-primary">Buy(SD):<%= movie.trackPrice %></button></td>
-                            <td><button id="buyHdMovie" class="btn btn-primary">Buy(HD):<%= movie.trackHdPrice %></button></td>
-                        </tr>
-                        <tr>
-                            <td> <button id="rentMovie" class="btn btn-primary">Rental(SD):<%= movie.trackRentalPrice %></button></td>
-                            <td> <button id="rentHdMovie" class="btn btn-primary">Rental(HD) :<%= movie.trackHdRentalPrice %></button></td>
-                        </tr>
-
-                    </table>
-            </div>-->
         </movie>
-
     </script>
-
     <script type="text/template" id="TVShows-list-template"  >
-
-
         <% _.each(results, function(result) { %>
-
         <div class="movieTitle">
             <h1><%= result.collectionName %></h1>
         </div>
@@ -241,9 +221,7 @@
         </div>
         <div id="videoMovieContainer">
         </div>
-
         <% }); %>
-
     </script>
     <script type="text/template" id="episodes-list-template"  >
 
@@ -252,13 +230,9 @@
             <% _.each(results, function(result) { %>
             <li><span><img src="<%= result.artworkUrl30 %>" > <%= result.trackCensoredName %></span></li>
             <% }); %>
-
         </ul>
     </script>
-
 </main>
-
-
 </body>
 </html>
 
