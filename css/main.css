@@ -57,6 +57,15 @@ section {
     margin-bottom: 10px;
 }
 
+.btn-itunes {
+    background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_itunes-lrg.svg) no-repeat;
+    display:inline-block;
+    height:40px;
+    overflow:hidden;
+    text-indent: -9999px;
+    width:165px;
+}
+
 /*******************************************/
 /*    Affichage des listes de film         */
 /*******************************************/

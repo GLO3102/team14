@@ -9,9 +9,33 @@ var TvShowsView = Backbone.View.extend({
         });
     },
     render: function () {
+
+        var tvShowsName = this.collection.toJSON()[0].collectionName;
+
         this.$el.html(this.template({
             results: this.collection.toJSON()
         }))
-    }
+
+        this.searchVideoYoutube(tvShowsName);
+    },
+    searchVideoYoutube: function(title){
+        var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
+        var urlMiddle =  title+' official trailer';
+        var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
+        var urlComplete = urlBegin + urlMiddle + urlEnd;
+        var player;
+
+        $.ajax({
+            url : urlComplete,
+            type : 'GET',
+            contentType: 'application/json'
+        }).done(function(data) {
+            player = new YT.Player('TVShows-list-template', {
+                height: '390',
+                width: '640',
+                videoId: data.items[0].id.videoId
+            });
+        });
+    },
 });
 
