@@ -6,7 +6,7 @@
     <title>Welcome to UMovie</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" src="css/movie.css">
+    <link rel="stylesheet" type="text/css" href="css/movie.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
@@ -189,8 +189,6 @@
                     <h3>Synopsis</h3>
                     <p><%= movie.longDescription%></p>
                 </div>
-                <div id="videoMovieContainer">
-                </div>
 
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
@@ -199,7 +197,8 @@
                         <% });%>
                     </select>
                 </div>
-
+                <div id="videoMovieContainer">
+                </div>
         </movie>
     </script>
     <script type="text/template" id="TVShows-list-template"  >

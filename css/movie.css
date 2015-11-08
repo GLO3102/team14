@@ -108,6 +108,11 @@ movie .movieLink
     height: 40%;
 }
 
+#videoMovieContainer
+{
+    padding-top: 10px;
+}
+
 /*******************************************/
 /*              Tablette                   */
 /*******************************************/
