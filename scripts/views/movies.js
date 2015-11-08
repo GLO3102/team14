@@ -15,7 +15,7 @@ MovieView = Backbone.View.extend({
         var indexArray = 0;
         var movie = modelJson.results[indexArray];
 
-        movie.artworkUrl100 = this.changeCoverPhotoDefinition(movie.artworkUrl100);
+        //movie.artworkUrl100 = this.changeCoverPhotoDefinition(movie.artworkUrl100);
         movie.releaseDate = this.changeDateFormat(movie.releaseDate);
         movie.trackTimeMillis = this.changeTimeTrackFormat(movie.trackTimeMillis);
 
