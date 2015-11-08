@@ -173,15 +173,6 @@
                 <div class="movieTitle">
                     <h1><%= movie.trackName %></h1>
                 </div>
-                <div class="coverPhoto col-md-2">
-                    <img src="<%= movie.artworkUrl100 %>" />
-                </div>
-                <div class="description col-md-10">
-                    <p><%= movie.longDescription%></p>
-                </div>
-                <div>
-                    <span><a  class="btn-itunes" href="<%= movie.trackViewUrl %>"></a></span>
-                </div>
                 <div class="infos">
                     <p><strong>Genre:</strong><span>   <%= movie.primaryGenreName %></span></p>
                     <p><strong>Release date:</strong><span>    <%= movie.releaseDate%></span></p>
@@ -189,7 +180,18 @@
                     <p><strong>Director:</strong><span>   <%= movie.artistName%></span></p>
                     <p><strong>Duration:</strong><span>  <%= movie.trackTimeMillis %> minutes</span></p>
                     <p><strong>Rating:</strong><span>    <%= movie.contentAdvisoryRating%></span></p>
+                    <p><span><a  class="btn-itunes" href="<%= movie.trackViewUrl %>"></a></span></p>
                 </div>
+                <div class="coverPhoto col-md-2">
+                    <img src="<%= movie.artworkUrl100 %>" />
+                </div>
+                <div class="description col-md-10">
+                    <h3>Synopsis</h3>
+                    <p><%= movie.longDescription%></p>
+                </div>
+                <div id="videoMovieContainer">
+                </div>
+
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
                         <% _.each(watchlists, function(list) { %>
@@ -197,9 +199,7 @@
                         <% });%>
                     </select>
                 </div>
-                <div id="videoMovieContainer">
-                </div>
-            </div>
+
         </movie>
     </script>
     <script type="text/template" id="TVShows-list-template"  >

@@ -98,16 +98,21 @@ var WatchlistEditView = Backbone.View.extend({
         if(currentId == 0) {
             console.log("Creating a watchlist");
             //c'est alors une nouvelle watchlist
-            var checkValid = watchlists.create({
-                name: $('#watchlistName').val()
-            }, {
-                beforeSend: setHeader,
-                type: 'POST',
-                validate: true,
-                success: function(watchlist) {
-                    router.navigate('watchlists', {trigger:true});
-                }
-            });
+            if(!($('#watchlistName').val().length > 0)) {
+                alert("A watchlist name must contain at least one character.");
+            }
+            else {
+                var checkValid = watchlists.create({
+                    name: $('#watchlistName').val()
+                }, {
+                    beforeSend: setHeader,
+                    type: 'POST',
+                    validate: true,
+                    success: function (watchlist) {
+                        router.navigate('watchlists', {trigger: true});
+                    }
+                });
+            }
         } else {
             //on veut plutôt modifier une watchlist existante
             console.log("Modifying a watchlist");
