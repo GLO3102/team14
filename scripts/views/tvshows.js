@@ -19,6 +19,7 @@ var TvShowsView = Backbone.View.extend({
         this.searchVideoYoutube(tvShowsName);
     },
     searchVideoYoutube: function(title){
+        console.log("searchVideoYoutube "+title)
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
         var urlMiddle =  title+' official trailer';
         var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
@@ -30,7 +31,7 @@ var TvShowsView = Backbone.View.extend({
             type : 'GET',
             contentType: 'application/json'
         }).done(function(data) {
-            player = new YT.Player('TVShows-list-template', {
+            player = new YT.Player('player', {
                 height: '220',
                 width: '400',
                 videoId: data.items[0].id.videoId

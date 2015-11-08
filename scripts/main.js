@@ -80,8 +80,10 @@ router.on('route:tvshow', function(id){
         });
         tvShowsCollection.fetch({
             success: function (model, response) {
+
                 tvShowsView.render();
                 createEpisodesListe(model);
+
             },
             error: function (model, response) {
                 console.log("error");
