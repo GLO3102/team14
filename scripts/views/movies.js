@@ -5,10 +5,7 @@ MovieView = Backbone.View.extend({
     template: _.template($("#movie-template").html()),
     el: "#PageContent",
     initialize: function (){
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        _.bindAll(this, 'render');
     },
     render: function(){
         var modelJson = this.model.toJSON();
@@ -19,8 +16,8 @@ MovieView = Backbone.View.extend({
         movie.releaseDate = this.changeDateFormat(movie.releaseDate);
         movie.trackTimeMillis = this.changeTimeTrackFormat(movie.trackTimeMillis);
 
-        this.searchVideoYoutube(movie.trackName);
         this.getWatchlitsForAddWatchistButton(movie);
+        return this;
     },
     events:{
         "click #btnAddWatchList": "addMovieWatchlist"
@@ -43,7 +40,7 @@ MovieView = Backbone.View.extend({
             type : 'GET',
             contentType: 'application/json'
         }).done(function(data) {
-            player = new YT.Player('movie-template', {
+            player = new YT.Player('videoMovieContainer', {
                 height: '220',
                 width: '400',
                 videoId: data.items[0].id.videoId

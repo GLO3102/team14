@@ -15,7 +15,7 @@ var Router = Backbone.Router.extend({
 
 // Display logic
 var movieModel = new MovieModel({});
-var movieView = new MovieView({})
+var movieView = new MovieView({});
 var router = new Router();
 
 router.on('route:home', function() {
@@ -47,12 +47,20 @@ router.on('route:showMovieData', function(id){
     console.log(movieModel);
     var rootUrl = "http://umovie.herokuapp.com/unsecure/movies";
     movieModel.urlRoot = rootUrl+"/"+id;
-    movieView.model = movieModel;
+    if (movieView.model) {
+        movieView.model.set(movieModel.toJSON());
+    }
+    else
+    {
+        movieView.model = movieModel;
+    }
     movieModel.fetch({
         success: function(){
-            console.log("youpi ça marché!");
             console.log(movieView.model.toJSON());
             movieView.render();
+
+            var trackName = movieView.model.toJSON().results[0].trackName;
+            setTimeout(movieView.searchVideoYoutube, 200, trackName);
         }
     })
     console.log(movieView.model.toJSON());
