@@ -26,15 +26,13 @@ router.on('route:home', function() {
 });
 
 router.on('route:actor', function(id) {
-
     $.get('actor.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
         actorFunction(id);
-        setTimeout(populatePreviews, 200);
     });
-
 });
+
 router.on('route:watchlists', function() {
     toggleUserMenu(null);
     var watchlistListView = new WatchlistListView({ });

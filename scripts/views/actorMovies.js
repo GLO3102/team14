@@ -1,5 +1,5 @@
 $(function () {
-    MovieView = Backbone.View.extend({
+    ActorMovieView = Backbone.View.extend({
         template: _.template($('#movies-tpl').html()),
         el: ".movieInfo",
 
@@ -22,8 +22,8 @@ $(function () {
             this.$el.html(this.template({
                 movies: this.collection.toJSON()
             }));
-
-        },
+            populatePreviews();
+        }
     });
 
 });
@@ -51,7 +51,7 @@ var searchVideoYoutube=function(title,container){
 var populatePreviews=function(){
     var listTitles = $('.title');
     for(var i=0; i < listTitles.length; ++i) {
-        searchVideoYoutube(listTitles[i].value, 'moviePreview' + i);
+        searchVideoYoutube(listTitles[i].innerHTML, 'previewTitle' + i);
     }
 
 
