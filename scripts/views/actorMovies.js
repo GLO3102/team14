@@ -16,13 +16,47 @@ $(function () {
 
         },
         render: function () {
+
+
             // Pass the model (as a JSON) to the template to be rendered.
             this.$el.html(this.template({
                 movies: this.collection.toJSON()
             }));
-        }
+
+        },
+
 
 
     });
 
 });
+
+var searchVideoYoutube=function(title,container){
+    console.log("searchVideoYoutube "+title)
+    var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
+    var urlMiddle =  title+' official trailer';
+    var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
+    var urlComplete = urlBegin + urlMiddle + urlEnd;
+    var player;
+
+    $.ajax({
+        url : urlComplete,
+        type : 'GET',
+        contentType: 'application/json'
+    }).done(function(data) {
+        player = new YT.Player(container, {
+            height: '220',
+            width: '400',
+            videoId: data.items[0].id.videoId
+        });
+    });
+};
+
+var populatePreviews=function(){
+    var listTitles = $('.title');
+    for(var i=0; i < listTitles.length; ++i) {
+        searchVideoYoutube(listTitles[i].value, 'moviePreview' + i);
+    }
+
+
+}

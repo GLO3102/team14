@@ -9,7 +9,9 @@ var Router = Backbone.Router.extend({
         'watchlists' : 'watchlists',
         'watchlists/:id' : 'editWatchlist',
         'movies/:id': 'showMovieData',
-        'tvshow/:id': 'tvshow'
+        'tvshow/:id': 'tvshow',
+        'actors/:id': 'actor'
+
     }
 });
 
@@ -18,10 +20,23 @@ var movieModel = new MovieModel({});
 var movieView = new MovieView({});
 var router = new Router();
 
+
+
 router.on('route:home', function() {
     console.log("routing to home");
 });
 
+router.on('route:actor', function(id) {
+
+    $.get('actor.html', function(data) {
+        $("#PageContent").html(data);
+    }).done(function(){
+        console.log("routing to actor");
+        actorFunction(id);
+        setTimeout(populatePreviews, 200);
+    });
+
+});
 router.on('route:watchlists', function() {
     console.log("routing to watchlists");
     toggleUserMenu(null);

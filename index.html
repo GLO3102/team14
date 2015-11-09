@@ -231,6 +231,36 @@
             <% }); %>
         </ul>
     </script>
+
+    <script id="actors-tpl" type="text/template">
+        <div class="actorName">
+            Name : <span id="actorFullName"><%= actor.results[0].artistName %></span>
+        </div>
+
+        <div class="primaryGenre">
+            Primary genre :<span > <%= actor.results[0].primaryGenreName %></span>
+        </div>
+
+
+
+
+    </script>
+    <script id="movies-tpl" type="text/template">
+
+        <ol>
+            <% _.each(movies[0].results, function(movie,index){ %>
+            <li>
+                <ul>
+
+                    <li class="title"><%=movie.trackName %> </li>
+                    <li class="releaseDate"><%=movie.releaseDate %></li>
+                    <li class="preview" id="<%= 'movieTitle' + index %>"><div class="moviePreview" id="<%= 'previewTitle' + index %>"> </div>/li>
+                        <!--  <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe> </li> -->
+                </ul>
+            </li>
+            <% }); %>
+        </ol>
+    </script>
 </main>
 </body>
 </html>
@@ -247,6 +277,20 @@
 <script type="text/javascript" src="scripts/collection/episodes.js"></script>
 <script type="text/javascript" src="scripts/views/episodes.js"></script>
 <script type="text/javascript" src="scripts/tvshows.js"></script>
+
+<script src="scripts/models/actor.js"></script>
+
+<script src="scripts/views/actor.js"></script>
+
+
+<script src="scripts/collection/actorMovies.js"></script>
+<script src="scripts/models/actorMovie.js"></script>
+
+<script src="scripts/views/actorMovies.js"></script>
+
+
+<script src="app.js"></script>
+
 
 <script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/models/movie.js"></script>

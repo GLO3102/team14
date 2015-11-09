@@ -1,15 +1,15 @@
 /**
  * Created by Stéphane on 2015-10-29.
  */
-$(function () {
+var actorFunction=function (id) {
 
 
-    var actorModel = new ActorModel(['results'].artistId= 184723090);
-    actorModel.url = 'https://umovie.herokuapp.com/unsecure/actors/184723090';
+    var actorModel = new ActorModel(['results'].artistId= id);
+    actorModel.url = 'https://umovie.herokuapp.com/unsecure/actors/'+ id;
 
    // collection movies
-    var movieCollection = new MoviesCollection ({});
-    movieCollection.url='https://umovie.herokuapp.com/unsecure/actors/184723090/movies';
+    var movieCollection = new ActorMoviesCollection();
+    movieCollection.url='https://umovie.herokuapp.com/unsecure/actors/'+id+'/movies';
 
     var actorView = new ActorView({
         model: actorModel
@@ -39,4 +39,5 @@ $(function () {
         console.log( JSON.stringify(movieCollection));
     });
 
-});
+};
+
