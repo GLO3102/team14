@@ -98,7 +98,7 @@
                 <% watchlist.movies.forEach( function( item ){ %>
                 <tr>
                     <th><%= item.trackName %></th>
-                    <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X <%= item.trackId%></button></th>
+                    <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></th>
                     <input type="hidden" name="hiddenMovieId" value="<%= item.trackId%>" />
                 </tr>
                 <% }); %>
