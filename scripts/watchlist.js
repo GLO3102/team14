@@ -20,7 +20,6 @@ var Watchlist = Backbone.Model.extend({
         console.log(apiResponse);
 
         apiResponse.movies.forEach( function(item) {
-            console.log(item.trackName);
         });
 
         return apiResponse;
@@ -36,8 +35,6 @@ var Watchlists = Backbone.Collection.extend({
     'model': Watchlist,
 
     'parse': function( apiResponse ){
-        console.log("parsing wlist collection");
-        console.log(apiResponse);
         return apiResponse;
     }
 });
@@ -96,7 +93,6 @@ var WatchlistEditView = Backbone.View.extend({
     'saveWatchlist': function(event) {
         var currentId = $('#hiddenWatchlistId').text();
         if(currentId == 0) {
-            console.log("Creating a watchlist");
             //c'est alors une nouvelle watchlist
             if(!($('#watchlistName').val().length > 0)) {
                 alert("A watchlist name must contain at least one character.");
@@ -156,7 +152,6 @@ var WatchlistEditView = Backbone.View.extend({
         else {
             var movies = new MoviesCollection();
             var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
-            console.log(reqUrl);
             movies.url = reqUrl;
             movies.fetch({
                 beforeSend: setHeader,
@@ -175,15 +170,12 @@ var WatchlistEditView = Backbone.View.extend({
         var id = Number(clickId.substr(clickId.length-1));
         var movieToAdd = watchlistSearchResults[id-1];
         var self = this;
-        console.log("adding search result to wl");
-        console.log(movieToAdd);
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
             url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
-                console.log("post successful, adding 1 item");
                 options = {'id': currentId};
                 self.render(options);
             },
@@ -194,14 +186,11 @@ var WatchlistEditView = Backbone.View.extend({
     'deleteMovieFromWL': function(event) {
         var currentWLID = $('#hiddenWatchlistId').text();
         var currentMovieID = event.currentTarget.id;
-        console.log("got a click from the delete button for " + currentWLID + " and " + currentMovieID);
         var self = this;
         $.ajax({
             url: "https://umovie.herokuapp.com/unsecure/watchlists/" + currentWLID + "/movies/" + currentMovieID,
             type: 'DELETE',
             success: function(result) {
-                console.log("successful in deleting movie in WL");
-                console.log(result);
                 options = {'id': currentWLID};
                 self.render(options);
             }

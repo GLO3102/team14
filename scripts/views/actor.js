@@ -31,19 +31,13 @@ var ActorView = Backbone.View.extend({
             }));
             var nom=this.model.toJSON().results[0].artistName;
             $.ajax({
-                //url : 'https://api.gettyimages.com/v3/search/images?fields=id,title,thumb,referral_destinations&sort_order=best&phrase='+ encodeURIComponent(nom),
                 url:'https://api.gettyimages.com/v3/search/images?phrase='+ encodeURIComponent(nom),
                 beforeSend:this.setHeader,
                 contentType: 'application/json'
             }).done(function(data) {
-
                 var img = document.createElement("IMG");
                 img.src = data.images[0].display_sizes[0].uri;
                 $('.actorPhoto').html(img);
-
-
-                console.log(data.images[0].display_sizes[0].uri);
-
             });
         },
 

@@ -24,7 +24,6 @@ var actorFunction=function (id) {
     // We add `.complete` callback to render the views only after the `fetch()` is completed.
     actorModel.fetch().complete(function () {
         actorView.render();
-        //console.log( JSON.stringify(actorModel));
         var data =JSON.stringify(actorModel);
     });
     /**actorModel.fetch({
