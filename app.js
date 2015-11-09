@@ -27,13 +27,6 @@ var actorFunction=function (id) {
         //console.log( JSON.stringify(actorModel));
         var data =JSON.stringify(actorModel);
     });
-    /**actorModel.fetch({
-        success: function (actorModel) {
-            //console.log( JSON.stringify(actorModel));
-            var data =JSON.stringify(actorModel);
-            console.log( data);
-        }
-    })*/
     movieCollection.fetch().complete(function () {
         movieView.render();
 
