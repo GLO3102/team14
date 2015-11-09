@@ -34,8 +34,7 @@ var actorFunction=function (id) {
         }
     })*/
     movieCollection.fetch().complete(function () {
-        movieView .render();
-        console.log( JSON.stringify(movieCollection));
+        movieView.render();
     });
 
 };

@@ -51,7 +51,6 @@ MovieView = Backbone.View.extend({
         });
     },
     addMovieInWatchList: function(movie){
-        console.log($("#menuWatchlistMovie").find(":selected").index());
         var idWatchList = $("#menuWatchlistMovie").val();
         var that= this;
         $.ajax({
@@ -59,7 +58,6 @@ MovieView = Backbone.View.extend({
             url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(movie),
             success: function(data) {
-                console.log(data);
                 router.navigate('watchlists', {trigger:true});
                 alert("The movie " +movie.trackName + " is added to the watchlist : "+ data.name);
                 LoadMainScreen();

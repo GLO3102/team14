@@ -16,9 +16,6 @@ var Watchlist = Backbone.Model.extend({
     },
 
     'parse': function( apiResponse ){
-        console.log("parsing wlist model");
-        console.log(apiResponse);
-
         apiResponse.movies.forEach( function(item) {
         });
 
@@ -42,7 +39,6 @@ var Watchlists = Backbone.Collection.extend({
 var WatchlistListView = Backbone.View.extend({
     'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
-
 
     'render': function() {
         var that = this;
@@ -111,7 +107,6 @@ var WatchlistEditView = Backbone.View.extend({
             }
         } else {
             //on veut plutôt modifier une watchlist existante
-            console.log("Modifying a watchlist");
             var watchlist = new Watchlist();
             var checkValid = watchlist.save({
                 id: currentId,
