@@ -1,23 +1,25 @@
+
 /**
-* Created by Sebastien on 2015-10-26.
-*/
+ * Created by Sebastien on 2015-10-26.
+ */
 MovieView = Backbone.View.extend({
     template: _.template($("#movie-template").html()),
     el: "#PageContent",
     initialize: function (){
-        _.bindAll(this, 'render');
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
     },
     render: function(){
         var modelJson = this.model.toJSON();
         var indexArray = 0;
         var movie = modelJson.results[indexArray];
 
-        //movie.artworkUrl100 = this.changeCoverPhotoDefinition(movie.artworkUrl100);
-        movie.releaseDate = this.changeDateFormat(movie.releaseDate);
-        movie.trackTimeMillis = this.changeTimeTrackFormat(movie.trackTimeMillis);
-
+        this.searchVideoYoutube(movie.trackName);
         this.getWatchlitsForAddWatchistButton(movie);
-        return this;
     },
     events:{
         "click #btnAddWatchList": "addMovieWatchlist"
@@ -26,6 +28,7 @@ MovieView = Backbone.View.extend({
         var modelJson =  this.model.toJSON();
         var indexArray=0;
         var movie = modelJson.results[indexArray];
+        this.searchVideoYoutube(movie.nameTrack);
         this.addMovieInWatchList(movie);
     },
     searchVideoYoutube: function(title){
@@ -40,7 +43,7 @@ MovieView = Backbone.View.extend({
             type : 'GET',
             contentType: 'application/json'
         }).done(function(data) {
-            player = new YT.Player('videoMovieContainer', {
+            player = new YT.Player('movie-template', {
                 height: '220',
                 width: '400',
                 videoId: data.items[0].id.videoId
@@ -55,8 +58,10 @@ MovieView = Backbone.View.extend({
             type: "POST",
             url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(movie),
-            success: function() {
-                alert("The movie " +movie.trackName + "  #"+ idWatchList);
+            success: function(data) {
+                console.log(data);
+                router.navigate('watchlists', {trigger:true});
+                alert("The movie " +movie.trackName + " is added to the watchlist : "+ data.name);
                 LoadMainScreen();
             },
             contentType: 'application/json'
@@ -73,25 +78,6 @@ MovieView = Backbone.View.extend({
         })
 
     },
-    changeDateFormat: function (dateRelease) {
-        var monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"];
-
-            var releaseDate = new Date(dateRelease);
-            releaseDate = monthNames[releaseDate.getMonth()] + " "+releaseDate.getUTCDate() + ", "+releaseDate.getUTCFullYear() ;
-            return releaseDate;
-    },
-    changeTimeTrackFormat: function(trackTimeMillis){
-        var trackTime = trackTimeMillis;
-        var millisInMinute = 60000;
-        trackTime = (trackTime /millisInMinute);
-        trackTime = Math.round(trackTime);
-        return trackTime;
-    },
-    changeCoverPhotoDefinition: function(coverPhoto){
-        coverPhoto = coverPhoto.replace("100x100bb","300x300bb");
-        return coverPhoto;
-    }
 
 });
 
