@@ -5,8 +5,7 @@
 
 var ActorView = Backbone.View.extend({
         template: _.template($('#actors-tpl').html()),
-        el: "#PageContent",
-
+        el: ".actorInfo",
         initialize: function () {
             // You'll see the `_.bindAll()` function in almost every `initialize`.
             // See this StackOverflow [answer](http://stackoverflow.com/a/6396224/884338 "JSONP") to why `_.bindAll()` is necessary.
@@ -19,11 +18,9 @@ var ActorView = Backbone.View.extend({
             // We can bind to any events like this.
 
         },
-
-    setHeader:function(xhr){
-        xhr.setRequestHeader('Api-Key','p6av4vu96q5kh2mpfhcpwjbz')
-    },
-
+        setHeader:function(xhr){
+            xhr.setRequestHeader('Api-Key','p6av4vu96q5kh2mpfhcpwjbz')
+        },
         render: function () {
             // Pass the model (as a JSON) to the template to be rendered.
             this.$el.html(this.template({
@@ -39,16 +36,11 @@ var ActorView = Backbone.View.extend({
 
                 var img = document.createElement("IMG");
                 img.src = data.images[0].display_sizes[0].uri;
-                $('.actorPhoto').html(img);
-
+                $('.actorPhoto').append(img);
 
                 console.log(data.images[0].display_sizes[0].uri);
 
             });
-        },
-
-
-
-
+        }
     });
 

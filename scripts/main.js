@@ -27,13 +27,12 @@ router.on('route:home', function() {
 });
 
 router.on('route:actor', function(id) {
-
     $.get('actor.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
         console.log("routing to actor");
         actorFunction(id);
-        setTimeout(populatePreviews, 200);
+        //setTimeout(populatePreviews, 500);
     });
 
 });

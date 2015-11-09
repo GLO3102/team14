@@ -16,7 +16,7 @@ var actorFunction=function (id) {
     });
 
     //vue movies
-    var movieView = new MovieView({
+    var movieView = new ActorMovieView({
         collection: movieCollection
     });
 
@@ -27,15 +27,9 @@ var actorFunction=function (id) {
         //console.log( JSON.stringify(actorModel));
         var data =JSON.stringify(actorModel);
     });
-    /**actorModel.fetch({
-        success: function (actorModel) {
-            //console.log( JSON.stringify(actorModel));
-            var data =JSON.stringify(actorModel);
-            console.log( data);
-        }
-    })*/
     movieCollection.fetch().complete(function () {
-        movieView .render();
+        movieView.render();
+
         console.log( JSON.stringify(movieCollection));
     });
 

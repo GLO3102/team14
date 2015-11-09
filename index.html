@@ -251,9 +251,9 @@
             <li>
                 <ul>
 
-                    <li class="title"><%=movie.trackName %> </li>
-                    <li class="releaseDate"><%=movie.releaseDate %></li>
-                    <li class="preview" id="<%= 'movieTitle' + index %>"><div class="moviePreview" id="<%= 'previewTitle' + index %>"> </div>/li>
+                    <li class="title" id="<%= 'movieTitle' + index %>"><%=movie.trackName %> </li>
+                    <li class="releaseDate"><%= (new Date(movie.releaseDate)).toDateString() %></li>
+                    <li class="preview"><div class="moviePreview" id="<%= 'previewTitle' + index %>"> </div></li>
                         <!--  <li class="preview">preview : <iframe width="560" height="315" src="https://www.youtube.com/embed/9feD6MDcM1E" frameborder="0" allowfullscreen></iframe> </li> -->
                 </ul>
             </li>
