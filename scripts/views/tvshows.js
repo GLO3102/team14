@@ -14,12 +14,11 @@ var TvShowsView = Backbone.View.extend({
 
         this.$el.html(this.template({
             results: this.collection.toJSON()
-        }))
+        }));
 
         this.searchVideoYoutube(tvShowsName);
     },
     searchVideoYoutube: function(title){
-        console.log("searchVideoYoutube "+title)
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
         var urlMiddle =  title+' official trailer';
         var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';

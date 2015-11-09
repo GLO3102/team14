@@ -16,7 +16,7 @@ var actorFunction=function (id) {
     });
 
     //vue movies
-    var movieView = new ActorMovieView({
+    var movieView = new MovieView({
         collection: movieCollection
     });
 
@@ -24,12 +24,17 @@ var actorFunction=function (id) {
     // We add `.complete` callback to render the views only after the `fetch()` is completed.
     actorModel.fetch().complete(function () {
         actorView.render();
-        //console.log( JSON.stringify(actorModel));
         var data =JSON.stringify(actorModel);
     });
+    /**actorModel.fetch({
+        success: function (actorModel) {
+            //console.log( JSON.stringify(actorModel));
+            var data =JSON.stringify(actorModel);
+            console.log( data);
+        }
+    })*/
     movieCollection.fetch().complete(function () {
-        movieView.render();
-
+        movieView .render();
         console.log( JSON.stringify(movieCollection));
     });
 

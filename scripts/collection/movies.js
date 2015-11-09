@@ -6,6 +6,6 @@ var MoviesCollection = Backbone.Collection.extend({
     model:MovieModel,
 
     'initialize': function(data) {
-        console.log("initializing movies collection");
+
     }
 });

@@ -23,31 +23,25 @@ var router = new Router();
 
 
 router.on('route:home', function() {
-    console.log("routing to home");
 });
 
 router.on('route:actor', function(id) {
+
     $.get('actor.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
-        console.log("routing to actor");
         actorFunction(id);
-        //setTimeout(populatePreviews, 500);
+        setTimeout(populatePreviews, 200);
     });
 
 });
 router.on('route:watchlists', function() {
-    console.log("routing to watchlists");
     toggleUserMenu(null);
-
     var watchlistListView = new WatchlistListView({ });
     watchlistListView.render();
 });
 
 router.on('route:editWatchlist', function(id) {
-    console.log("routing to editWachlist");
-    console.log(id);
-
     var watchlistEditView = new WatchlistEditView({ });
     watchlistEditView.render({id: id});
 });
@@ -56,9 +50,6 @@ router.on('route:editWatchlist', function(id) {
  */
 router.on('route:showMovieData', function(id){
     movieModel.trackId=id;
-    console.log(id);
-    console.log("voici mon model -->>>>>>>>>>>>>>>>>>>>>");
-    console.log(movieModel);
     var rootUrl = "http://umovie.herokuapp.com/unsecure/movies";
     movieModel.urlRoot = rootUrl+"/"+id;
     if (movieView.model) {
@@ -70,14 +61,12 @@ router.on('route:showMovieData', function(id){
     }
     movieModel.fetch({
         success: function(){
-            console.log(movieView.model.toJSON());
             movieView.render();
 
             var trackName = movieView.model.toJSON().results[0].trackName;
             setTimeout(movieView.searchVideoYoutube, 200, trackName);
         }
     })
-    console.log(movieView.model.toJSON());
 });
 
 router.on('route:tvshow', function(id){
@@ -88,7 +77,6 @@ router.on('route:tvshow', function(id){
         var tvShowsCollection =  new TvShowsCollection({});
         //http://umovie.herokuapp.com/unsecure/tvshows/season/271383858
         tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
-        console.log('Log Patrick tvshow URL : ' + tvShowsCollection.url);
         var tvShowsView = new TvShowsView({
             collection: tvShowsCollection
         });

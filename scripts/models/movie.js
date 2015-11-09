@@ -7,7 +7,6 @@ var MovieModel = Backbone.Model.extend({
 
     initialize: function(data) {
         this.trackId = data.trackId;
-        console.log("initializing moviemodel")
     },
     parse: function(response) {
         this.trackId = response.trackId;
