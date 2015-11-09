@@ -43,7 +43,7 @@ MovieView = Backbone.View.extend({
             type : 'GET',
             contentType: 'application/json'
         }).done(function(data) {
-            player = new YT.Player('movie-template', {
+            player = new YT.Player('MoviePageVideoContainer', {
                 height: '220',
                 width: '400',
                 videoId: data.items[0].id.videoId

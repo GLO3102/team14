@@ -11,7 +11,6 @@ body {
     left: 0;
     right: 0;
     position: relative;
-    /*z-index: 9999;*/
     margin: 50px 50px 50px 50px;
 }
 button{
@@ -66,10 +65,7 @@ movie .movieInfosContainer {
 
 movie .description {
     display: inline-block;
-    /*width: 60%;*/
     vertical-align:top;
-    /*padding-left: 5%;
-    padding-right: 5%;*/
 }
 
 movie .rating {
@@ -108,7 +104,7 @@ movie .movieLink
     height: 40%;
 }
 
-#videoMovieContainer
+#MoviePageVideoContainer
 {
     padding-top: 10px;
 }
