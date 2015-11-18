@@ -10,7 +10,8 @@ var Router = Backbone.Router.extend({
         'watchlists/:id' : 'editWatchlist',
         'movies/:id': 'showMovieData',
         'tvshow/:id': 'tvshow',
-        'actors/:id': 'actor'
+        'actors/:id': 'actor',
+        'user/:id': 'users'
 
     }
 });
@@ -18,6 +19,10 @@ var Router = Backbone.Router.extend({
 // Display logic
 var movieModel = new MovieModel({});
 var movieView = new MovieView({});
+var usersCollection = new UsersCollection({});
+var userModel = new UsersModel({});
+var userView = new UsersViews({collection: usersCollection});
+
 var router = new Router();
 
 
@@ -68,7 +73,6 @@ router.on('route:showMovieData', function(id){
 });
 
 router.on('route:tvshow', function(id){
-
     $.get('tvshow.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
@@ -91,6 +95,23 @@ router.on('route:tvshow', function(id){
         });
     });
 });
+router.on('route:users', function(id){
+    var rootUrl="http://umovie.herokuapp.com/unsecure/users"
+    userModel.urlRoot = rootUrl+"/"+id;
+    if(userView.model){
+        userView.model.set(userModel.toJSON())
+    }
+    else{
+        userView.model = userModel;
+    }
+    userModel.fetch({
+        success: function(){
+            userView.render();
+
+        }
+    })
+
+})
 
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;
@@ -101,7 +122,6 @@ $.ajax({
     success: function(data, textStatus, jqXHR)
     {
         loginObj = data;
-        //alert(loginObj["token"]);
     },
     error: function (jqXHR, textStatus, errorThrown)
     {

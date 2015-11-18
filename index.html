@@ -239,13 +239,8 @@
         <div class="primaryGenre">
             Primary genre :<span > <%= actor.results[0].primaryGenreName %></span>
         </div>
-
-
-
-
     </script>
     <script id="movies-tpl" type="text/template">
-
         <ol>
             <% _.each(movies[0].results, function(movie,index){ %>
             <li>
@@ -259,6 +254,13 @@
             <% }); %>
         </ol>
     </script>
+    <script id="user-tpl" type="text/template">
+        <div>
+            <p><strong>Name: </strong><span><%= user.name%></span></p>
+            <p><strong>Email: </strong><span><%= user.email %></span></p>
+        </div>
+
+    </script>
 </main>
 </body>
 </html>
@@ -267,6 +269,10 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
+
+<script type="text/javascript" src="scripts/models/user.js"></script>
+<script type="text/javascript" src="scripts/collection/users.js"></script>
+<script type="text/javascript" src="scripts/views/users.js"></script>
 
 <script type="text/javascript" src="scripts/models/tvshows.js"></script>
 <script type="text/javascript" src="scripts/collection/tvshows.js"></script>
@@ -277,18 +283,13 @@
 <script type="text/javascript" src="scripts/tvshows.js"></script>
 
 <script src="scripts/models/actor.js"></script>
-
 <script src="scripts/views/actor.js"></script>
-
-
 <script src="scripts/collection/actorMovies.js"></script>
 <script src="scripts/models/actorMovie.js"></script>
-
 <script src="scripts/views/actorMovies.js"></script>
 
 
 <script src="app.js"></script>
-
 
 <script type="text/javascript" src="scripts/watchlist.js"></script>
 <script type="text/javascript" src="scripts/models/movie.js"></script>
