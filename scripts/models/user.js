@@ -5,7 +5,8 @@ var UsersModel = Backbone.Model.extend({
     default: {
         id: "",
         name : "",
-        email: ""
+        email: "",
+        following: []
     }
 
 })

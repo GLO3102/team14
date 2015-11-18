@@ -259,6 +259,25 @@
             <p><strong>Name: </strong><span><%= user.name%></span></p>
             <p><strong>Email: </strong><span><%= user.email %></span></p>
         </div>
+        <% if(user.following) { %>
+        <table>
+            <thead>
+            <tr>
+                <th>Friends follow</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% user.following.forEach( function( item ){ %>
+            <tr>
+                <th><%= item.name %></th>
+                <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></th>
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+        <% }; %>
+        <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
 
     </script>
 </main>
