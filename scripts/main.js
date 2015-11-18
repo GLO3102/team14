@@ -98,12 +98,18 @@ router.on('route:tvshow', function(id){
 router.on('route:users', function(id){
     var rootUrl="http://umovie.herokuapp.com/unsecure/users"
     userModel.urlRoot = rootUrl+"/"+id;
+    userModel.id="";
+
+    console.log(userModel)
+    userView.model = userModel;
+    /*
     if(userView.model){
-        userView.model.set(userModel.toJSON())
+        userView.model.set(userModel)
     }
     else{
         userView.model = userModel;
     }
+    */
     userModel.fetch({
         success: function(){
             userView.render();

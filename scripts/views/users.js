@@ -15,6 +15,24 @@ var UsersViews = Backbone.View.extend({
         this.$el.html(this.template({
             user: this.model.toJSON()
         }))
+    },
+    events: {
+        "click #friendFollowing" : "viewFriend"
+    },
+    viewFriend: function(event){
+        var friendUser = new UsersModel;
+        var root = "http://umovie.herokuapp.com/unsecure/search/users?q="
+        friendUser.urlRoot = root + event.target.innerHTML;
+        friendUser.fetch({
+            success:function(data){
+                console.log("allo toi");
+                console.log(data.attributes[0]);
+                var id = data.attributes[0].id;
+                router.navigate("user/"+id, {trigger: true})
+            }
+
+        })
+
     }
 
 })

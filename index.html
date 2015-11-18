@@ -260,7 +260,7 @@
             <p><strong>Email: </strong><span><%= user.email %></span></p>
         </div>
         <% if(user.following) { %>
-        <table>
+        <table id="friendFollowing">
             <thead>
             <tr>
                 <th>Friends follow</th>
@@ -270,13 +270,15 @@
             <tbody>
             <% user.following.forEach( function( item ){ %>
             <tr>
-                <th><%= item.name %></th>
-                <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></th>
+                <td id=<%= item._id %> value=<%= item.name %>><%= item.name %></td>
+                <td><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></td>
             </tr>
             <% }); %>
+
             </tbody>
         </table>
         <% }; %>
+
         <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
 
     </script>
