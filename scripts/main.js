@@ -48,6 +48,8 @@ router.on('route:editWatchlist', function(id) {
     var watchlistEditView = new WatchlistEditView({ });
     watchlistEditView.render({id: id});
 });
+
+
 /**
  * Created by Sebastien on 2015-10-30.
  */
@@ -118,6 +120,13 @@ router.on('route:users', function(id){
     })
 
 })
+
+if(getTokenFromCookie()) {
+    console.log(getTokenFromCookie());
+} else {
+    window.location.replace("login.html");
+}
+
 
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;

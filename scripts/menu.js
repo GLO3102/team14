@@ -11,6 +11,9 @@ var MainMenuView = Backbone.View.extend({
 var appMainMenuView = new MainMenuView({el: $('#MainMenu')});
 appMainMenuView.render();
 
+var loginButton = document.getElementById("login-btn");
+loginButton.onclick = toggleUserMenu;
+
 var userButton = document.getElementById("user-btn");
 userButton.onclick = toggleUserMenu;
 
