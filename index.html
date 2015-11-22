@@ -226,9 +226,59 @@
         <h2>Episodes</h2>
         <ul class="list-unstyled list-episodes">
             <% _.each(results, function(result) { %>
-            <li><span><img src="<%= result.artworkUrl30 %>" > <%= result.trackCensoredName %></span></li>
+            <li><span><img src="<%= result.artworkUrl30 %>" >
+                <button type="button" data-trackId="<%= result.trackId %>" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myTvShowModal">
+                    <%= result.trackCensoredName %>
+            </span></li>
             <% }); %>
         </ul>
+
+
+        <% _.each(results, function(result) { %>
+        <!-- Button trigger modal -->
+        <button type="button"  class="btn btn-primary btn-lg"  data-target="#myTvShowModal">
+            <%= result.trackCensoredName %>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myTvShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        </div>
+        <% }); %>
+    </script>
+    <script type="text/template" id="single-episode-template"  >
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="coverPhoto col-md-4">
+                        <img src="<%= result.artworkUrl100 %>" />
+                    </div>
+                    <div class="col-md-8">
+                        <h1><%= result.trackCensoredName %></h1>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <tr>
+                                <th>Nom de la saison</th>
+                                <td><%= result.collectionName %></td>
+                            </tr>
+                            <tr>
+                                <th>Durée</th>
+                                <td><%= result.trackTimeMillis %></td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td><%= result.longDescription %></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </script>
 
     <script id="actors-tpl" type="text/template">
@@ -286,7 +336,8 @@
 </body>
 </html>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
@@ -301,6 +352,9 @@
 <script type="text/javascript" src="scripts/models/episodes.js"></script>
 <script type="text/javascript" src="scripts/collection/episodes.js"></script>
 <script type="text/javascript" src="scripts/views/episodes.js"></script>
+<script type="text/javascript" src="scripts/models/episode.js"></script>
+<script type="text/javascript" src="scripts/collection/episode.js"></script>
+<script type="text/javascript" src="scripts/views/episode.js"></script>
 <script type="text/javascript" src="scripts/tvshows.js"></script>
 
 <script src="scripts/models/actor.js"></script>
@@ -327,6 +381,9 @@
     }
 
     LoadMainScreen();
+
+
+
 </script>
 
 </body>

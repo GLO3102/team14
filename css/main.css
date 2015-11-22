@@ -65,7 +65,13 @@ section {
     text-indent: -9999px;
     width:165px;
 }
-
+.modal  {
+    top:40px;
+}
+.modal-footer {
+    display: inline-block;
+    width: 100%;
+}
 /*******************************************/
 /*    Affichage des listes de film         */
 /*******************************************/

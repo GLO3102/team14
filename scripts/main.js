@@ -77,7 +77,6 @@ router.on('route:tvshow', function(id){
         $("#PageContent").html(data);
     }).done(function(){
         var tvShowsCollection =  new TvShowsCollection({});
-        //http://umovie.herokuapp.com/unsecure/tvshows/season/271383858
         tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
         var tvShowsView = new TvShowsView({
             collection: tvShowsCollection
@@ -118,6 +117,8 @@ router.on('route:users', function(id){
     })
 
 })
+
+
 
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;

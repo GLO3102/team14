@@ -7,6 +7,7 @@ var TvShowsView = Backbone.View.extend({
         this.collection.bind('sync change add remove', function () {
             self.render();
         });
+
     },
     render: function () {
 
@@ -17,6 +18,7 @@ var TvShowsView = Backbone.View.extend({
         }));
 
         this.searchVideoYoutube(tvShowsName);
+        return this;
     },
     searchVideoYoutube: function(title){
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
