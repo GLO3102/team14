@@ -234,17 +234,7 @@
         </ul>
 
 
-        <% _.each(results, function(result) { %>
-        <!-- Button trigger modal -->
-        <button type="button"  class="btn btn-primary btn-lg"  data-target="#myTvShowModal">
-            <%= result.trackCensoredName %>
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="myTvShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-
-        </div>
-        <% }); %>
+        <div class="modal fade" id="myTvShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> </div>
     </script>
     <script type="text/template" id="single-episode-template"  >
 
@@ -274,6 +264,7 @@
                         </table>
                     </div>
                 </div>
+                <div id="player" class="col-md-12"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -352,9 +343,6 @@
 <script type="text/javascript" src="scripts/models/episodes.js"></script>
 <script type="text/javascript" src="scripts/collection/episodes.js"></script>
 <script type="text/javascript" src="scripts/views/episodes.js"></script>
-<script type="text/javascript" src="scripts/models/episode.js"></script>
-<script type="text/javascript" src="scripts/collection/episode.js"></script>
-<script type="text/javascript" src="scripts/views/episode.js"></script>
 <script type="text/javascript" src="scripts/tvshows.js"></script>
 
 <script src="scripts/models/actor.js"></script>

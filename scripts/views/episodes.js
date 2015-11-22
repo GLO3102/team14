@@ -36,9 +36,34 @@ $(function (){
                 elModal.html(templateModal({
                     result: episodeInModal
                 }))
-
+                _this.searchVideoYoutube(episodeInModal.collectionName+" "+episodeInModal.trackCensoredName);
             })
+
         },
+        searchVideoYoutube: function(title){
+            var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
+            var urlMiddle =  title+' official trailer';
+            var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
+            var urlComplete = urlBegin + urlMiddle + urlEnd;
+            var player;
+
+            $.ajax({
+                url : urlComplete,
+                type : 'GET',
+                contentType: 'application/json'
+            }).done(function(data) {
+                if(data.items.length == 0){
+                    $("#player").html("No preview find");
+                }else{
+                    player = new YT.Player('player', {
+                        height: '150',
+                        width: '300',
+                        videoId: data.items[0].id.videoId
+                    });
+                }
+
+            });
+        }
     });
 });
 
