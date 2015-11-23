@@ -24,20 +24,6 @@
 
 
 
-
-
-
-    <!--div id="welcome-message">
-        <p>Welcome to UMovie</p>
-        <p>Which movie do you want to watch?</p>
-        <form id="search-home" >
-            <label for="search" class="hidden">Search</label>
-            <input type="input" name="search" id="search" placeholder="Search a movie"   />
-            <input class="search-button" type="submit" value=" &#xf002">
-
-        </form>
-    </div-->
-
     <script type="text/template" id="MainMenu-Template">
         <ul>
             <li class="home-btn"><a href=""><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
@@ -45,15 +31,15 @@
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
                     <li  class="tablet-hidden mobile-visible"><input  type="text" placeholder="Search ..."/><button ><i class="fa fa-search"></i></button></li>
-                    <li><a href="#">My Account (userName)</a></li>
-                    <li><a href="#/watchlists">My Watchlist</a></li>
+                    <li><a href="#" id="accountRef">My Account (userName)</a></li>
+                    <li><a href="#/watchlists/" id="watchlistsRef">My Watchlist</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
             </li>
             <li class="tablet-hidden" ><button id="user-btn" ><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></button>
                 <ul id="user-nav" class="hidden">
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#/watchlists">My Watchlist</a></li>
+                    <li><a href="#" id="accountRef">My Account</a></li>
+                    <li><a href="#/watchlists/" id="watchlistsRef">My Watchlist</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
             </li>
@@ -312,7 +298,7 @@
             <% user.following.forEach( function( item ){ %>
             <tr>
                 <td id=<%= item._id %> value=<%= item.name %>><%= item.name %></td>
-                <td><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></td>
+                <!--<td><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></td>-->
             </tr>
             <% }); %>
 
@@ -332,6 +318,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
+
+<script type="text/javascript" src="scripts/login.js"></script>
 
 <script type="text/javascript" src="scripts/models/user.js"></script>
 <script type="text/javascript" src="scripts/collection/users.js"></script>
