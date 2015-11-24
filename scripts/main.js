@@ -122,6 +122,7 @@ router.on('route:users', function(id){
 })
 
 if(getTokenFromCookie()) {
+    console.log("cookie has been found");
     console.log(getTokenFromCookie());
 } else {
     window.location.replace("login.html");
