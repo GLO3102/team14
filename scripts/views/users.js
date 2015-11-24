@@ -47,7 +47,6 @@ var UsersViews = Backbone.View.extend({
         var friend = {"id": this.model.id};
         console.log(loginObj.token);
         var token = loginObj.token;
-
         $.ajax({
             type: "POST",
             url: "http://umovie.herokuapp.com/follow",
@@ -57,9 +56,7 @@ var UsersViews = Backbone.View.extend({
                 xhr.setRequestHeader('Authorization', token);
             },
             success: function (data, textStatus, jqXHR) {
-                $("#followUserButton").hide();
-                $("#stopFollowUserButton").show();
-
+                router.navigate("user/"+loginObj.id, {trigger: true})
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Ca va mal a la shop")
@@ -87,8 +84,6 @@ var UsersViews = Backbone.View.extend({
                     console.log(friend);
                     if (friend.name === that.model.attributes.name) {
                         var idFriend = friend._id;
-                        console.log("id Friend ==== " + idFriend);
-                        alert(idFriend);
                         $.ajax({
                             type: "DELETE",
                             url: "http://umovie.herokuapp.com/follow" + "/" + idFriend,
@@ -97,7 +92,7 @@ var UsersViews = Backbone.View.extend({
                                 xhr.setRequestHeader('Authorization', token);
                             },
                             success: function (data, textStatus, jqXHR) {
-                                alert("J'ai gagné");
+                                router.navigate("user/"+loginObj.id, {trigger: true})
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
                                 alert("Ca va mal a la shop")
