@@ -25,6 +25,9 @@ appMainMenuView.render();
 var userButton = document.getElementById("user-btn");
 userButton.onclick = toggleUserMenu;
 
+var loginButton = document.getElementsByClassName("login-btn");
+loginButton.onclick = toggleUserMenu;
+
 function toggleUserMenu(even){
     var userMenu = document.getElementById("user-nav");
 
