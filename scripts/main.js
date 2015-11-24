@@ -79,7 +79,6 @@ router.on('route:tvshow', function(id){
         $("#PageContent").html(data);
     }).done(function(){
         var tvShowsCollection =  new TvShowsCollection({});
-        //http://umovie.herokuapp.com/unsecure/tvshows/season/271383858
         tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
         var tvShowsView = new TvShowsView({
             collection: tvShowsCollection
@@ -98,21 +97,14 @@ router.on('route:tvshow', function(id){
     });
 });
 router.on('route:users', function(id){
-    var rootUrl="http://umovie.herokuapp.com/unsecure/users"
+    var rootUrl="http://umovie.herokuapp.com/users"
     userModel.urlRoot = rootUrl+"/"+id;
     userModel.id="";
 
     console.log(userModel)
     userView.model = userModel;
-    /*
-    if(userView.model){
-        userView.model.set(userModel)
-    }
-    else{
-        userView.model = userModel;
-    }
-    */
     userModel.fetch({
+        beforeSend: setHeader,
         success: function(){
             userView.render();
 
@@ -128,22 +120,7 @@ if(getTokenFromCookie()) {
     window.location.replace("login.html");
 }
 
-
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;
-
-$.ajax({
-    type: "POST",
-    data : formData,
-    success: function(data, textStatus, jqXHR)
-    {
-        loginObj = data;
-    },
-    error: function (jqXHR, textStatus, errorThrown)
-    {
-
-    }
-});
-
 
 Backbone.history.start();

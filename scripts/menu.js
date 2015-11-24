@@ -5,6 +5,17 @@ var MainMenuView = Backbone.View.extend({
     },
     render: function () {
         this.$el.html(this.template({}));
+    },
+    events: {
+        "click #accountRef": "showAccount",
+        "click #watchlistsRef": "showWatchlists"
+    },
+    showAccount: function (event) {
+        var id = loginObj['id'];
+        router.navigate("user/"+id, {trigger: true})
+    },
+    showWatchlists: function(event){
+        router.navigate("watchlists", {trigger: true});
     }
 });
 
@@ -39,3 +50,4 @@ function toggleBarMenu(even){
         barMenu.className = "hidden";
     }
 }
+
