@@ -285,10 +285,10 @@
     <script id="user-tpl" type="text/template">
         <div>
             <p><strong>Name: </strong><span><%= user.name%></span></p>
-            <p><strong>Email: </strong><span><%= user.email %></span></p>
+            <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
         </div>
         <% if(user.following) { %>
-        <table id="friendFollowing">
+        <table id="friendFollowing" class="list-group">
             <thead>
             <tr>
                 <th>Friends follow</th>
@@ -298,8 +298,8 @@
             <tbody>
             <% user.following.forEach( function( item ){ %>
             <tr>
-                <td id=<%= item._id %> value=<%= item.name %>><%= item.name %></td>
-                <!--<td><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></td>-->
+                <td id="friendsFollowList" class="list-group-item" > <a href="#"><%= item.name %></a></td>
+                <td><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>>X</button></td>
             </tr>
             <% }); %>
 
