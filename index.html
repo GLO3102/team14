@@ -295,6 +295,7 @@
             <tr>
                 <th>Friends follow</th>
                 <th></th>
+
             </tr>
             </thead>
             <tbody>
@@ -305,6 +306,14 @@
             </tr>
             <% }); %>
             <tr>
+                <div class="list-group">
+                    <h2>List of watchlists</h2>
+                    <% watchlists.each( function( list ){ %>
+                    <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
+                    <% }); %>
+                </div>
+            </tr>
+            <tr>
                 <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
                 <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
             </tr>
@@ -314,11 +323,7 @@
 
 
 
-        <div class="list-group">
-            <% watchlists.each( function( list ){ %>
-            <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
-            <% }); %>
-        </div>
+
     </script>
 </main>
 </body>
