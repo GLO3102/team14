@@ -21,6 +21,8 @@
 <main>
     <h1 class="hidden">UMovie</h1>
     <div id="PageContent"></div>
+    <div id="WatchListContent"></div>
+    <div id="UserContent"></div>
 
 
 
@@ -302,13 +304,21 @@
                 <td><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>>X</button></td>
             </tr>
             <% }); %>
-
+            <tr>
+                <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
+                <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
+            </tr>
             </tbody>
         </table>
         <% }; %>
 
-        <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
-        <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
+
+
+        <div class="list-group">
+            <% watchlists.each( function( list ){ %>
+            <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
+            <% }); %>
+        </div>
     </script>
 </main>
 </body>

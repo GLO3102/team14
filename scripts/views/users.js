@@ -5,6 +5,7 @@ var UsersViews = Backbone.View.extend({
     template: _.template($("#user-tpl").html()),
     el: "#PageContent",
     initialize: function () {
+
         _.bindAll(this, 'render');
         var self = this;
         this.collection.bind('sync change add remove', function () {
@@ -12,16 +13,27 @@ var UsersViews = Backbone.View.extend({
         });
     },
     render: function () {
-        this.$el.html(this.template({
-            user: this.model.toJSON()
-        }))
-        if (this.model.id === loginObj['id']) {
-            $("#followUserButton").hide()
-            $("#stopFollowUserButton").hide();
 
+
+        var templateWatchList = _.template($('#watchlist-list-template').html());
+        var watchlists = new Watchlists();
+        var that = this;
+        watchlists.fetch( {
+            beforeSend: setHeader,
+            success: function() {
+                that.$el.html(that.template({
+                    user: that.model.toJSON(), 'watchlists': watchlists
+                }));
+                $("#followUserButton").hide()
+                $("#stopFollowUserButton").hide();
+                $("#boutonsEffacer").hide();
+            }
+        })
+
+        if (this.model.id === loginObj['id']) {
+            $("#boutonsEffacer").show()
         }
         else {
-            $("#boutonsEffacer").hide();
             this.searchFriendOnAccountFollow(this.model.attributes.name);
         }
 
@@ -69,18 +81,20 @@ var UsersViews = Backbone.View.extend({
         });
     },
     deleteFriendFollow: function (event) {
-        var that = this;
+        var token = loginObj.token;
+
         var id = this.model.attributes.id;
         var userAccount = new UsersModel();
         userAccount.urlRoot = "http://umovie.herokuapp.com/users" + "/" + loginObj.id;
+        var that = this;
         userAccount.fetch({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', token);
             },
             success: function (data) {
-                console.log(data);
+                alert("youppi j'ai gagne!");
                 var followArray = data.attributes.following;
-                this.deleteFriend(followArray);
+                that.deleteFriend(that,followArray);
 
             }
         })
@@ -90,13 +104,13 @@ var UsersViews = Backbone.View.extend({
         var idFriend = event.target.id;
         this.deleteFriendOnServer(idFriend);
     },
-    deleteFriend: function(followArray){
+    deleteFriend: function(that,followArray){
         followArray.forEach(function (friend) {
-            console.log(friend);
+            console.log(that);
             if (friend.name === that.model.attributes.name) {
                 var idFriend = friend._id;
-                this.deleteFriendOnServer(idFriend);
-                this.Model.fetch({})
+                that.deleteFriendOnServer(idFriend);
+                that.Model.fetch({})
 
 
             }
@@ -133,10 +147,11 @@ var UsersViews = Backbone.View.extend({
                     }
                 })
                 if(result){
-                    $("#followUserButton").hide()
+                    $("#stopFollowUserButton").show();
+
                 }
                 else{
-                    $("#stopFollowUserButton").hide();
+                    $("#followUserButton").show()
 
                 }
 
