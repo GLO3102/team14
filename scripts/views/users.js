@@ -15,12 +15,12 @@ var UsersViews = Backbone.View.extend({
     render: function () {
 
 
-        var templateWatchList = _.template($('#watchlist-list-template').html());
         var watchlists = new Watchlists();
         var that = this;
         watchlists.fetch( {
             beforeSend: setHeader,
             success: function() {
+                that.getWatchListAccounnt(that,watchlists);
                 that.$el.html(that.template({
                     user: that.model.toJSON(), 'watchlists': watchlists
                 }));
@@ -47,12 +47,10 @@ var UsersViews = Backbone.View.extend({
     viewFriend: function (event) {
         var friendUser = new UsersModel;
         var root = "http://umovie.herokuapp.com/search/users?q="
-        console.log(event.target.innerHTML);
         friendUser.urlRoot = root + event.target.innerHTML;
         friendUser.fetch({
             beforeSend: setHeader,
             success: function (data) {
-                console.log(data.attributes[0]);
                 var id = data.attributes[0].id;
                 router.navigate("user/" + id, {trigger: true})
             }
@@ -61,7 +59,6 @@ var UsersViews = Backbone.View.extend({
     },
     addFriend: function (event) {
         var friend = {"id": this.model.id};
-        console.log(loginObj.token);
         var token = loginObj.token;
         $.ajax({
             type: "POST",
@@ -92,7 +89,6 @@ var UsersViews = Backbone.View.extend({
                 xhr.setRequestHeader('Authorization', token);
             },
             success: function (data) {
-                alert("youppi j'ai gagne!");
                 var followArray = data.attributes.following;
                 that.deleteFriend(that,followArray);
 
@@ -100,16 +96,13 @@ var UsersViews = Backbone.View.extend({
         })
     },
     deleteFriendAccount: function(event){
-      console.log(event);
         var idFriend = event.target.id;
         this.deleteFriendOnServer(idFriend);
     },
     deleteFriend: function(that,followArray){
         followArray.forEach(function (friend) {
-            console.log(that);
             if (friend.name === that.model.attributes.name) {
                 var idFriend = friend._id;
-                that.deleteFriendOnServer(idFriend);
                 that.Model.fetch({})
 
 
@@ -153,10 +146,22 @@ var UsersViews = Backbone.View.extend({
                 else{
                     $("#followUserButton").show()
 
+
                 }
 
             }
         })
-
+    },
+    getWatchListAccounnt: function(that,watchlists){
+        var modelsArray = watchlists.models;
+        var watchlistsAccount = []
+        modelsArray.forEach(function(watchlist){
+            if(watchlist.attributes.owner !== undefined){
+                if(watchlist.attributes.owner.id === that.model.attributes.id){
+                    watchlistsAccount.push(watchlist);
+                }
+            }
+        })
+        watchlists.models = watchlistsAccount;
     }
 })
