@@ -17,9 +17,53 @@ window.onload = function(){
             cookie = "asgasfhdregdfssdaf";
             console.log(cookie);
 
-            if(saveTokenToCookie(cookie)) {
-                window.location.replace("index.html");
-            }
+            var loginInfo = {
+                email : username,
+                password : password
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "https://umovie.herokuapp.com/login",
+                data: {
+                    "email": username,
+                    "password": password
+                },
+                contentType: 'application/x-www-form-urlencoded',
+                statusCode: {
+                    200: function (response) {
+                        console.log('200');
+                    },
+                    201: function (response) {
+                        console.log('201');
+                    },
+                    400: function (response) {
+                        console.log('400');
+                    },
+                    401: function (response) {
+                        console.log('401');
+                    },
+                    404: function (response) {
+                        console.log('404');
+                    }
+                },
+                success: function(data) {
+                    console.log("request succeeded");
+                    console.log(data.token);
+
+                    if(saveTokenToCookie(data.token)) {
+                        window.location.replace("index.html");
+                    }
+                },
+                fail: function() {
+                    console.log("request failed");
+                },
+                always: function() {
+                    console.log("request always");
+                }
+            });
+
+
         }
     }
 };
