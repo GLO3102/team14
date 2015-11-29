@@ -1,5 +1,16 @@
 <section class="showInfoSection">
     <div id="list-tvshows"></div>
-    <div id="list-episodes" class="col-md-4"></div>
-    <div id="player" class="col-md-8"></div>
+    <div id="search-episodes">
+        <form id="search-episodes-form" class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="search-episodes-field">Search</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search-episodes-field" placeholder="Episode names">
+                </div>
+            </div>
+            <button type="submit" id="search-episode" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div id="list-episodes" class="col-md-8"></div>
+    <div id="player" class="col-md-4"></div>
 </section>
