@@ -30,7 +30,7 @@
         <ul>
             <li class="home-btn"><a href=""><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
             <li class="login-btn"><a href=""><i class="fa fa-sign-in"></i><span class=" hidden">Login</span></a></li>
-            <li class="mobile-hidden"><input  type="text" placeholder="Search ..."/><button id="search-btn"><i class="fa fa-search"></i></button></li>
+            <li class="mobile-hidden"><input id="SearchCriteria" type="text" placeholder="Search ..."/><button id="search-btn" onclick="SearchUMovie();"><i class="fa fa-search"></i></button></li>
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
                     <li  class="tablet-hidden mobile-visible"><input  type="text" placeholder="Search ..."/><button ><i class="fa fa-search"></i></button></li>
@@ -320,10 +320,42 @@
             </tbody>
         </table>
         <% }; %>
-
-
-
-
+    </script>
+    <script id="movies-result-tpl" type="text/template">
+        <ul class="list-unstyled list-episodes">
+            <% _.each(movieResults, function(result) { %>
+            <li>
+                <span><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
+            </li>
+            <% }); %>
+        </ul>
+    </script>
+    <script id="tvshows-result-tpl" type="text/template">
+        <ul class="list-unstyled list-episodes">
+            <% _.each(tvShowResults, function(result) { %>
+            <li>
+                <span><a href="<%= '#/tvshow/' + result.collectionId %>"><%= result.collectionName %></a> - <%= result.primaryGenreName %></span>
+            </li>
+            <% }); %>
+        </ul>
+    </script>
+    <script id="actors-result-tpl" type="text/template">
+        <ul class="list-unstyled list-episodes">
+            <% _.each(actorsResults, function(result) { %>
+            <li>
+                <span><a href="<%= '#/actors/' + result.artistId %>"><%= result.artistName %></a> - <%= result.primaryGenreName %></span>
+            </li>
+            <% }); %>
+        </ul>
+    </script>
+    <script id="users-result-tpl" type="text/template">
+        <ul class="list-unstyled list-episodes">
+            <% _.each(usersResults, function(result) { %>
+            <li>
+                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %></span>
+            </li>
+            <% }); %>
+        </ul>
     </script>
 </main>
 </body>
@@ -364,6 +396,16 @@
 <script type="text/javascript" src="scripts/models/movie.js"></script>
 <script type="text/javascript" src="scripts/collection/movies.js"></script>
 <script type="text/javascript" src="scripts/views/movies.js"></script>
+
+<script type="text/javascript" src="scripts/collection/moviesSearchResult.js"></script>
+<script type="text/javascript" src="scripts/views/moviesSearchResult.js"></script>
+<script type="text/javascript" src="scripts/collection/tvShowsSearchResult.js"></script>
+<script type="text/javascript" src="scripts/views/tvShowsSearchResult.js"></script>
+<script type="text/javascript" src="scripts/collection/actorsSearchResult.js"></script>
+<script type="text/javascript" src="scripts/views/actorsSearchResult.js"></script>
+<script type="text/javascript" src="scripts/collection/usersSearchResult.js"></script>
+<script type="text/javascript" src="scripts/views/usersSearchResult.js"></script>
+
 <script type="text/javascript" src="scripts/main.js"></script>
 <script type="text/javascript" src="scripts/menu.js"></script>
 
