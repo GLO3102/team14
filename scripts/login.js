@@ -68,8 +68,6 @@ window.onload = function(){
         $.get('mainpage.html', function(data) {
             $("#PageContent").html(data);
         });
-
-        LoadMainScreen();
     }
 };
 
