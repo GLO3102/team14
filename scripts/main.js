@@ -120,6 +120,7 @@ if(getTokenFromCookie()) {
     console.log("cookie has been found");
     console.log(getTokenFromCookie());
 } else {
+    console.log("cookie not found");
     $.get('login.html', function(data) {
         $("#PageContent").html(data);
     })

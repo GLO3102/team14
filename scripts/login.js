@@ -14,9 +14,6 @@ window.onload = function(){
 
             console.log("u=" + username + " p=" + password);
 
-            cookie = "asgasfhdregdfssdaf";
-            console.log(cookie);
-
             var loginInfo = {
                 email : username,
                 password : password
@@ -62,8 +59,6 @@ window.onload = function(){
                     console.log("request always");
                 }
             });
-
-
         }
     }
 };
