@@ -13,7 +13,7 @@ window.onload = function(){
             var password = document.getElementById("userPassword").value;
 
             console.log("u=" + username + " p=" + password);
-
+            
             var loginInfo = {
                 email : username,
                 password : password
