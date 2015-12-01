@@ -121,11 +121,10 @@ if(getTokenFromCookie()) {
     console.log(getTokenFromCookie());
 } else {
     console.log("cookie not found");
-    window.location.replace("login.html");
-    /*$.get('login.html', function(data) {
+    //window.location.replace("login.html");
+    $.get('login.html', function(data) {
         $("#PageContent").html(data);
     })
-    */
 }
 
 /*

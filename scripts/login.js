@@ -5,15 +5,17 @@
 var loginCookieName = "umovieToken";
 
 window.onload = function(){
+    console.log("on load called");
     var loginButton = document.getElementById("loginButton");
 
     if(getTokenFromCookie() === undefined) {
+        console.log("just before loginButton");
         loginButton.onclick = function() {
             var username = document.getElementById("userEmail").value;
             var password = document.getElementById("userPassword").value;
 
             console.log("u=" + username + " p=" + password);
-            
+
             var loginInfo = {
                 email : username,
                 password : password
@@ -60,6 +62,14 @@ window.onload = function(){
                 }
             });
         }
+    }
+    else {
+        console.log("load main screen");
+        $.get('mainpage.html', function(data) {
+            $("#PageContent").html(data);
+        });
+
+        LoadMainScreen();
     }
 };
 
