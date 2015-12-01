@@ -125,6 +125,7 @@ if(getTokenFromCookie()) {
     })
 }
 
+/*
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;
 
@@ -144,6 +145,6 @@ var loginObj;
 
     }
  });
-
+*/
 
 Backbone.history.start();
