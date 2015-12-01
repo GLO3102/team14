@@ -5,6 +5,7 @@ var UsersViews = Backbone.View.extend({
     template: _.template($("#user-tpl").html()),
     el: "#PageContent",
     initialize: function () {
+
         _.bindAll(this, 'render');
         var self = this;
         this.collection.bind('sync change add remove', function () {
@@ -12,31 +13,44 @@ var UsersViews = Backbone.View.extend({
         });
     },
     render: function () {
-        this.$el.html(this.template({
-            user: this.model.toJSON()
-        }))
+
+
+        var watchlists = new Watchlists();
+        var that = this;
+        watchlists.fetch( {
+            beforeSend: setHeader,
+            success: function() {
+                that.getWatchListAccounnt(that,watchlists);
+                that.$el.html(that.template({
+                    user: that.model.toJSON(), 'watchlists': watchlists
+                }));
+                $("#followUserButton").hide()
+                $("#stopFollowUserButton").hide();
+                $("#boutonsEffacer").hide();
+            }
+        })
 
         if (this.model.id === loginObj['id']) {
-            $("#followUserButton").hide();
+            $("#boutonsEffacer").show()
         }
-        $("#stopFollowUserButton").hide();
+        else {
+            this.searchFriendOnAccountFollow(this.model.attributes.name);
+        }
 
     },
     events: {
-        "click #friendFollowing": "viewFriend",
+        "click #friendsFollowList": "viewFriend",
         "click #followUserButton": "addFriend",
-        "click #stopFollowUserButton": "deleteFriend",
+        "click #stopFollowUserButton": "deleteFriendFollow",
+        "click .deleteMovieFromWL": "deleteFriendAccount"
     },
     viewFriend: function (event) {
         var friendUser = new UsersModel;
-
         var root = "http://umovie.herokuapp.com/search/users?q="
-        console.log(event.target.innerHTML);
         friendUser.urlRoot = root + event.target.innerHTML;
         friendUser.fetch({
             beforeSend: setHeader,
             success: function (data) {
-                console.log(data.attributes[0]);
                 var id = data.attributes[0].id;
                 router.navigate("user/" + id, {trigger: true})
             }
@@ -45,9 +59,7 @@ var UsersViews = Backbone.View.extend({
     },
     addFriend: function (event) {
         var friend = {"id": this.model.id};
-        console.log(loginObj.token);
         var token = loginObj.token;
-
         $.ajax({
             type: "POST",
             url: "http://umovie.herokuapp.com/follow",
@@ -57,9 +69,7 @@ var UsersViews = Backbone.View.extend({
                 xhr.setRequestHeader('Authorization', token);
             },
             success: function (data, textStatus, jqXHR) {
-                $("#followUserButton").hide();
-                $("#stopFollowUserButton").show();
-
+                router.navigate("user/"+loginObj.id, {trigger: true})
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Ca va mal a la shop")
@@ -67,47 +77,91 @@ var UsersViews = Backbone.View.extend({
             }
         });
     },
-    deleteFriend: function (event) {
-        console.log(this.model);
-        var that = this;
+    deleteFriendFollow: function (event) {
+        var token = loginObj.token;
 
         var id = this.model.attributes.id;
-        var token = loginObj.token;
         var userAccount = new UsersModel();
         userAccount.urlRoot = "http://umovie.herokuapp.com/users" + "/" + loginObj.id;
+        var that = this;
         userAccount.fetch({
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('Authorization', token);
             },
             success: function (data) {
-                console.log(data);
                 var followArray = data.attributes.following;
-                console.log(followArray);
-                followArray.forEach(function (friend) {
-                    console.log(friend);
-                    if (friend.name === that.model.attributes.name) {
-                        var idFriend = friend._id;
-                        console.log("id Friend ==== " + idFriend);
-                        alert(idFriend);
-                        $.ajax({
-                            type: "DELETE",
-                            url: "http://umovie.herokuapp.com/follow" + "/" + idFriend,
-                            contentType: "application/json",
-                            beforeSend: function (xhr) {
-                                xhr.setRequestHeader('Authorization', token);
-                            },
-                            success: function (data, textStatus, jqXHR) {
-                                alert("J'ai gagné");
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                alert("Ca va mal a la shop")
+                that.deleteFriend(that,followArray);
 
-                            }
-
-                        })
-                    }
-                })
             }
         })
+    },
+    deleteFriendAccount: function(event){
+        var idFriend = event.target.id;
+        this.deleteFriendOnServer(idFriend);
+    },
+    deleteFriend: function(that,followArray){
+        followArray.forEach(function (friend) {
+            if (friend.name === that.model.attributes.name) {
+                var idFriend = friend._id;
+                that.Model.fetch({})
+
+
+            }
+        })
+    },
+    deleteFriendOnServer: function(idFriend){
+        var token = loginObj.token;
+        $.ajax({
+            type: "DELETE",
+            url: "http://umovie.herokuapp.com/follow" + "/" + idFriend,
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', token);
+            },
+            success: function (data, textStatus, jqXHR) {
+                router.navigate("user/"+loginObj.id, {trigger: true})
+            }
+        })
+    },
+    searchFriendOnAccountFollow: function(nameFriend){
+        var token = loginObj.token;
+        var result = false;
+        var accountUser = new UsersModel;
+        accountUser.urlRoot = "http://umovie.herokuapp.com/users" + "/" + loginObj.id;
+        accountUser.fetch({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', token);
+            },
+            success: function(data){
+                var arrayFollow = data.attributes.following;
+                arrayFollow.forEach(function(friend){
+                    if(friend.name === nameFriend){
+                        result = true;
+                    }
+                })
+                if(result){
+                    $("#stopFollowUserButton").show();
+
+                }
+                else{
+                    $("#followUserButton").show()
+
+
+                }
+
+            }
+        })
+    },
+    getWatchListAccounnt: function(that,watchlists){
+        var modelsArray = watchlists.models;
+        var watchlistsAccount = []
+        modelsArray.forEach(function(watchlist){
+            if(watchlist.attributes.owner !== undefined){
+                if(watchlist.attributes.owner.id === that.model.attributes.id){
+                    watchlistsAccount.push(watchlist);
+                }
+            }
+        })
+        watchlists.models = watchlistsAccount;
     }
 })

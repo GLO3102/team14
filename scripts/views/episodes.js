@@ -21,23 +21,31 @@ $(function (){
 
             var episodeCollection = this.collection.toJSON();
             var _this = this;
-            var elModal = $("#myTvShowModal");
-            var templateModal = _.template($("#single-episode-template").html());
-            var episodeInModal = {};
+
 
             $('#myTvShowModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
                 var trackId = $(button).attr('data-trackId');
-                episodeCollection.forEach(function(obj) {
-                    if(obj.trackId == trackId){
-                        episodeInModal = obj;
-                    }
-                });
-                elModal.html(templateModal({
-                    result: episodeInModal
-                }))
-                _this.searchVideoYoutube(episodeInModal.collectionName+" "+episodeInModal.trackCensoredName);
+                _this.modalEpisode(trackId);
             })
+
+        },
+        modalEpisode : function(trackId) {
+            var episodeCollection = this.collection.toJSON();
+            var elModal = $("#myTvShowModal");
+            var templateModal = _.template($("#single-episode-template").html());
+            var episodeInModal = {};
+
+            episodeCollection.forEach(function(obj) {
+                if(obj.trackId == trackId){
+                    episodeInModal = obj;
+                }
+            });
+            elModal.html(templateModal({
+                result: episodeInModal
+            }))
+            this.searchVideoYoutube(episodeInModal.collectionName+" "+episodeInModal.trackCensoredName);
+
 
         },
         searchVideoYoutube: function(title){
