@@ -10,14 +10,19 @@ var Router = Backbone.Router.extend({
         'watchlists/:id' : 'editWatchlist',
         'movies/:id': 'showMovieData',
         'tvshow/:id': 'tvshow',
-        'actors/:id': 'actor'
-
+        'actors/:id': 'actor',
+        'user/:id': 'users',
+        'search': 'search'
     }
 });
 
 // Display logic
 var movieModel = new MovieModel({});
 var movieView = new MovieView({});
+var usersCollection = new UsersCollection({});
+var userModel = new UsersModel({});
+var userView = new UsersViews({collection: usersCollection});
+
 var router = new Router();
 
 
@@ -43,6 +48,8 @@ router.on('route:editWatchlist', function(id) {
     var watchlistEditView = new WatchlistEditView({ });
     watchlistEditView.render({id: id});
 });
+
+
 /**
  * Created by Sebastien on 2015-10-30.
  */
@@ -68,12 +75,10 @@ router.on('route:showMovieData', function(id){
 });
 
 router.on('route:tvshow', function(id){
-
     $.get('tvshow.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
         var tvShowsCollection =  new TvShowsCollection({});
-        //http://umovie.herokuapp.com/unsecure/tvshows/season/271383858
         tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
         var tvShowsView = new TvShowsView({
             collection: tvShowsCollection
@@ -91,23 +96,54 @@ router.on('route:tvshow', function(id){
         });
     });
 });
+router.on('route:users', function(id){
+    var rootUrl="http://umovie.herokuapp.com/users"
+    userModel.urlRoot = rootUrl+"/"+id;
+    userModel.id="";
+
+    console.log(userModel)
+    userView.model = userModel;
+    userModel.fetch({
+        beforeSend: setHeader,
+        success: function(){
+            userView.render();
+
+        }
+    })
+
+});
+router.on('route:search', function() {
+    LoadSearchResults();
+});
+
+if(getTokenFromCookie()) {
+    console.log("cookie has been found");
+    console.log(getTokenFromCookie());
+} else {
+    $.get('login.html', function(data) {
+        $("#PageContent").html(data);
+    })
+}
 
 var formData = {email:"sebastien.reader.1@ulaval.ca", password:"serea@ulaval@2013"};
 var loginObj;
 
-$.ajax({
+
+ $.ajax({
     type: "POST",
+    url: "http://umovie.herokuapp.com/login",
     data : formData,
+    contentType : "application/x-www-form-urlencoded",
     success: function(data, textStatus, jqXHR)
     {
         loginObj = data;
-        //alert(loginObj["token"]);
+        console.log(loginObj)
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
 
     }
-});
+ });
 
 
 Backbone.history.start();
