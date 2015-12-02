@@ -285,6 +285,7 @@
         </ol>
     </script>
     <script id="user-watchlist-movies" type="text/template">
+        <h2>List of movies of <%= watchlistName %></h2>
         <% movies.forEach(function(movie) {%>
         <div id="Films" class="moviesWatchListUser">
         <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
@@ -297,7 +298,7 @@
             <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
         </div>
         <% if(user.following) { %>
-        <table id="friendFollowing" class="list-group">
+        <table id="friendFollowing">
             <tbody>
             <% user.following.forEach( function( item ){ %>
                 <tr>
@@ -311,22 +312,19 @@
             </tr>
             </tbody>
         </table>
-        <table >
+        <table  >
             <tbody>
                 <tr>
                     <td width="20%">
-                        <div>
+                        <div class="watchlist-list">
                             <h2>List of watchlists</h2>
                             <% watchlists.forEach( function( list ){ %>
-                            <a id=<%= list.id %> class="list-group-item"><%= list.name %></a>
+                            <a class="list-group-item" id=<%= list.id %>><%= list.name %></a>
                             <% }); %>
                         </div>
                     </td>
                     <td width="80%">
-                        <div class="container">
-                            <hr />
-                            <div class="pageUser"></div>
-                        </div>
+                        <div class="pageUser"></div>
                     </td>
                 </tr>
             </tbody>

@@ -104,8 +104,6 @@ router.on('route:users', function(id){
     var rootUrl="http://umovie.herokuapp.com/users"
     userModel.urlRoot = rootUrl+"/"+id;
     userModel.id="";
-
-    console.log(userModel)
     userView.model = userModel;
     userModel.fetch({
         beforeSend: setHeader,

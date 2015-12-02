@@ -23,10 +23,7 @@ var Watchlist = Backbone.Model.extend({
     }
 });
 
-var setHeader = function (xhr) {
-    var token = $.cookie('umovieToken');
-    xhr.setRequestHeader('authorization', token);
-}
+
 
 var Watchlists = Backbone.Collection.extend({
     'url': 'http://umovie.herokuapp.com/watchlists',
@@ -93,6 +90,7 @@ var WatchlistEditView = Backbone.View.extend({
                 beforeSend: setHeader,
                 success: function(watchlist) {
                     obj = watchlist.toJSON();
+
                     var template= _.template($("#watchlist-edit-template").html(), {watchlist: obj});
                     self.$el.html(template);
                 }
@@ -121,16 +119,13 @@ var WatchlistEditView = Backbone.View.extend({
                 alert("A watchlist name must contain at least one character.");
             }
             else {
-                var token = $.cookie("umovieToken");
                 var checkValid = watchlists.create({
                     name: $('#watchlistName').val()
                 }, {
-
                     type: 'POST',
                     validate: true,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader('Authorization', token);
-                    },
+                        beforeSend: setHeader,
+
                     success: function (watchlist) {
                         router.navigate('watchlists', {trigger: true});
                     }
@@ -216,6 +211,7 @@ var WatchlistEditView = Backbone.View.extend({
         var currentMovieID = event.currentTarget.id;
         var self = this;
         $.ajax({
+            beforeSend: setHeader,
             url: "https://umovie.herokuapp.com/watchlists/" + currentWLID + "/movies/" + currentMovieID,
             type: 'DELETE',
             success: function(result) {
