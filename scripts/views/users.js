@@ -203,7 +203,6 @@ var UsersViews = Backbone.View.extend({
         watchlists.models = watchlistsAccount;
     },
     viewWatchlistDetails: function(event) {
-        alert("tu vas bien toi?")
         var idWatchListTarget = event.target.id;
         var options = {'id': idWatchListTarget};
         this.render(options);
