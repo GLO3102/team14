@@ -55,7 +55,7 @@ router.on('route:editWatchlist', function(id) {
  */
 router.on('route:showMovieData', function(id){
     movieModel.trackId=id;
-    var rootUrl = "http://umovie.herokuapp.com/unsecure/movies";
+    var rootUrl = "http://umovie.herokuapp.com/movies";
     movieModel.urlRoot = rootUrl+"/"+id;
     if (movieView.model) {
         movieView.model.set(movieModel.toJSON());
@@ -64,7 +64,11 @@ router.on('route:showMovieData', function(id){
     {
         movieView.model = movieModel;
     }
+    var token = $.cookie("umovieToken");
     movieModel.fetch({
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', token);
+        },
         success: function(){
             movieView.render();
 

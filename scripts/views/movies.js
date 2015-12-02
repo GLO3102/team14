@@ -55,6 +55,7 @@ MovieView = Backbone.View.extend({
         var that= this;
         $.ajax({
             type: "POST",
+
             url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(movie),
             success: function(data) {
@@ -68,7 +69,11 @@ MovieView = Backbone.View.extend({
     getWatchlitsForAddWatchistButton: function(movie){
         self = this;
         var watchListMovie = new Watchlists;
+        var token = $.cookie("umovieToken");
         watchListMovie.fetch({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', token);
+            },
             success: function (data){
                 var templateWatchList = _.template($("#movie-template").html());
                 self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
