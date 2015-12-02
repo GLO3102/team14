@@ -110,7 +110,8 @@ router.on('route:users', function(id){
     userModel.fetch({
         beforeSend: setHeader,
         success: function(){
-            userView.render();
+            var options = {'id': ""};
+            userView.render(options);
 
         }
     })

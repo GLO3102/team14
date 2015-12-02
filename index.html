@@ -284,6 +284,13 @@
             <% }); %>
         </ol>
     </script>
+    <script id="user-watchlist-movies" type="text/template">
+        <% movies.forEach(function(movie) {%>
+        <div id="Films" class="moviesWatchListUser">
+        <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
+        </div>
+        <% }); %>
+    </script>
     <script id="user-tpl" type="text/template">
         <div>
             <p><strong>Name: </strong><span><%= user.name%></span></p>
@@ -291,35 +298,37 @@
         </div>
         <% if(user.following) { %>
         <table id="friendFollowing" class="list-group">
-            <thead>
-            <tr>
-                <th>Friends follow</th>
-                <th></th>
-
-            </tr>
-            </thead>
             <tbody>
             <% user.following.forEach( function( item ){ %>
-            <tr>
-                <td id="friendsFollowList" class="list-group-item" > <a href="#"><%= item.name %></a></td>
-                <td><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>>X</button></td>
-            </tr>
+                <tr>
+                    <td id="friendsFollowList" class="list-group-item" > <a href="#"><%= item.name %></a></td>
+                    <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>>X</button></td>
+                </tr>
             <% }); %>
-            <tr>
-                <div  class="list-group">
-                    <h2>List of watchlists</h2>
-                    <% watchlists.each( function( list ){ %>
-                    <a id=<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
-
-                    <% }); %>
-                </div>
-
-
-            </tr>
             <tr>
                 <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
                 <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
             </tr>
+            </tbody>
+        </table>
+        <table >
+            <tbody>
+                <tr>
+                    <td width="20%">
+                        <div>
+                            <h2>List of watchlists</h2>
+                            <% watchlists.forEach( function( list ){ %>
+                            <a id=<%= list.id %> class="list-group-item"><%= list.name %></a>
+                            <% }); %>
+                        </div>
+                    </td>
+                    <td width="80%">
+                        <div class="container">
+                            <hr />
+                            <div class="pageUser"></div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <% }; %>

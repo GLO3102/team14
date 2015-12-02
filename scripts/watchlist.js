@@ -64,25 +64,18 @@ var WatchlistListView = Backbone.View.extend({
                 var watchlistArray = watchlists.models;
                 var newWatchlistArray = [];
                 watchlistArray.forEach(function(watchlist){
-                    if(watchlist.attributes.owner !==  undefined){
-                        if(watchlist.attributes.owner.id === userId){
+                    var watchlistAttributes = watchlist.attributes;
+                    if(watchlistAttributes.owner !==  undefined){
+                        var owner = watchlistAttributes.owner;
+                        if(owner.id === userId){
                             newWatchlistArray.push(watchlist)
                         }
                     }
                 })
-                console.log("le nouvel array");
-                console.log(newWatchlistArray);
                 watchlists.models = newWatchlistArray;
                 currentWatchlist.$el.html( currentWatchlist.template( { 'watchlists': watchlists } ) );
-
-
             }
-
         })
-
-
-
-
     }
 });
 
