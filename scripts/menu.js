@@ -11,8 +11,17 @@ var MainMenuView = Backbone.View.extend({
         "click #watchlistsRef": "showWatchlists"
     },
     showAccount: function (event) {
-        var id = loginObj['id'];
-        router.navigate("user/"+id, {trigger: true})
+        var token = $.cookie("umovieToken");
+        var infoTokenModel = new InfosTokenModel();
+        infoTokenModel.fetch({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', token);
+            },
+            success: function(data){
+                router.navigate("user/"+data.id, {trigger: true})
+            }
+        })
+
     },
     showWatchlists: function(event){
         router.navigate("watchlists", {trigger: true});

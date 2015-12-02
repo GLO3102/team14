@@ -306,12 +306,16 @@
             </tr>
             <% }); %>
             <tr>
-                <div class="list-group">
+                <div  class="list-group">
                     <h2>List of watchlists</h2>
                     <% watchlists.each( function( list ){ %>
-                    <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
+                    <a id=<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
+
                     <% }); %>
                 </div>
+                <div><button class="btn btn-primary" id="showWatchList">showWatchLists</button></div>
+
+
             </tr>
             <tr>
                 <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
@@ -372,7 +376,7 @@
 <script type="text/javascript" src="scripts/recommendations.js"></script>
 
 
-
+<script type="text/javascript" src="scripts/models/infosToken.js"></script>
 <script type="text/javascript" src="scripts/models/user.js"></script>
 <script type="text/javascript" src="scripts/collection/users.js"></script>
 <script type="text/javascript" src="scripts/views/users.js"></script>

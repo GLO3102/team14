@@ -5,7 +5,7 @@
 var watchlistSearchResults = [];
 
 var Watchlist = Backbone.Model.extend({
-    'urlRoot': 'http://umovie.herokuapp.com/unsecure/watchlists',
+    'urlRoot': 'http://umovie.herokuapp.com/watchlists',
 
     'defaults': {
         id: null,
@@ -24,11 +24,12 @@ var Watchlist = Backbone.Model.extend({
 });
 
 var setHeader = function (xhr) {
-    xhr.setRequestHeader('authorization', loginObj["token"]);
+    var token = $.cookie('umovieToken');
+    xhr.setRequestHeader('authorization', token);
 }
 
 var Watchlists = Backbone.Collection.extend({
-    'url': 'http://umovie.herokuapp.com/unsecure/watchlists',
+    'url': 'http://umovie.herokuapp.com/watchlists',
     'model': Watchlist,
 
     'parse': function( apiResponse ){
@@ -47,9 +48,41 @@ var WatchlistListView = Backbone.View.extend({
         watchlists.fetch( {
             beforeSend: setHeader,
             success: function() {
-                that.$el.html( that.template( { 'watchlists': watchlists } ) );
+                var watchListArray = watchlists.toJSON();
+                that.getUserWatchLists(that,watchlists);
+
             }
         })
+
+    },
+    getUserWatchLists: function(currentWatchlist, watchlists){
+        var tokenInfo = new InfosTokenModel();
+        tokenInfo.fetch({
+            beforeSend: setHeader,
+            success: function(data){
+                var userId = data.id;
+                var watchlistArray = watchlists.models;
+                var newWatchlistArray = [];
+                watchlistArray.forEach(function(watchlist){
+                    if(watchlist.attributes.owner !==  undefined){
+                        if(watchlist.attributes.owner.id === userId){
+                            newWatchlistArray.push(watchlist)
+                        }
+                    }
+                })
+                console.log("le nouvel array");
+                console.log(newWatchlistArray);
+                watchlists.models = newWatchlistArray;
+                currentWatchlist.$el.html( currentWatchlist.template( { 'watchlists': watchlists } ) );
+
+
+            }
+
+        })
+
+
+
+
     }
 });
 
@@ -60,7 +93,7 @@ var WatchlistEditView = Backbone.View.extend({
     'render': function(options) {
         var self = this;
         //si la requête est faite avec un ID, c'est qu'on veut aller chercher une watchlist en particulier (*Edit
-        // Watchlist*)
+        // Watchlist*)a
         if(options.id) {
             var watchlist = new Watchlist({id: options.id});
             watchlist.fetch({
@@ -87,6 +120,7 @@ var WatchlistEditView = Backbone.View.extend({
         'click .deleteMovieFromWL' : 'deleteMovieFromWL'
     },
     'saveWatchlist': function(event) {
+
         var currentId = $('#hiddenWatchlistId').text();
         if(currentId == 0) {
             //c'est alors une nouvelle watchlist
@@ -94,18 +128,23 @@ var WatchlistEditView = Backbone.View.extend({
                 alert("A watchlist name must contain at least one character.");
             }
             else {
+                var token = $.cookie("umovieToken");
                 var checkValid = watchlists.create({
                     name: $('#watchlistName').val()
                 }, {
-                    beforeSend: setHeader,
+
                     type: 'POST',
                     validate: true,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', token);
+                    },
                     success: function (watchlist) {
                         router.navigate('watchlists', {trigger: true});
                     }
                 });
             }
         } else {
+
             //on veut plutôt modifier une watchlist existante
             var watchlist = new Watchlist();
             var checkValid = watchlist.save({
@@ -137,6 +176,7 @@ var WatchlistEditView = Backbone.View.extend({
         return false;
     },
     'searchMoviesForWatchlist': function(event) {
+
         $(".searchResultItem").hide();
         var self = this;
         var searchword = $("#watchlistMovieSearch").val();
@@ -146,7 +186,7 @@ var WatchlistEditView = Backbone.View.extend({
         }
         else {
             var movies = new MoviesCollection();
-            var reqUrl = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
+            var reqUrl = "https://umovie.herokuapp.com/search/movies?q="+encodeURIComponent(searchword)+"&limit=5";
             movies.url = reqUrl;
             movies.fetch({
                 beforeSend: setHeader,
@@ -168,7 +208,7 @@ var WatchlistEditView = Backbone.View.extend({
         $.ajax({
             beforeSend: setHeader,
             type: "POST",
-            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+currentId+"/movies",
+            url: "https://umovie.herokuapp.com/watchlists/"+currentId+"/movies",
             data: JSON.stringify(movieToAdd),
             success: function() {
                 options = {'id': currentId};
@@ -183,7 +223,7 @@ var WatchlistEditView = Backbone.View.extend({
         var currentMovieID = event.currentTarget.id;
         var self = this;
         $.ajax({
-            url: "https://umovie.herokuapp.com/unsecure/watchlists/" + currentWLID + "/movies/" + currentMovieID,
+            url: "https://umovie.herokuapp.com/watchlists/" + currentWLID + "/movies/" + currentMovieID,
             type: 'DELETE',
             success: function(result) {
                 options = {'id': currentWLID};
