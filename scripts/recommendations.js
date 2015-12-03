@@ -5,7 +5,7 @@
 var uMovieRecTotal = 0;
 
 var recCallback = function(data) {
-    var recList = []
+    var recList = [];
     for(var i = 0; i<data.Similar.Results.length; i++) {
         var itemName = data.Similar.Results[i].Name;
         var itemType = data.Similar.Results[i].Type;
@@ -17,7 +17,10 @@ var recCallback = function(data) {
 };
 
 var getRecommendationList = function(title, type) {
-    var urlBegin = "https://www.tastekid.com/api/similar?q=" + encodeURIComponent("attack of the killer tomatoes") + "&type=" + type;
+    uMovieRecTotal=0;
+    var titleToSearch = prepareTitle(title);
+    console.log("title to search is:"+titleToSearch);
+    var urlBegin = "https://www.tastekid.com/api/similar?q=" + encodeURIComponent(titleToSearch) + "&type=" + type;
     var urlEnd = "&limit=5&format=JSON&jsonp=?&k=179633-uMovie-8BNUD4NB&callback=recCallback";
     var urlComplete = urlBegin + urlEnd;
 
@@ -41,9 +44,10 @@ var createUMovieRecList = function(recList) {
     for(var i = 0; i < recListLength; i++) {
         var subUrl = "";
         //subUrl sera pour alterner entre "search movies" et "search shows"
-        //var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(recList[i].Name)+"&limit=1";
-        var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent("attack of the killer" +
-                " tomatoes")+"&limit=1";
+        console.log(recList[i].name);
+        var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent(recList[i].name)+"&limit=1";
+        //var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent("attack of the killer" +
+        //        " tomatoes")+"&limit=1";
         $.ajax({
             type: 'GET',
             url: url,
@@ -57,8 +61,6 @@ var createUMovieRecList = function(recList) {
 
 var addResponseToList = function(uMovieRecList, response, index, recListLength) {
     console.log("index="+index);
-    //TODO: vérifier si le response contient au moins un élément: ajouter si oui, rien si non, mais incrémente quand
-    //TODO: meme le counter uMovieRecTotal
     //ajoute le résultat à la liste
     uMovieRecList.push(response.results[0]);
     uMovieRecTotal = uMovieRecTotal+1;
@@ -71,5 +73,38 @@ var addResponseToList = function(uMovieRecList, response, index, recListLength) 
 };
 
 var displayRecommendations = function(uMovieRecList) {
+    console.log("display time");
+    console.log(uMovieRecList.length);
+    if(uMovieRecList.length===0) {
+        //todo: show the first box and write "no similar items found"
+    }
+    for(var i = 0; i<uMovieRecList.length; i++) {
+        if(uMovieRecList[i]!==undefined) {
+            var divid = "#movieRec" + (i + 1);
+            $(divid).text(uMovieRecList[i].trackCensoredName);
+            $(divid).show();
+            $(divid).prop("href","#/movies/"+uMovieRecList[i].trackId);
+        }
+    }
 
 };
+
+var prepareTitle = function(title) {
+    var bracketPos = title.indexOf("(");
+    var cleanTitle = "";
+    if (bracketPos !== -1) {
+        cleanTitle = title.substring(0,bracketPos);
+        var colonPos = cleanTitle.indexOf(":");
+        if (colonPos !== -1) {
+            cleanTitle = cleanTitle.substring(0, colonPos);
+        }
+    } else {
+        var colonPos = title.indexOf(":");
+        if (colonPos !== -1) {
+            cleanTitle = title.substring(0, colonPos);
+        } else {
+            cleanTitle = title;
+        }
+    }
+    return cleanTitle;
+}
