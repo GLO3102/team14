@@ -116,26 +116,38 @@ var displayRecommendations = function(uMovieRecList, type) {
     }
     console.log("RECS TO DISPLAY"+uMovieRecList.length);
     if(uMovieRecList.length===0) {
-        //todo: show the first box and write "no similar items found"
-    }
-    for(var i = 0; i<uMovieRecList.length; i++) {
-        if(uMovieRecList[i]!==undefined) {
-            var divid = "#"+divtype+"Rec" + (i + 1);
-            if(divtype=="movie") {
-                $(divid).text(uMovieRecList[i].trackCensoredName);
-                $(divid).prop("href","#/"+divtype+"s/"+uMovieRecList[i].trackId);
-                $(divid).show();
-            } else if (divtype == "show") {
-                $(divid).text(uMovieRecList[i].collectionName);
-                $(divid).prop("href","#/tv"+divtype+"/"+uMovieRecList[i].collectionId);
-                $(divid).show();
-            } else if (divtype == "actor") {
-                $(divid).text(uMovieRecList[i].artistName);
-                $(divid).prop("href","#/"+divtype+"s/"+uMovieRecList[i].artistId);
-                $(divid).show();
+        var noResDivId = divtype+"Rec1";
+        $(noResDivId).text("Sorry, no recommendations found");
+        $(noResDivId).show();
+    } else {
+        for(var i = 0; i<uMovieRecList.length; i++) {
+            if(uMovieRecList[i]!==undefined) {
+                var divid = "#"+divtype+"Rec" + (i + 1);
+                if(divtype=="movie") {
+                    $(divid).text(uMovieRecList[i].trackCensoredName);
+                    $(divid).prop("href","#/"+divtype+"s/"+uMovieRecList[i].trackId);
+                    $(divid).show();
+                } else if (divtype == "show") {
+                    $(divid).text(uMovieRecList[i].collectionName);
+                    $(divid).prop("href","#/tv"+divtype+"/"+uMovieRecList[i].collectionId);
+                    $(divid).show();
+                } else if (divtype == "actor") {
+                    $(divid).text(uMovieRecList[i].artistName);
+                    $(divid).prop("href","#/"+divtype+"s/"+uMovieRecList[i].artistId);
+                    $(divid).show();
+                }
             }
         }
+        var checkdiv = "#"+divtype+"Rec1";
+        console.log(checkdiv);
+        console.log(!($(checkdiv).is(":visible")));
+        if( $(checkdiv).css('display') == 'none' ) {
+            console.log("hmm?!?!");
+            $(checkdiv).text("Sorry, no recommendations found");
+            $(checkdiv).show();
+        }
     }
+
 
 };
 
