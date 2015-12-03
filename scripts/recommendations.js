@@ -90,20 +90,19 @@ var displayRecommendations = function(uMovieRecList) {
 };
 
 var prepareTitle = function(title) {
-    var bracketPos = title.indexOf("(");
-    var cleanTitle = "";
+    var cleanTitle = title.replace(/[&]/g, 'and');
+    var bracketPos = cleanTitle.indexOf("(");
+
     if (bracketPos !== -1) {
-        cleanTitle = title.substring(0,bracketPos);
+        cleanTitle = cleanTitle.substring(0,bracketPos);
         var colonPos = cleanTitle.indexOf(":");
         if (colonPos !== -1) {
             cleanTitle = cleanTitle.substring(0, colonPos);
         }
     } else {
-        var colonPos = title.indexOf(":");
+        var colonPos = cleanTitle.indexOf(":");
         if (colonPos !== -1) {
-            cleanTitle = title.substring(0, colonPos);
-        } else {
-            cleanTitle = title;
+            cleanTitle = cleanTitle.substring(0, colonPos);
         }
     }
     return cleanTitle;
