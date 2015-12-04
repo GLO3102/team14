@@ -2,14 +2,15 @@
  * Created by dmercier on 2015-11-18.
  */
 
-var loginCookieName = "umovieToken";
+var loginToken = "umovieToken";
+var loginUsername = "umovieUsername";
 
 window.onload = function(){
     console.log("on load called");
     var loginButton = document.getElementById("loginButton");
 
-    if(getTokenFromCookie() === undefined) {
-        console.log("just before loginButton");
+    if(getLoginToken() === undefined) {
+        deleteAllCookies(); // just to make sure we don't have old data in username or other...
         loginButton.onclick = function() {
             var username = document.getElementById("userEmail").value;
             var password = document.getElementById("userPassword").value;
@@ -50,7 +51,7 @@ window.onload = function(){
                     console.log("request succeeded");
                     console.log(data.token);
 
-                    if(saveTokenToCookie(data.token)) {
+                    if(saveToCookie(loginToken, data.token) && saveToCookie(loginUsername, username)) {
                         window.location.replace("index.html");
                     }
                 },
@@ -65,30 +66,42 @@ window.onload = function(){
     }
     else {
         console.log("load main screen");
+        console.log("Current token is " + getLoginToken());
+        console.log("Current user is " + getCurrentUsername());
         $.get('mainpage.html', function(data) {
             $("#PageContent").html(data);
         });
     }
 };
 
-function getTokenFromCookie () {
-    var tokenCookie = $.cookie(loginCookieName);
-    return tokenCookie;
+function deleteAllCookies() {
+    $.removeCookie(loginToken);
+    $.removeCookie(loginUsername);
+}
+
+function getLoginToken () {
+    var cookie = $.cookie(loginToken);
+    return cookie;
 };
+
+function getCurrentUsername() {
+    var cookie = $.cookie(loginUsername);
+    return cookie;
+}
+
 var setHeader = function (xhr) {
-    var token = getTokenFromCookie();
+    var token = getLoginToken();
     xhr.setRequestHeader('authorization', token);
 }
 
-function saveTokenToCookie (token) {
-    var tokenCookie = $.cookie(loginCookieName, token);
+function saveToCookie(key, value) {
+    var cookie = $.cookie(key, value);
 
-    if(tokenCookie === undefined) {
-        console.log("tokenCookie does not exist");
+    if(cookie === undefined) {
+        console.log("Can't write cookie into store");
         return false;
     }
 
-    console.log("saving token to cookie");
+    console.log("Cookie has been saved into store");
     return true;
-};
-
+}

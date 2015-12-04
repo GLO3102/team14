@@ -8,7 +8,8 @@ var MainMenuView = Backbone.View.extend({
     },
     events: {
         "click #accountRef": "showAccount",
-        "click #watchlistsRef": "showWatchlists"
+        "click #watchlistsRef": "showWatchlists",
+        "click #logout": "logout"
     },
     showAccount: function (event) {
         var token = $.cookie("umovieToken");
@@ -25,6 +26,9 @@ var MainMenuView = Backbone.View.extend({
     },
     showWatchlists: function(event){
         router.navigate("watchlists", {trigger: true});
+    },
+    logout: function(event){
+        router.navigate("logout", {trigger: true});
     }
 });
 
