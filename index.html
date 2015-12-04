@@ -155,6 +155,7 @@
             </div>
         </div>
     </script>
+
     <script type="text/template" id="movie-template">
         <movie>
             <div id="mainContainer">
@@ -186,9 +187,18 @@
                     </select>
                 </div>
                 <div id="MoviePageVideoContainer"></div>
+                <div id="movieRecContainer" class="list-group recommendations">
+                    <a class="list-group-item active" id="movieRecHeader"><h3>Similar Movies:</h3></a>
+                    <a class="list-group-item" id="movieRec1" style="display:none"></a>
+                    <a class="list-group-item" id="movieRec2" style="display:none"></a>
+                    <a class="list-group-item" id="movieRec3" style="display:none"></a>
+                    <a class="list-group-item" id="movieRec4" style="display:none"></a>
+                    <a class="list-group-item" id="movieRec5" style="display:none"></a>
+                </div>
             </div>
         </movie>
     </script>
+
     <script type="text/template" id="TVShows-list-template"  >
         <% _.each(results, function(result) { %>
         <div class="movieTitle">
@@ -224,6 +234,14 @@
 
 
         <div class="modal fade" id="myTvShowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> </div>
+        <div id="showRecContainer" class="list-group recommendations">
+            <a class="list-group-item active" id="showRecHeader"><h3>Similar Shows:</h3></a>
+            <a class="list-group-item" id="showRec1" style="display:none"></a>
+            <a class="list-group-item" id="showRec2" style="display:none"></a>
+            <a class="list-group-item" id="showRec3" style="display:none"></a>
+            <a class="list-group-item" id="showRec4" style="display:none"></a>
+            <a class="list-group-item" id="showRec5" style="display:none"></a>
+        </div>
     </script>
     <script type="text/template" id="single-episode-template"  >
 

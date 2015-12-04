@@ -1,5 +1,5 @@
 /**
- * Created by Stéphane on 2015-10-27.
+ * Created by Stï¿½phane on 2015-10-27.
  */
 
 
@@ -39,6 +39,7 @@ var ActorView = Backbone.View.extend({
                 img.src = data.images[0].display_sizes[0].uri;
                 $('.actorPhoto').append(img);
             });
+            getRecommendationList(nom, "actor");
         },
 
 

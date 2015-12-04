@@ -67,6 +67,7 @@ MovieView = Backbone.View.extend({
         } );
     },
     getWatchlitsForAddWatchistButton: function(movie){
+        console.log("before call to getRecList");
         self = this;
         var watchListMovie = new Watchlists;
         var token = $.cookie("umovieToken");
