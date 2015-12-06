@@ -131,6 +131,12 @@ section {
     padding: 5px 0;
     border-bottom: #dddddd 1px solid;
 }
+
+#SearchFilters
+{
+    list-style-type: none;
+}
+
 /*******************************************/
 /*           style pour responsive         */
 /*******************************************/

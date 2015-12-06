@@ -350,7 +350,7 @@
         <% }; %>
     </script>
     <script id="movies-result-tpl" type="text/template">
-        <ul class="list-unstyled list-episodes">
+        <ul id="movieResultsList">
             <% _.each(movieResults, function(result) { %>
             <li>
                 <span><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
@@ -359,7 +359,7 @@
         </ul>
     </script>
     <script id="tvshows-result-tpl" type="text/template">
-        <ul class="list-unstyled list-episodes">
+        <ul id="tvShowResultsList">
             <% _.each(tvShowResults, function(result) { %>
             <li>
                 <span><a href="<%= '#/tvshow/' + result.collectionId %>"><%= result.collectionName %></a> - <%= result.primaryGenreName %></span>
@@ -368,7 +368,7 @@
         </ul>
     </script>
     <script id="actors-result-tpl" type="text/template">
-        <ul class="list-unstyled list-episodes">
+        <ul id="actorsResultsList">
             <% _.each(actorsResults, function(result) { %>
             <li>
                 <span><a href="<%= '#/actors/' + result.artistId %>"><%= result.artistName %></a> - <%= result.primaryGenreName %></span>
@@ -377,7 +377,7 @@
         </ul>
     </script>
     <script id="users-result-tpl" type="text/template">
-        <ul class="list-unstyled list-episodes">
+        <ul id="usersResultsList">
             <% _.each(usersResults, function(result) { %>
             <li>
                 <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %></span>

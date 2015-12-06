@@ -24,14 +24,16 @@ var usersCollection = new UsersCollection({});
 var userModel = new UsersModel({});
 var userView = new UsersViews({collection: usersCollection});
 
+var searchFiltersCategories = [];
+var moviesSearchResults = [];
+var tvShowsSearchResults = [];
+var actorsSearchResults = [];
+var usersSearchResults = [];
+
 var router = new Router();
-
-
-
 router.on('route:home', function() {
     console.log("home route called");
 });
-
 router.on('route:actor', function(id) {
     console.log("actor route called");
     $.get('actor.html', function(data) {
@@ -40,20 +42,16 @@ router.on('route:actor', function(id) {
         actorFunction(id);
     });
 });
-
 router.on('route:watchlists', function() {
     console.log("watchlist route called");
     toggleUserMenu(null);
     var watchlistListView = new WatchlistListView({ });
     watchlistListView.render();
 });
-
 router.on('route:editWatchlist', function(id) {
     var watchlistEditView = new WatchlistEditView({ });
     watchlistEditView.render({id: id});
 });
-
-
 /**
  * Created by Sebastien on 2015-10-30.
  */
@@ -81,7 +79,6 @@ router.on('route:showMovieData', function(id){
         }
     })
 });
-
 router.on('route:tvshow', function(id){
     $.get('tvshow.html', function(data) {
         $("#PageContent").html(data);
@@ -118,12 +115,10 @@ router.on('route:users', function(id){
         }
     })
 });
-
 router.on('route:search', function() {
     console.log("search route called");
     LoadSearchResults();
 });
-
 router.on('route:logout', function() {
     console.log("route logout detected");
     deleteAllCookies();

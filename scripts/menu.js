@@ -75,6 +75,8 @@ function LoadSearchResults()
     $.get('search.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
+        searchFiltersCategories = [];
+
         var moviesSRCollection =  new MoviesSearchResultCollection({});
         moviesSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/movies?q=' + $('#SearchCriteria').val();
         var moviesSRView = new MoviesSearchResultView({
@@ -83,6 +85,21 @@ function LoadSearchResults()
         moviesSRCollection.fetch({
             success: function (model, response) {
                 moviesSRView.render();
+
+                var results = JSON.parse(JSON.stringify(moviesSRView.collection))[0].results;
+
+                moviesSearchResults = results;
+
+                for(var i=0; i < results.length; ++i)
+                {
+                    var genre = results[i].primaryGenreName;
+                    var index = searchFiltersCategories.indexOf(genre);
+                    if (index === -1)
+                    {
+                        searchFiltersCategories.push(genre);
+                        $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
+                    }
+                }
             },
             error: function (model, response) {
                 console.log("error");
@@ -97,6 +114,21 @@ function LoadSearchResults()
         tvShowsSRCollection.fetch({
             success: function (model, response) {
                 tvShowsSRView.render();
+
+                var results = JSON.parse(JSON.stringify(tvShowsSRView.collection))[0].results;
+
+                tvShowsSearchResults = results;
+
+                for(var i=0; i < results.length; ++i)
+                {
+                    var genre = results[i].primaryGenreName;
+                    var index = searchFiltersCategories.indexOf(genre);
+                    if (index === -1)
+                    {
+                        searchFiltersCategories.push(genre);
+                        $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
+                    }
+                }
             },
             error: function (model, response) {
                 console.log("error");
@@ -111,6 +143,21 @@ function LoadSearchResults()
         actorsSRCollection.fetch({
             success: function (model, response) {
                 actorsSRView.render();
+
+                var results = JSON.parse(JSON.stringify(actorsSRView.collection))[0].results;
+
+                actorsSearchResults = results;
+
+                for(var i=0; i < results.length; ++i)
+                {
+                    var genre = results[i].primaryGenreName;
+                    var index = searchFiltersCategories.indexOf(genre);
+                    if (index === -1)
+                    {
+                        searchFiltersCategories.push(genre);
+                        $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
+                    }
+                }
             },
             error: function (model, response) {
                 console.log("error");
@@ -125,10 +172,83 @@ function LoadSearchResults()
         usersSRCollection.fetch({
             success: function (model, response) {
                 usersSRView.render();
+
+                var results = JSON.parse(JSON.stringify(usersSRView.collection))[0].results;
+
+                usersSearchResults = results;
+
+                for(var i=0; i < results.length; ++i)
+                {
+                    var genre = results[i].primaryGenreName;
+                    var index = searchFiltersCategories.indexOf(genre);
+                    if (index === -1)
+                    {
+                        searchFiltersCategories.push(genre);
+                        $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
+                    }
+                }
             },
             error: function (model, response) {
                 console.log("error");
             }
         });
     });
+}
+
+function ApplySearchFilter(control)
+{
+    var checkedFilters = $('.SearchFilter:checked');
+    var checkedGenres = [];
+    for(var i=0; i < checkedFilters.length; ++i)
+    {
+        checkedGenres.push(checkedFilters[i].id);
+    }
+
+    $('#movieResultsList').empty();
+    for(var i=0; i < moviesSearchResults.length; ++i)
+    {
+        if (checkedGenres.length == 0) {
+            $('#movieResultsList').append('<li><span><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
+                                                                                                                   + moviesSearchResults[i].primaryGenreName + '</span></li>');
+        }
+        else {
+            if (checkedGenres.indexOf(moviesSearchResults[i].primaryGenreName) !== -1)
+            {
+                $('#movieResultsList').append('<li><span><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
+                                                                                                                       + moviesSearchResults[i].primaryGenreName + '</span></li>');
+            }
+        }
+    }
+
+    $('#tvShowResultsList').empty();
+    for(var i=0; i < tvShowsSearchResults.length; ++i)
+    {
+        if (checkedGenres.length == 0) {
+            $('#tvShowResultsList').append('<li><span><a href=\"#/tvshow/' + tvShowsSearchResults[i].collectionId + '\">' + tvShowsSearchResults[i].collectionName + '</a> - '
+                + tvShowsSearchResults[i].primaryGenreName + '</span></li>');
+        }
+        else {
+            if (checkedGenres.indexOf(tvShowsSearchResults[i].primaryGenreName) !== -1)
+            {
+                $('#tvShowResultsList').append('<li><span><a href=\"#/tvshow/' + tvShowsSearchResults[i].collectionId + '\">' + tvShowsSearchResults[i].collectionName + '</a> - '
+                    + tvShowsSearchResults[i].primaryGenreName + '</span></li>');
+            }
+        }
+    }
+
+    $('#actorsResultsList').empty();
+    for(var i=0; i < actorsSearchResults.length; ++i)
+    {
+        if (checkedGenres.length == 0) {
+            $('#actorsResultsList').append('<li><span><a href=\"#/actors/' + actorsSearchResults[i].artistId + '\">' + actorsSearchResults[i].artistName + '</a> - '
+                + actorsSearchResults[i].primaryGenreName + '</span></li>');
+        }
+        else {
+            if (checkedGenres.indexOf(actorsSearchResults[i].primaryGenreName) !== -1)
+            {
+                $('#actorsResultsList').append('<li><span><a href=\"#/actors/' + actorsSearchResults[i].artistId + '\">' + actorsSearchResults[i].artistName + '</a> - '
+                    + actorsSearchResults[i].primaryGenreName + '</span></li>');
+            }
+        }
+    }
 }
