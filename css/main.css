@@ -72,6 +72,10 @@ section {
     display: inline-block;
     width: 100%;
 }
+
+#login-form {
+    max-width: 300px;
+}
 /*******************************************/
 /*    Affichage des listes de film         */
 /*******************************************/
