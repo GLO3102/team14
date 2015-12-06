@@ -3,6 +3,7 @@ $(function (){
         template:  _.template($("#episodes-list-template").html()),
         el: "#list-episodes",
         templateModal : _.template($("#single-episode-template").html()),
+        player : null,
         initialize: function (){
             _.bindAll(this,  'render', 'afterRender');
             var _this = this;
@@ -27,6 +28,9 @@ $(function (){
                 var button = $(event.relatedTarget)
                 var trackId = $(button).attr('data-trackId');
                 _this.modalEpisode(trackId);
+            })
+            $('#myTvShowModal').on('hidden.bs.modal', function (e) {
+                _this.player.stopVideo();
             })
 
         },
@@ -53,7 +57,7 @@ $(function (){
             var urlMiddle =  title+' official trailer';
             var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
             var urlComplete = urlBegin + urlMiddle + urlEnd;
-            var player;
+            var _this = this;
 
             $.ajax({
                 url : urlComplete,
@@ -61,10 +65,10 @@ $(function (){
                 contentType: 'application/json'
             }).done(function(data) {
                 if(data.items.length == 0){
-                    $("#player").html("No preview find");
+                    $("#episodePlayer").html("No preview find");
                 }else{
-                    player = new YT.Player('player', {
-                        height: '150',
+                    _this.player = new YT.Player('episodePlayer', {
+                        height: '300',
                         width: '300',
                         videoId: data.items[0].id.videoId
                     });

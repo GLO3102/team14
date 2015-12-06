@@ -14,7 +14,6 @@ function createEpisodesListe(tvShowsCollection){
         }
     });
 
-    console.log("pascal");
     $('#search-episodes-form').submit(function () {
         return false;
     });
