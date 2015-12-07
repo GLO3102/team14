@@ -5,7 +5,6 @@
         template: _.template($("#user-watchlist-movies").html()),
         el:".pageUser",
         render: function(watchlistName,movies){
-            this.$el.html("");
             this.$el.html(this.template({watchlistName: watchlistName, movies: movies}))
 
         }
@@ -42,6 +41,7 @@ var UsersViews = Backbone.View.extend({
         }
         else{
             var watchlists = new Watchlists();
+            watchlists.initialize(this.model.id)
             var that = this;
             watchlists.fetch( {
                 beforeSend:setHeader,
@@ -73,7 +73,6 @@ var UsersViews = Backbone.View.extend({
 
 
         }
-
 
     },
     events: {
@@ -121,10 +120,6 @@ var UsersViews = Backbone.View.extend({
             beforeSend: setHeader,
             success: function (data, textStatus, jqXHR) {
                 router.navigate("user/"+that.userId, {trigger: true})
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("Ca va mal a la shop")
-
             }
         });
     },

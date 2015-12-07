@@ -69,18 +69,25 @@ MovieView = Backbone.View.extend({
     getWatchlitsForAddWatchistButton: function(movie){
         console.log("before call to getRecList");
         self = this;
-        var watchListMovie = new Watchlists;
-        var token = $.cookie("umovieToken");
-        watchListMovie.fetch({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', token);
-            },
-            success: function (data){
-                var templateWatchList = _.template($("#movie-template").html());
-                self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
-                getRecommendationList(movie.trackName, "movies");
+        var userInfo = new  InfosTokenModel();
+        userInfo.fetch({
+            beforeSend: setHeader,
+            success: function(data){
+                console.log("le id est : " + data.id);
+                var currentUserId = data.id;
+                var watchListMovie = new Watchlists;
+                watchListMovie.initialize(currentUserId);
+                watchListMovie.fetch({
+                    beforeSend: setHeader,
+                    success: function (data){
+                        var templateWatchList = _.template($("#movie-template").html());
+                        self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
+                        getRecommendationList(movie.trackName, "movies");
+                    }
+                })
             }
         })
+
 
     },
 

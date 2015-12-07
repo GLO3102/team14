@@ -4,45 +4,38 @@
 var WatchlistListView = Backbone.View.extend({
     'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
-
-    'render': function() {
+    'render': function(currentUserId) {
         var that = this;
         var watchlists = new Watchlists();
-
+        watchlists.initialize(currentUserId);
         watchlists.fetch( {
             beforeSend: setHeader,
             success: function() {
                 var watchListArray = watchlists.toJSON();
-                that.getUserWatchLists(that,watchlists);
-
+                console.log("je veux voir");
+                console.log(watchlists.toJSON());
+                that.$el.html( that.template( { 'watchlists': watchlists } ) );
             }
         })
 
-    },
-    getUserWatchLists: function(currentWatchlist, watchlists){
-        var tokenInfo = new InfosTokenModel();
-        tokenInfo.fetch({
-            beforeSend: setHeader,
-            success: function(data){
-                var userId = data.id;
-                var watchlistArray = watchlists.models;
-                var newWatchlistArray = [];
-                watchlistArray.forEach(function(watchlist){
-                    var watchlistAttributes = watchlist.attributes;
-                    if(watchlistAttributes.owner !==  undefined){
-                        var owner = watchlistAttributes.owner;
-                        if(owner.id === userId){
-                            newWatchlistArray.push(watchlist)
-                        }
-                    }
-                })
-                watchlists.models = newWatchlistArray;
-                currentWatchlist.$el.html( currentWatchlist.template( { 'watchlists': watchlists } ) );
-            }
-        })
     }
-});
 
+});
+/*
+var getUserId = function(currentView){
+    var tokenInfo = new InfosTokenModel();
+    var self = this;
+    tokenInfo.fetch({
+        beforeSend: setHeader,
+        success: function(data){
+            console.log("**************************");
+            console.log(data.id);
+            console.log("**************************");
+
+
+    })
+}
+*/
 var watchlists = new Watchlists();
 var watchlistSearchResults = [];
 var WatchlistEditView = Backbone.View.extend({

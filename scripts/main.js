@@ -45,8 +45,17 @@ router.on('route:actor', function(id) {
 router.on('route:watchlists', function() {
     console.log("watchlist route called");
     toggleUserMenu(null);
-    var watchlistListView = new WatchlistListView({ });
-    watchlistListView.render();
+    var userInfo = new  InfosTokenModel();
+    userInfo.fetch({
+        beforeSend: setHeader,
+        success: function(data){
+            console.log("le id est : " + data.id);
+            var currentUserId = data.id;
+            var watchlistListView = new WatchlistListView();
+            watchlistListView.render(currentUserId);
+        }
+    })
+
 });
 router.on('route:editWatchlist', function(id) {
     var watchlistEditView = new WatchlistEditView({ });
