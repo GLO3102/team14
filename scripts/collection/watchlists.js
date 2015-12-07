@@ -11,13 +11,9 @@ var Watchlists = Backbone.Collection.extend({
 
 
     'parse': function( apiResponse ){
-        console.log("user Id: " + this.userId);
-        console.log("voici la collection de la watchlist");
-        console.log(apiResponse);
         var self = this;
         var newWatchlistArray = [];
         apiResponse.forEach(function(watchlist){
-            console.log(watchlist+ "====" + self.userId)
             if(watchlist.owner !==  undefined){
                 var owner = watchlist.owner;
                 if(owner.id === self.userId){

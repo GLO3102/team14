@@ -11,9 +11,6 @@ var WatchlistListView = Backbone.View.extend({
         watchlists.fetch( {
             beforeSend: setHeader,
             success: function() {
-                var watchListArray = watchlists.toJSON();
-                console.log("je veux voir");
-                console.log(watchlists.toJSON());
                 that.$el.html( that.template( { 'watchlists': watchlists } ) );
             }
         })
@@ -21,21 +18,6 @@ var WatchlistListView = Backbone.View.extend({
     }
 
 });
-/*
-var getUserId = function(currentView){
-    var tokenInfo = new InfosTokenModel();
-    var self = this;
-    tokenInfo.fetch({
-        beforeSend: setHeader,
-        success: function(data){
-            console.log("**************************");
-            console.log(data.id);
-            console.log("**************************");
-
-
-    })
-}
-*/
 var watchlists = new Watchlists();
 var watchlistSearchResults = [];
 var WatchlistEditView = Backbone.View.extend({
@@ -68,7 +50,8 @@ var WatchlistEditView = Backbone.View.extend({
         'click .addMovieToWL': 'addMovieToWatchlist',
         'click #btnWatchlistMovieSearch': 'searchMoviesForWatchlist',
         'click .addSearchResult' : 'addSearchResultToWatchlist',
-        'click .deleteMovieFromWL' : 'deleteMovieFromWL'
+        'click .deleteMovieFromWL' : 'deleteMovieFromWL',
+        'click #watchlist-movies-list' : 'showMovieDetails'
     },
     'saveWatchlist': function(event) {
 
@@ -181,6 +164,11 @@ var WatchlistEditView = Backbone.View.extend({
         });
 
         return false;
+    },
+    showMovieDetails : function(event){
+        var idMovie = event.target.id;
+        router.navigate('/movies/'+idMovie, {trigger: true});
+
     }
 });
 

@@ -72,9 +72,11 @@
         <h5><%= watchlist ? '':'Enter watchlist name:' %></h5>
         <textarea id="watchlistName" cols="50" rows="1"><%= watchlist? watchlist.name : '' %></textarea>
         <hr>
+        <button class="btn btn-primary">Delete watchlist</button>
+
         <div id="hiddenWatchlistId" style="display:none;"><%= watchlist ? watchlist.id : 0 %></div>
 
-        <div class="list-group">
+        <div id="watchlist-movies-list" class="list-group">
             <% if(watchlist) { %>
             <table>
                 <thead>
@@ -86,7 +88,7 @@
                 <tbody>
                 <% watchlist.movies.forEach( function( item ){ %>
                 <tr>
-                    <th><%= item.trackName %></th>
+                    <th><a id=<%= item.trackId %>><%= item.trackName %></a></th>
                     <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></th>
                     <input type="hidden" name="hiddenMovieId" value="<%= item.trackId%>" />
                 </tr>
@@ -95,7 +97,7 @@
                 </table>
             <% }; %>
         </div>
-        
+
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>

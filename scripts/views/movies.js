@@ -73,7 +73,6 @@ MovieView = Backbone.View.extend({
         userInfo.fetch({
             beforeSend: setHeader,
             success: function(data){
-                console.log("le id est : " + data.id);
                 var currentUserId = data.id;
                 var watchListMovie = new Watchlists;
                 watchListMovie.initialize(currentUserId);
