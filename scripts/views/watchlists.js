@@ -1,39 +1,6 @@
 /**
- * Created by dmercier on 2015-10-18.
+ * Created by Sebastien on 2015-12-07.
  */
-
-var watchlistSearchResults = [];
-
-var Watchlist = Backbone.Model.extend({
-    'urlRoot': 'http://umovie.herokuapp.com/watchlists',
-
-    'defaults': {
-        id: null,
-    },
-
-    'initialize': function() {
-        this.set('movies', new MoviesCollection(this.get('movies')));
-    },
-
-    'parse': function( apiResponse ){
-        apiResponse.movies.forEach( function(item) {
-        });
-
-        return apiResponse;
-    }
-});
-
-
-
-var Watchlists = Backbone.Collection.extend({
-    'url': 'http://umovie.herokuapp.com/watchlists',
-    'model': Watchlist,
-
-    'parse': function( apiResponse ){
-        return apiResponse;
-    }
-});
-
 var WatchlistListView = Backbone.View.extend({
     'el': '#PageContent',
     'template': _.template($('#watchlist-list-template').html()),
@@ -77,7 +44,7 @@ var WatchlistListView = Backbone.View.extend({
 });
 
 var watchlists = new Watchlists();
-
+var watchlistSearchResults = [];
 var WatchlistEditView = Backbone.View.extend({
     'el': '.page',
     'render': function(options) {
@@ -124,7 +91,7 @@ var WatchlistEditView = Backbone.View.extend({
                 }, {
                     type: 'POST',
                     validate: true,
-                        beforeSend: setHeader,
+                    beforeSend: setHeader,
 
                     success: function (watchlist) {
                         router.navigate('watchlists', {trigger: true});
@@ -233,3 +200,4 @@ function displaySearchResults(results) {
         $("#idResult"+i).text(results.results[i-1].trackId);
     }
 };
+
