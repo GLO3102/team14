@@ -45,7 +45,9 @@ h4 span {
     font-weight: normal;
 }
 
-
+a:hover   {
+    cursor:pointer;
+}
 
 main {
     margin: 50px 50px 50px 50px;
