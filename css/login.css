@@ -1,0 +1,24 @@
+#login-form {
+    max-width: 300px;
+}
+
+#signin-form {
+    max-width: 300px;
+}
+
+.badCred {
+    padding-top: 20px;
+}
+
+h4 {
+    color:red;
+}
+
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color:black;
+    height: 1px;
+}

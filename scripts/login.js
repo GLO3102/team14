@@ -7,7 +7,10 @@ var loginUsername = "umovieUsername";
 
 window.onload = function(){
     console.log("on load called");
+
+    $('#badCredText').text("");
     var loginButton = document.getElementById("loginButton");
+    var signinButton = document.getElementById("signinButton");
 
     if(getLoginToken() === undefined) {
         deleteAllCookies(); // just to make sure we don't have old data in username or other...
@@ -42,6 +45,9 @@ window.onload = function(){
                     },
                     401: function (response) {
                         console.log('401');
+                        //$('#badCredentials').hide();
+                        //$('#badCredentials').show();
+                        $('#badCredText').text("The login information you entered are invalid...");
                     },
                     404: function (response) {
                         console.log('404');
@@ -62,6 +68,10 @@ window.onload = function(){
                     console.log("request always");
                 }
             });
+        }
+
+        signinButton.onclick = function() {
+            console.log("asdfsdfasdf");
         }
     }
     else {
