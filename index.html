@@ -24,12 +24,10 @@
     <div id="WatchListContent"></div>
     <div id="UserContent"></div>
 
-
-
     <script type="text/template" id="MainMenu-Template">
+        <% if(user) { %>
         <ul>
             <li class="home-btn"><a href=""><i class="fa fa-home"></i><span class=" hidden">Accueil</span></a></li>
-            <li class="login-btn"><a href=""><i class="fa fa-sign-in"></i><span class=" hidden">Login</span></a></li>
             <li class="mobile-hidden"><input id="SearchCriteria" type="text" placeholder="Search ..."/><button id="search-btn" onclick="SearchUMovie();"><i class="fa fa-search"></i></button></li>
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
@@ -39,7 +37,7 @@
                     <li><a href="#/logout/" id="logout">Log out</a></li>
                 </ul>
             </li>
-            <li class="tablet-hidden" ><button id="user-btn" ><i class="fa fa-user"></i><span class="mobile-hidden">UserName</span></button>
+            <li class="tablet-hidden" ><button id="user-btn" ><i class="fa fa-user"></i><span class="mobile-hidden"><%= user %></span></button>
                 <ul id="user-nav" class="hidden">
                     <li><a href="#" id="accountRef">My Account</a></li>
                     <li><a href="#/watchlists/" id="watchlistsRef">My Watchlist</a></li>
@@ -47,6 +45,7 @@
                 </ul>
             </li>
         </ul>
+        <% }; %>
     </script>
 
     <script type="text/template" id="watchlist-list-template">

@@ -4,7 +4,7 @@ var MainMenuView = Backbone.View.extend({
         _.bindAll(this, 'render');
     },
     render: function () {
-        this.$el.html(this.template({}));
+        this.$el.html(this.template({user: getCurrentUsername()}));
     },
     events: {
         "click #accountRef": "showAccount",
