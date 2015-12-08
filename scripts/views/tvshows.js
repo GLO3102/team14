@@ -22,6 +22,7 @@ var TvShowsView = Backbone.View.extend({
         return this;
     },
     searchVideoYoutube: function(title){
+
         var urlBegin = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q="';
         var urlMiddle =  title+' official trailer';
         var urlEnd = '&maxResults=1&order=viewCount&key=AIzaSyBNPujtVRFaQjnXBUMu6kvMj-S6gIiNHYk';
