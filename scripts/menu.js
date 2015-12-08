@@ -41,6 +41,10 @@ userButton.onclick = toggleUserMenu;
 var loginButton = document.getElementsByClassName("login-btn");
 loginButton.onclick = toggleUserMenu;
 
+$("#user-nav ").mouseleave(function() {
+    $("#user-nav").addClass("hidden");
+});
+
 function toggleUserMenu(even){
     var userMenu = document.getElementById("user-nav");
 
