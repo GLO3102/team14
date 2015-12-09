@@ -19,6 +19,7 @@ var TvShowsView = Backbone.View.extend({
 
         this.searchVideoYoutube(tvShowsName);
         getRecommendationList(tvShowsName, "shows");
+        getPrice(tvShowsName);
         return this;
     },
     searchVideoYoutube: function(title){
