@@ -1,6 +1,5 @@
 
-(function() {
-     ActorMovieModel = Backbone.Model.extend({
+
+   var  ActorMovieModel = Backbone.Model.extend({
 
     });
-})();

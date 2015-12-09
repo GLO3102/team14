@@ -82,6 +82,7 @@ MovieView = Backbone.View.extend({
                         var templateWatchList = _.template($("#movie-template").html());
                         self.$el.html(self.template({movie: movie,watchlists: data.toJSON()}))
                         getRecommendationList(movie.trackName, "movies");
+                        getPrice(movie.trackName);
                     }
                 })
             }
