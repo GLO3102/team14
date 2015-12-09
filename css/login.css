@@ -6,12 +6,20 @@
     max-width: 300px;
 }
 
-.badCred {
+.badCred .newSignin {
     padding-top: 20px;
 }
 
-h4 {
+#badCredText {
     color:red;
+}
+
+.red {
+    color:red;
+}
+
+.green {
+    color:green;
 }
 
 hr {

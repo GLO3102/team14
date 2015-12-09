@@ -15,27 +15,41 @@ window.onload = function(){
     if(getLoginToken() === undefined) {
         deleteAllCookies(); // just to make sure we don't have old data in username or other...
         loginButton.onclick = function() {
-            var username = document.getElementById("userEmail").value;
+            var usermail = document.getElementById("userEmail").value;
             var password = document.getElementById("userPassword").value;
 
-            console.log("u=" + username + " p=" + password);
+            login(usermail, password);
+
+        }
+
+        signinButton.onclick = function() {
+            var username = document.getElementById("newUserName").value;
+            var usermail = document.getElementById("newUserEmail").value;
+            var password = document.getElementById("newUserPassword").value;
+
+            $('#newSigninText').text("");
+
+            console.log("n=" + username + "m=" + usermail + " p=" + password);
 
             var loginInfo = {
-                email : username,
+                name : username,
+                email : usermail,
                 password : password
             };
 
             $.ajax({
                 type: "POST",
-                url: "https://umovie.herokuapp.com/login",
+                url: "https://umovie.herokuapp.com/signup",
                 data: {
-                    "email": username,
+                    "name": username,
+                    "email": usermail,
                     "password": password
                 },
                 contentType: 'application/x-www-form-urlencoded',
                 statusCode: {
                     200: function (response) {
                         console.log('200');
+                        login(usermail, password);
                     },
                     201: function (response) {
                         console.log('201');
@@ -45,33 +59,27 @@ window.onload = function(){
                     },
                     401: function (response) {
                         console.log('401');
-                        //$('#badCredentials').hide();
-                        //$('#badCredentials').show();
-                        $('#badCredText').text("The login information you entered are invalid...");
                     },
                     404: function (response) {
+                        console.log('404');
+                    },
+                    500: function (response) {
+                        $('#newSigninText').addClass("red");
+                        $('#newSigninText').text("This e-mail already exists or is invalid... please use another one.");
                         console.log('404');
                     }
                 },
                 success: function(data) {
-                    console.log("request succeeded");
+                    console.log("request signup succeeded");
                     console.log(data.token);
-
-                    if(saveToCookie(loginToken, data.token) && saveToCookie(loginUsername, username)) {
-                        window.location.replace("index.html");
-                    }
                 },
                 fail: function() {
-                    console.log("request failed");
+                    console.log("request signup failed");
                 },
                 always: function() {
-                    console.log("request always");
+                    console.log("request signup always");
                 }
             });
-        }
-
-        signinButton.onclick = function() {
-            console.log("asdfsdfasdf");
         }
     }
     else {
@@ -83,6 +91,57 @@ window.onload = function(){
         });
     }
 };
+
+function login(usermail, password) {
+    console.log("u=" + usermail + " p=" + password);
+
+    var loginInfo = {
+        email : usermail,
+        password : password
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "https://umovie.herokuapp.com/login",
+        data: {
+            "email": usermail,
+            "password": password
+        },
+        contentType: 'application/x-www-form-urlencoded',
+        statusCode: {
+            200: function (response) {
+                console.log('200');
+            },
+            201: function (response) {
+                console.log('201');
+            },
+            400: function (response) {
+                console.log('400');
+            },
+            401: function (response) {
+                console.log('401');
+                $('#badCredText').text("The login information you entered are invalid...");
+            },
+            404: function (response) {
+                console.log('404');
+            }
+        },
+        success: function(data) {
+            console.log("request login succeeded");
+            console.log(data.token);
+
+            if(saveToCookie(loginToken, data.token) && saveToCookie(loginUsername, usermail)) {
+                window.location.replace("index.html");
+            }
+        },
+        fail: function() {
+            console.log("request failed");
+        },
+        always: function() {
+            console.log("request always");
+        }
+    });
+}
 
 function deleteAllCookies() {
     $.removeCookie(loginToken);
