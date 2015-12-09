@@ -37,7 +37,6 @@ var UsersViews = Backbone.View.extend({
                     if(movies.length > 0){
                         var moviesWatchlist = new MoviesWatchListView();
                         moviesWatchlist.render(watchlistName,movies);
-
                     }
                 }
             })
