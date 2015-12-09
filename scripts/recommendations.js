@@ -31,7 +31,6 @@ var recCallbackActor = function(data) {
 var getRecommendationList = function(title, type) {
     uMovieRecTotal=0;
     var titleToSearch = prepareTitle(title);
-    console.log("title to search is:"+titleToSearch);
     var callbackMethod = "recCallback";
     if(type=="shows") {
         callbackMethod = callbackMethod + "Shows";
@@ -57,7 +56,6 @@ var getRecommendationList = function(title, type) {
 };
 
 var createUMovieRecList = function(recList, type) {
-    console.log("Simon??");
     var uMovieRecList = [];
     //for each item in recList
     var recListLength = recList.length;
@@ -71,7 +69,6 @@ var createUMovieRecList = function(recList, type) {
         } else if (type==="actor") {
             subUrl = "actors";
         }
-        console.log(recList[i].name);
         var url = "https://umovie.herokuapp.com/unsecure/search/"+subUrl+"?q="+encodeURIComponent(recList[i].name)+"&limit=1";
         //var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent("attack of the killer" +
         //        " tomatoes")+"&limit=1";
@@ -87,7 +84,6 @@ var createUMovieRecList = function(recList, type) {
 };
 
 var addResponseToList = function(uMovieRecList, response, index, recListLength, type) {
-    console.log("index="+index);
     if(response === undefined) {
         return;
     }
@@ -96,15 +92,11 @@ var addResponseToList = function(uMovieRecList, response, index, recListLength, 
     uMovieRecTotal = uMovieRecTotal+1;
     if(uMovieRecTotal===recListLength) {
         //si c'est le dernier élément, lancer la fonction d'affichage
-        console.log("here");
-        console.log(uMovieRecList);
         displayRecommendations(uMovieRecList, type);
     }
 };
 
 var displayRecommendations = function(uMovieRecList, type) {
-    console.log("display time");
-    console.log(uMovieRecList.length);
     var divtype = "movie";
     if(type==="movies") {
         divtype = "movie";
@@ -114,7 +106,6 @@ var displayRecommendations = function(uMovieRecList, type) {
     else if (type==="actor") {
         divtype = "actor";
     }
-    console.log("RECS TO DISPLAY"+uMovieRecList.length);
     if(uMovieRecList.length===0) {
         var noResDivId = divtype+"Rec1";
         $(noResDivId).text("Sorry, no recommendations found");
@@ -139,10 +130,7 @@ var displayRecommendations = function(uMovieRecList, type) {
             }
         }
         var checkdiv = "#"+divtype+"Rec1";
-        console.log(checkdiv);
-        console.log(!($(checkdiv).is(":visible")));
         if( $(checkdiv).css('display') == 'none' ) {
-            console.log("hmm?!?!");
             $(checkdiv).text("Sorry, no recommendations found");
             $(checkdiv).show();
         }
