@@ -331,12 +331,12 @@
             <h2>Friends</h2>
             <table id="friendFollowing" class="table-bordered">
                 <tbody>
-                <% user.following.forEach( function( item ){ %>
+                <% user.following.forEach( function( user ){ %>
                 <tr>
                     <td id="friendsFollowList">
-                        <a href="#"  class="list-group-item" id=<%=item.email%>><span class="glyphicon glyphicon-user"></span>  <%= item.name %></a>
+                        <a href="#"  class="list-group-item"><span class="glyphicon glyphicon-user"></span><%= user.name %></a>
                     </td>
-                    <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>><span class="glyphicon glyphicon-remove"></span></button></td>
+                    <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= user._id %>><span class="glyphicon glyphicon-remove"></span></button></td>
                 </tr>
                 <% }); %>
                 </tbody>

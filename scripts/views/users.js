@@ -90,13 +90,10 @@ var UsersViews = Backbone.View.extend({
     viewFriend: function (event) {
         var friendUser = new UsersModel;
         var root = "http://umovie.herokuapp.com/search/users?q="
-
         var nameUserFollow = event.target.innerHTML;
         nameUserFollow = nameUserFollow.slice(46,nameUserFollow.length);
-        console.log(nameUserFollow);
         friendUser.urlRoot = root + nameUserFollow;
-
-        friendUser.fetch({
+   friendUser.fetch({
             beforeSend: setHeader,
             success: function (data) {
                 var resultsSearch = data.toJSON();
@@ -144,7 +141,7 @@ var UsersViews = Backbone.View.extend({
         })
     },
     deleteFriendAccount: function(event){
-        var idFriend = event.target.id;
+        var idFriend = event.currentTarget.id;
         this.deleteFriendOnServer(this,idFriend);
     },
     searchIdFollowUser: function(currentUser,followArray){
@@ -164,8 +161,21 @@ var UsersViews = Backbone.View.extend({
             contentType: "application/json",
             beforeSend: setHeader,
             success: function (data, textStatus, jqXHR) {
-                that.model.fetch();
-                router.navigate("user/"+that.userId, {trigger: true})
+                that.refreshModelAfterDelete(that)
+            }
+        })
+    },
+    refreshModelAfterDelete: function(userCurrent){
+        var self = userCurrent;
+        var userChanged =new UsersModel();
+        var rootUrl="http://umovie.herokuapp.com/users"
+        userChanged.urlRoot = rootUrl+"/"+userCurrent.userId;
+        userCurrent.model = userChanged;
+        userChanged.fetch({
+            beforeSend: setHeader,
+            success: function(){
+                var options = {'id': ""};
+                self.render(options);
             }
         })
     },
@@ -204,9 +214,6 @@ var UsersViews = Backbone.View.extend({
         watchlists.models = watchlistsAccount;
     },
     viewWatchlistDetails: function(event) {
-        console.log(event);
-        console.log($(this));
-
         var idWatchListTarget = event.target.id;
         var options = {'id': idWatchListTarget};
         this.render(options);
