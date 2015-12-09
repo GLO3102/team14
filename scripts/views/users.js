@@ -1,7 +1,7 @@
 /**
  * Created by Sebastien on 2015-11-17.
  */
-    var MoviesWatchListView = Backbone.View.extend({
+var MoviesWatchListView = Backbone.View.extend({
         template: _.template($("#user-watchlist-movies").html()),
         el:".pageUser",
         render: function(watchlistName,movies){
@@ -34,8 +34,11 @@ var UsersViews = Backbone.View.extend({
                     var watchlistJSon = data.toJSON();
                     var watchlistName = watchlistJSon.name;
                     var movies = watchlistJSon.movies;
-                    var moviesWatchlist = new MoviesWatchListView();
-                    moviesWatchlist.render(watchlistName,movies);
+                    if(movies.length > 0){
+                        var moviesWatchlist = new MoviesWatchListView();
+                        moviesWatchlist.render(watchlistName,movies);
+
+                    }
                 }
             })
         }
@@ -47,11 +50,15 @@ var UsersViews = Backbone.View.extend({
                 beforeSend:setHeader,
                 success: function() {
                     that.getWatchListAccounnt(that, watchlists);
-                    var test = watchlists.toJSON();
-
+                    var watchlistArray = watchlists.toJSON();
+                    if(watchlists.length == 0)
+                    {
+                        watchlistArray = "";
+                    }
                     that.$el.html(that.template({
-                        user: that.model.toJSON(), 'watchlists': watchlists.toJSON()
+                        user: that.model.toJSON(), 'watchlists': watchlistArray
                     }));
+
                     $("#followUserButton").hide()
                     $("#stopFollowUserButton").hide();
                     $(".eraseButton").hide();
@@ -86,6 +93,7 @@ var UsersViews = Backbone.View.extend({
     viewFriend: function (event) {
         var friendUser = new UsersModel;
         var root = "http://umovie.herokuapp.com/search/users?q="
+        console.log(event.target);
         var nameUserFollow = event.target.innerHTML;
         friendUser.urlRoot = root + nameUserFollow;
 
@@ -110,8 +118,7 @@ var UsersViews = Backbone.View.extend({
         })
     },
     addFriend: function (event) {
-        FollowUser(this.model.id);
-        /*var friend = {"id": this.model.id};
+        var friend = {"id": this.model.id};
         var that  = this;
         $.ajax({
             type: "POST",
@@ -122,7 +129,7 @@ var UsersViews = Backbone.View.extend({
             success: function (data, textStatus, jqXHR) {
                 router.navigate("user/"+that.userId, {trigger: true})
             }
-        });*/
+        });
     },
     deleteFriendFollow: function (event) {
         var id = this.model.attributes.id;
@@ -165,7 +172,7 @@ var UsersViews = Backbone.View.extend({
     },
     searchFriendOnAccountFollow: function(nameFriend){
         var accountUser = new UsersModel;
-     accountUser.urlRoot = "http://umovie.herokuapp.com/users" + "/" + this.userId;
+        accountUser.urlRoot = "http://umovie.herokuapp.com/users" + "/" + this.userId;
         accountUser.fetch({
             beforeSend: setHeader,
             success: function(data){
@@ -208,19 +215,3 @@ var UsersViews = Backbone.View.extend({
 
     }
 })
-
-function FollowUser(userId)
-{
-    var userInfo = {"id": userId};
-
-    $.ajax({
-        type: "POST",
-        url: "http://umovie.herokuapp.com/follow",
-        data: JSON.stringify(userInfo),
-        contentType: "application/json",
-        beforeSend: setHeader,
-        success: function (data, textStatus, jqXHR) {
-            router.navigate("user/" + getCurrentUserId(), {trigger: true})
-        }
-    });
-}

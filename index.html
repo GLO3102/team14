@@ -55,7 +55,7 @@
         <!-- <hr /> -->
         <div class="list-group">
             <% watchlists.each( function( list ){ %>
-                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><%= list.get("name") %></a>
+                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span class="glyphicon glyphicon-film"></span><%= list.get("name") %></a>
             <% }); %>
         </div>
         <div class="container">
@@ -304,51 +304,60 @@
         </ol>
     </script>
     <script id="user-watchlist-movies" type="text/template">
-        <h2>List of movies of <%= watchlistName %></h2>
+        <h2><%= watchlistName %></h2>
         <% movies.forEach(function(movie) {%>
-        <div id="Films" class="moviesWatchListUser">
-        <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
+        <div id="Films" class="moviesWatchListUser container">
+            <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
         </div>
         <% }); %>
     </script>
     <script id="user-tpl" type="text/template">
-        <div>
-            <p><strong>Name: </strong><span><%= user.name%></span></p>
-            <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
-        </div>
-        <% if(user.following) { %>
-        <table id="friendFollowing">
-            <tbody>
-            <% user.following.forEach( function( item ){ %>
+        <div class="container">
+            <div  class="container">
+                <p><strong>Name: </strong><span><%= user.name%></span></p>
+                <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
+            </div>
+
+            <% if(user.following) { %>
+            <table id="friendFollowing" >
+                <tbody>
+                <% user.following.forEach( function( item ){ %>
                 <tr>
-                    <td id="friendsFollowList" class="list-group-item" > <a href="#"><%= item.name %></a></td>
-                    <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>>X</button></td>
-                </tr>
-            <% }); %>
-            <tr>
-                <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
-                <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
-            </tr>
-            </tbody>
-        </table>
-        <table  >
-            <tbody>
-                <tr>
-                    <td width="20%">
-                        <div class="watchlist-list">
-                            <h2>List of watchlists</h2>
-                            <% watchlists.forEach( function( list ){ %>
-                            <a class="list-group-item" id=<%= list.id %>><%= list.name %></a>
-                            <% }); %>
-                        </div>
+                    <td id="friendsFollowList">
+                        <a href="#"  class="list-group-item" id=<%=item.name%>><%= item.name %></a>
                     </td>
-                    <td width="80%">
+                    <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>><span class="glyphicon glyphicon-remove"></span></button></td>
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+            <% if(watchlists) { %>
+            <h2>List of watchlists</h2>
+
+            <table  class="table-condensed" >
+                <tbody>
+                <tr>
+                        <div class="watchlist-list ">
+                            <% watchlists.forEach( function( list ){ %>
+                            <a class="list-group-item" id=<%= list.id %>>
+                                <span class="glyphicon glyphicon-film"></span>   <%= list.name %><span class="badge"><%= list.movies.length %></span>
+                            </a>
+
+                            <% }); %>
+                    <td >
                         <div class="pageUser"></div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-        <% }; %>
+                </tbody>
+            </table>
+            <% }; %>
+            <% } %>
+            <div class="container"  id="buttonFollowContainer">
+                <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
+                <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
+            </div>
+        </div>
+
     </script>
     <script id="movies-result-tpl" type="text/template">
         <ul id="movieResultsList">
