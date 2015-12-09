@@ -354,7 +354,7 @@
         <ul id="movieResultsList">
             <% _.each(movieResults, function(result) { %>
             <li>
-                <span><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
+                <span class="movieSearchResultLine"><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
             </li>
             <% }); %>
         </ul>
@@ -381,7 +381,7 @@
         <ul id="usersResultsList">
             <% _.each(usersResults, function(result) { %>
             <li>
-                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %></span>
+                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %><button onclick="FollowUser('<%= result.id %>');">Follow user</button></span>
             </li>
             <% }); %>
         </ul>

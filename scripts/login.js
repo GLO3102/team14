@@ -4,6 +4,7 @@
 
 var loginToken = "umovieToken";
 var loginUsername = "umovieUsername";
+var loginUserId = "umovieUserId";
 
 window.onload = function(){
     console.log("on load called");
@@ -130,7 +131,7 @@ function login(usermail, password) {
             console.log("request login succeeded");
             console.log(data.token);
 
-            if(saveToCookie(loginToken, data.token) && saveToCookie(loginUsername, usermail)) {
+            if(saveToCookie(loginToken, data.token) && saveToCookie(loginUsername, usermail) && saveToCookie(loginUserId, data.id)) {
                 window.location.replace("index.html");
             }
         },
@@ -146,6 +147,7 @@ function login(usermail, password) {
 function deleteAllCookies() {
     $.removeCookie(loginToken);
     $.removeCookie(loginUsername);
+    $.removeCookie(loginUserId);
 }
 
 function getLoginToken () {
@@ -155,6 +157,11 @@ function getLoginToken () {
 
 function getCurrentUsername() {
     var cookie = $.cookie(loginUsername);
+    return cookie;
+}
+
+function getCurrentUserId() {
+    var cookie = $.cookie(loginUserId);
     return cookie;
 }
 
