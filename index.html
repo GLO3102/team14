@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 
 </head>
 <body>
@@ -32,7 +33,7 @@
             <li class="desktop-hidden"><button id="bar-btn" ><i class="fa fa-bars"></i></button>
                 <ul id="bar-nav" class="hidden">
                     <li  class="tablet-hidden mobile-visible"><input  type="text" placeholder="Search ..."/><button ><i class="fa fa-search"></i></button></li>
-                    <li><a href="#" id="accountRef">My Account (userName)</a></li>
+                    <li><a href="#" id="accountRef">My Account</a></li>
                     <li><a href="#/watchlists/" id="watchlistsRef">My Watchlist</a></li>
                     <li><a href="#/logout/" id="logout">Log out</a></li>
                 </ul>
@@ -353,7 +354,7 @@
         <ul id="movieResultsList">
             <% _.each(movieResults, function(result) { %>
             <li>
-                <span><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
+                <span class="movieSearchResultLine"><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
             </li>
             <% }); %>
         </ul>
@@ -380,7 +381,7 @@
         <ul id="usersResultsList">
             <% _.each(usersResults, function(result) { %>
             <li>
-                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %></span>
+                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %><button onclick="FollowUser('<%= result.id %>');">Follow user</button></span>
             </li>
             <% }); %>
         </ul>

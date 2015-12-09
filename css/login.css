@@ -1,0 +1,32 @@
+#login-form {
+    max-width: 300px;
+}
+
+#signin-form {
+    max-width: 300px;
+}
+
+.badCred .newSignin {
+    padding-top: 20px;
+}
+
+#badCredText {
+    color:red;
+}
+
+.red {
+    color:red;
+}
+
+.green {
+    color:green;
+}
+
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color:black;
+    height: 1px;
+}

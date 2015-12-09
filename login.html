@@ -1,3 +1,5 @@
+
+
     <h1>Login</h1>
     <form id="login-form">
         <div class="form-group">
@@ -10,5 +12,32 @@
         </div>
         <button type="button" class="btn btn-primary" id="loginButton">Login</button>
     </form>
+
+    <div class="badCred" id="badCredentials">
+        <h4 id="badCredText"></h4>
+    </div>
+
+    <hr>
+
+    <h1>Sign In</h1>
+    <form id="signin-form">
+        <div class="form-group">
+            <label for="newUserName">Name</label>
+            <input type="name" class="form-control" id="newUserName" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="newUserEmail">Email address</label>
+            <input type="email" class="form-control" id="newUserEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="newUserPassword">Password</label>
+            <input type="password" class="form-control" id="newUserPassword" placeholder="Password">
+        </div>
+        <button type="button" class="btn btn-primary" id="signinButton">Sign In</button>
+    </form>
+
+    <div class="newSignin">
+        <h4 id="newSigninText"></h4>
+    </div>
 
     <script type="text/javascript" src="scripts/login.js"></script>

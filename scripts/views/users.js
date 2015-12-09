@@ -110,7 +110,8 @@ var UsersViews = Backbone.View.extend({
         })
     },
     addFriend: function (event) {
-        var friend = {"id": this.model.id};
+        FollowUser(this.model.id);
+        /*var friend = {"id": this.model.id};
         var that  = this;
         $.ajax({
             type: "POST",
@@ -121,7 +122,7 @@ var UsersViews = Backbone.View.extend({
             success: function (data, textStatus, jqXHR) {
                 router.navigate("user/"+that.userId, {trigger: true})
             }
-        });
+        });*/
     },
     deleteFriendFollow: function (event) {
         var id = this.model.attributes.id;
@@ -207,3 +208,19 @@ var UsersViews = Backbone.View.extend({
 
     }
 })
+
+function FollowUser(userId)
+{
+    var userInfo = {"id": userId};
+
+    $.ajax({
+        type: "POST",
+        url: "http://umovie.herokuapp.com/follow",
+        data: JSON.stringify(userInfo),
+        contentType: "application/json",
+        beforeSend: setHeader,
+        success: function (data, textStatus, jqXHR) {
+            router.navigate("user/" + getCurrentUserId(), {trigger: true})
+        }
+    });
+}

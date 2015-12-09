@@ -120,7 +120,6 @@ router.on('route:users', function(id){
         success: function(){
             var options = {'id': ""};
             userView.render(options);
-
         }
     })
 });

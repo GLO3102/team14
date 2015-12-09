@@ -41,6 +41,10 @@ userButton.onclick = toggleUserMenu;
 var loginButton = document.getElementsByClassName("login-btn");
 loginButton.onclick = toggleUserMenu;
 
+$("#user-nav ").mouseleave(function() {
+    $("#user-nav").addClass("hidden");
+});
+
 function toggleUserMenu(even){
     var userMenu = document.getElementById("user-nav");
 
@@ -77,32 +81,50 @@ function LoadSearchResults()
     }).done(function(){
         searchFiltersCategories = [];
 
-        var moviesSRCollection =  new MoviesSearchResultCollection({});
-        moviesSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/movies?q=' + $('#SearchCriteria').val();
-        var moviesSRView = new MoviesSearchResultView({
-            collection: moviesSRCollection
-        });
-        moviesSRCollection.fetch({
-            success: function (model, response) {
-                moviesSRView.render();
 
-                var results = JSON.parse(JSON.stringify(moviesSRView.collection))[0].results;
+        var watchListMovie = new Watchlists;
+        watchListMovie.initialize(getCurrentUserId());
+        watchListMovie.fetch({
+            beforeSend: setHeader,
+            success: function (data){
 
-                moviesSearchResults = results;
+                var watchlists = $('<select />');
+                var dataArray = JSON.parse(JSON.stringify(data));
 
-                for(var i=0; i < results.length; ++i)
-                {
-                    var genre = results[i].primaryGenreName;
-                    var index = searchFiltersCategories.indexOf(genre);
-                    if (index === -1)
-                    {
-                        searchFiltersCategories.push(genre);
-                        $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
-                    }
+                for(var i=0; i < dataArray.length; ++i) {
+                    $('<option />', {value: dataArray[i].id, text: dataArray[i].name}).appendTo(watchlists);
                 }
-            },
-            error: function (model, response) {
-                console.log("error");
+
+                var moviesSRCollection =  new MoviesSearchResultCollection({});
+                moviesSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/movies?q=' + $('#SearchCriteria').val();
+                var moviesSRView = new MoviesSearchResultView({
+                    collection: moviesSRCollection
+                });
+                moviesSRCollection.fetch({
+                    success: function (model, response) {
+                        moviesSRView.render();
+
+                        $(".movieSearchResultLine").append(watchlists);
+
+                        var results = JSON.parse(JSON.stringify(moviesSRView.collection))[0].results;
+
+                        moviesSearchResults = results;
+
+                        for(var i=0; i < results.length; ++i)
+                        {
+                            var genre = results[i].primaryGenreName;
+                            var index = searchFiltersCategories.indexOf(genre);
+                            if (index === -1)
+                            {
+                                searchFiltersCategories.push(genre);
+                                $('#SearchFilters').append('<li><input type=\"checkbox\" id=\"' + genre + '\" class=\"SearchFilter\" onclick=\"ApplySearchFilter(this);\">' + genre + '</li>');
+                            }
+                        }
+                    },
+                    error: function (model, response) {
+                        console.log("error");
+                    }
+                });
             }
         });
 
