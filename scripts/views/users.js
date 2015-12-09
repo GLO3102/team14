@@ -49,12 +49,15 @@ var UsersViews = Backbone.View.extend({
             watchlists.fetch( {
                 beforeSend:setHeader,
                 success: function() {
-                    that.getWatchListAccounnt(that, watchlists);
+                    that.getWatchListAccount(that, watchlists);
                     var watchlistArray = watchlists.toJSON();
                     if(watchlists.length == 0)
                     {
                         watchlistArray = "";
                     }
+                    console.log("****************************");
+                    console.log(watchlistArray);
+                    console.log("****************************");
                     that.$el.html(that.template({
                         user: that.model.toJSON(), 'watchlists': watchlistArray
                     }));
@@ -77,10 +80,7 @@ var UsersViews = Backbone.View.extend({
                     })
                 }
             })
-
-
         }
-
     },
     events: {
         "click #friendsFollowList": "viewFriend",
@@ -193,7 +193,7 @@ var UsersViews = Backbone.View.extend({
             }
         })
     },
-    getWatchListAccounnt: function(that,watchlists){
+    getWatchListAccount: function(that,watchlists){
         var modelsArray = watchlists.models;
         var watchlistsAccount = []
         modelsArray.forEach(function(watchlist){
@@ -206,6 +206,9 @@ var UsersViews = Backbone.View.extend({
         watchlists.models = watchlistsAccount;
     },
     viewWatchlistDetails: function(event) {
+        console.log(event);
+        console.log($(this));
+
         var idWatchListTarget = event.target.id;
         var options = {'id': idWatchListTarget};
         this.render(options);

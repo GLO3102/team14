@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/user.css">
 
 </head>
 <body>
@@ -304,22 +305,26 @@
         </ol>
     </script>
     <script id="user-watchlist-movies" type="text/template">
-        <h2><%= watchlistName %></h2>
+        <div id="Films" class="moviesWatchListUser">
         <% movies.forEach(function(movie) {%>
-        <div id="Films" class="moviesWatchListUser container">
             <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
         </div>
         <% }); %>
     </script>
-    <script id="user-tpl" type="text/template">
-        <div class="container">
-            <div  class="container">
-                <p><strong>Name: </strong><span><%= user.name%></span></p>
-                <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
-            </div>
 
-            <% if(user.following) { %>
-            <table id="friendFollowing" >
+    <script id="user-tpl" type="text/template">
+        <div   id="button-follow-container">
+            <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
+            <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
+        </div>
+        <div id="user-data" class="container">
+            <p><strong>Name: </strong><span><%= user.name%></span></p>
+            <p><strong>Email: </strong> <a href="mailto:#"><%= user.email %></a></p>
+        </div>
+        <% if(user.following.length > 0) { %>
+        <div id="friends-container">
+            <h2>Friends</h2>
+            <table id="friendFollowing" class="table-bordered">
                 <tbody>
                 <% user.following.forEach( function( item ){ %>
                 <tr>
@@ -331,33 +336,28 @@
                 <% }); %>
                 </tbody>
             </table>
-            <% if(watchlists) { %>
-            <h2>List of watchlists</h2>
-
-            <table  class="table-condensed" >
-                <tbody>
-                <tr>
+        </div>
+        <% } %>
+        <% if(watchlists) { %>
+        <div id="watchlist-container" >
+            <h2>Watchlist</h2>
+            <div id="watchlist-table" >
+                <table  class="table-striped" >
+                    <tbody>
+                    <tr>
                         <div class="watchlist-list ">
                             <% watchlists.forEach( function( list ){ %>
                             <a class="list-group-item" id=<%= list.id %>>
                                 <span class="glyphicon glyphicon-film"></span>   <%= list.name %><span class="badge"><%= list.movies.length %></span>
                             </a>
-
                             <% }); %>
-                    <td >
-                        <div class="pageUser"></div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <% }; %>
-            <% } %>
-            <div class="container"  id="buttonFollowContainer">
-                <div><button id="followUserButton" class="btn btn-primary">follow</button></div>
-                <div><button id="stopFollowUserButton" class="btn btn-primary">Stop follow</button></div>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+            <div id="watchList-details" class="pageUser"></div>
+            <% }; %>
         </div>
-
     </script>
     <script id="movies-result-tpl" type="text/template">
         <ul id="movieResultsList">

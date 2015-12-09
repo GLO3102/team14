@@ -1,0 +1,41 @@
+
+#button-follow-container{
+    margin-top: 75px;
+    overflow:hidden;
+}
+#user-data{
+    margin-top: 25px;
+    left: 0;
+    overflow:hidden;
+
+}
+#friends-container{
+    margin-top: 25px;
+}
+
+#friendFollowing{
+    width: 300px;
+}
+
+#watchlist-container{
+    margin:0;
+}
+#watchlist-table{
+    top: 0;
+    float: left;
+    width:20%;
+    margin-right: 50px;
+    overflow:hidden;
+
+}
+#watchList-details{
+    float:left;
+    text-align: left;
+    width:40%;
+    overflow:hidden;
+}
+
+
+.pageUser{
+    text-align: left;
+}
