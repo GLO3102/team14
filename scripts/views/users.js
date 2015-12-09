@@ -55,9 +55,6 @@ var UsersViews = Backbone.View.extend({
                     {
                         watchlistArray = "";
                     }
-                    console.log("****************************");
-                    console.log(watchlistArray);
-                    console.log("****************************");
                     that.$el.html(that.template({
                         user: that.model.toJSON(), 'watchlists': watchlistArray
                     }));
@@ -93,15 +90,17 @@ var UsersViews = Backbone.View.extend({
     viewFriend: function (event) {
         var friendUser = new UsersModel;
         var root = "http://umovie.herokuapp.com/search/users?q="
-        console.log(event.target);
+
         var nameUserFollow = event.target.innerHTML;
+        nameUserFollow = nameUserFollow.slice(46,nameUserFollow.length);
+        console.log(nameUserFollow);
         friendUser.urlRoot = root + nameUserFollow;
 
         friendUser.fetch({
             beforeSend: setHeader,
             success: function (data) {
                 var resultsSearch = data.toJSON();
-                var found = false
+                var found = false;
                 var index = 0;
                 var idFollowUser;
                 while(!found){
@@ -185,7 +184,6 @@ var UsersViews = Backbone.View.extend({
                 })
                 if(result){
                     $("#stopFollowUserButton").show();
-
                 }
                 else{
                     $("#followUserButton").show();

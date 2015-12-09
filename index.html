@@ -56,7 +56,7 @@
         <!-- <hr /> -->
         <div class="list-group">
             <% watchlists.each( function( list ){ %>
-                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span class="glyphicon glyphicon-film"></span><%= list.get("name") %></a>
+                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span class="glyphicon glyphicon-film"></span>   <%= list.get("name") %></a>
             <% }); %>
         </div>
         <div class="container">
@@ -101,7 +101,7 @@
         <%= watchlist ? '<button class="addMovieToWL btn btn-primary">Add Movie to Watchlist</button>' : ''%>
         <button class="addSubmit btn btn-primary">Submit</button>
         <% if(watchlist) { %>
-            <button class="btn btn-delete delete">Delete</button>
+            <button class="btn btn-delete delete">Delete watchlist</button>
         <% }; %>
         <div id="watchlistSearchContainer" style="display:none">
             <textarea id="watchlistMovieSearch" cols="50" rows="1"
@@ -306,10 +306,15 @@
     </script>
     <script id="user-watchlist-movies" type="text/template">
         <div id="Films" class="moviesWatchListUser">
-        <% movies.forEach(function(movie) {%>
-            <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
+            <ul>
+                <% movies.forEach(function(movie) {%>
+                <li>
+                    <a  id=<%=movie.trackId %>><%= movie.trackName %></a>
+                </li>
+                <% }); %>
+            </ul>
+
         </div>
-        <% }); %>
     </script>
 
     <script id="user-tpl" type="text/template">
@@ -329,7 +334,7 @@
                 <% user.following.forEach( function( item ){ %>
                 <tr>
                     <td id="friendsFollowList">
-                        <a href="#"  class="list-group-item" id=<%=item.name%>><%= item.name %></a>
+                        <a href="#"  class="list-group-item" id=<%=item.email%>><span class="glyphicon glyphicon-user"></span>  <%= item.name %></a>
                     </td>
                     <td class="eraseButton"><button class="btn-xs btn-danger deleteMovieFromWL"id=<%= item._id %>><span class="glyphicon glyphicon-remove"></span></button></td>
                 </tr>
@@ -348,7 +353,7 @@
                         <div class="watchlist-list ">
                             <% watchlists.forEach( function( list ){ %>
                             <a class="list-group-item" id=<%= list.id %>>
-                                <span class="glyphicon glyphicon-film"></span>   <%= list.name %><span class="badge"><%= list.movies.length %></span>
+                                <span class="glyphicon glyphicon-film"></span>  <%= list.name %><span class="badge"><%= list.movies.length %></span>
                             </a>
                             <% }); %>
                     </tr>
@@ -387,7 +392,7 @@
         </ul>
     </script>
     <script id="users-result-tpl" type="text/template">
-        <ul id="usersResultsList">
+        <ul id="ussResultsList">
             <% _.each(usersResults, function(result) { %>
             <li>
                 <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %><button onclick="FollowUser('<%= result.id %>');">Follow user</button></span>
