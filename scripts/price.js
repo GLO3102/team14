@@ -14,6 +14,17 @@ var priceFunction = function(data, type) {
     var result = data.items[0];
     var resultProductUrl = result.productUrl;
     var resultPrice = result.salePrice;
+    console.log(type);
+    if(type==="Movie") {
+        $("#walmartMovieButton").attr("href", resultProductUrl);
+        $("#walmartMoviePrice").text(resultPrice);
+    }
+    else if (type==="Show") {
+        console.log(resultProductUrl);
+        $("#walmartShowButton").attr("href", resultProductUrl);
+        $("#walmartShowPrice").text(resultPrice);
+    }
+
 };
 
 
@@ -31,7 +42,7 @@ var getPrice = function(name, type) {
     //http://api.walmartlabs.com/v1/search?query=ipod&format=json&apiKey=ekvw4ff7kantjdwufr892nqu
     $.ajax({
         type: 'GET',
-        jsonpCallback: 'priceFunction',
+        jsonpCallback: callbackFunction,
         url: url,
         async: false,
         contentType: 'application/json',
