@@ -1,7 +1,7 @@
 
 #button-follow-container{
-    margin-top: 75px;
-    overflow:hidden;
+    margin-top: 20px;
+    float: right;
 }
 #user-data{
     margin-top: 25px;
