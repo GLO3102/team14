@@ -181,12 +181,21 @@
                     <p><strong>Rating:</strong><span>    <%= movie.contentAdvisoryRating%></span></p>
                 </div>
                 <div>
-                    <span><a  class="btn-itunes" href="<%= movie.trackViewUrl %>"></a></span>
+                    <div id="iTunesPriceContainer">
+                    <span><a  class="btn-itunes" href="<%= movie.trackViewUrl %>"></a><span id="iTunesPrice"><b><%=
+                        movie.trackPrice   %></b></span></span>
+                    </div>
+                    <div id="walmartMoviePriceContainer">
+                    <span><a  id="walmartMovieButton"
+                              href=""><img src="images/walmart.png" width="165" height="40"></a><b><span
+                            id="walmartMoviePrice"></span></b></span>
+                    </div>
                 </div>
+                <hr>
                 <div><button id="btnAddWatchList" class="btn btn-primary">Add to the watchList</button>
                     <select id="menuWatchlistMovie">
                         <% _.each(watchlists, function(list) { %>
-                        <option value=<%= list.id %>><%= list.name %></option>
+                            <option value=<%= list.id %>><%= list.name %></option>
                         <% });%>
                     </select>
                 </div>
@@ -212,7 +221,15 @@
         <div class="infos">
             <p><strong>Genre:</strong> <span><%= result.primaryGenreName %></span></p>
             <p><strong>Release date:</strong> <span><%= result.releaseDate%></span></p>
-            <p><span><a class="btn-itunes" href="<%= result.collectionViewUrl %>">View in Itunes</a></span></p>
+            <div id="iTunesShowPriceContainer">
+                <span><a class="btn-itunes" href="<%= result.collectionViewUrl %>">View in Itunes</a></span>
+                <b><span id="iTunesShowPrice"> <%= result.collectionPrice %> </span></b>
+            </div>
+            <div id="walmartShowPriceContainer">
+                <span><a id="walmartShowButton" href=""><img src="images/walmart.png" height="40" width="165"></a></span>
+                <b><span id="walmartShowPrice"></span></b>
+            </div>
+
         </div>
         <div class="coverPhoto col-md-2">
             <img src="<%= result.artworkUrl100 %>" />
