@@ -68,7 +68,6 @@ MovieView = Backbone.View.extend({
         } );
     },
     getWatchlitsForAddWatchistButton: function(movie){
-        console.log("before call to getRecList");
         self = this;
         var userInfo = new  InfosTokenModel();
         userInfo.fetch({
