@@ -5,6 +5,9 @@ var MoviesWatchListView = Backbone.View.extend({
         template: _.template($("#user-watchlist-movies").html()),
         el:".pageUser",
         render: function(watchlistName,movies){
+            console.log("***************************")
+            console.log(movies);
+            console.log("***************************")
             this.$el.html(this.template({watchlistName: watchlistName, movies: movies}))
 
         }
@@ -26,20 +29,7 @@ var UsersViews = Backbone.View.extend({
     },
     render: function (options) {
         if(options.id){
-            var watchlistTarget = new Watchlist;
-            watchlistTarget.urlRoot = "http://umovie.herokuapp.com/watchlists/"+ event.target.id;
-            watchlistTarget.fetch({
-                beforeSend: setHeader,
-                success: function(data){
-                    var watchlistJSon = data.toJSON();
-                    var watchlistName = watchlistJSon.name;
-                    var movies = watchlistJSon.movies;
-                    if(movies.length > 0){
-                        var moviesWatchlist = new MoviesWatchListView();
-                        moviesWatchlist.render(watchlistName,movies);
-                    }
-                }
-            })
+           this.showMoviesWatchlist(event.target.id);
         }
         else{
             var watchlists = new Watchlists();
@@ -78,6 +68,23 @@ var UsersViews = Backbone.View.extend({
             })
         }
     },
+    showMoviesWatchlist: function(watchlistId){
+        var watchlistTarget = new Watchlist;
+        watchlistTarget.urlRoot = "http://umovie.herokuapp.com/watchlists/"+ watchlistId;
+        watchlistTarget.fetch({
+            beforeSend: setHeader,
+            success: function(data){
+                var watchlistJSon = data.toJSON();
+                var watchlistName = watchlistJSon.name;
+                var movies = watchlistJSon.movies;
+                if(movies.length > 0){
+                    var moviesWatchlist = new MoviesWatchListView();
+                    moviesWatchlist.render(watchlistName,movies);
+                }
+            }
+        })
+
+    },
     events: {
         "click #friendsFollowList": "viewFriend",
         "click #followUserButton": "addFriend",
@@ -90,27 +97,30 @@ var UsersViews = Backbone.View.extend({
         var friendUser = new UsersModel;
         var root = "http://umovie.herokuapp.com/search/users?q="
         var nameUserFollow = event.target.innerHTML;
-        nameUserFollow = nameUserFollow.slice(46,nameUserFollow.length);
-        friendUser.urlRoot = root + nameUserFollow;
-   friendUser.fetch({
-            beforeSend: setHeader,
-            success: function (data) {
-                var resultsSearch = data.toJSON();
-                var found = false;
-                var index = 0;
-                var idFollowUser;
-                while(!found){
-                    if(resultsSearch[index].name === nameUserFollow){
-                        idFollowUser = resultsSearch[index].id;
-                        found = true;
+        if(nameUserFollow){
+            nameUserFollow = nameUserFollow.slice(46,nameUserFollow.length);
+            friendUser.urlRoot = root + nameUserFollow;
+            friendUser.fetch({
+                beforeSend: setHeader,
+                success: function (data) {
+                    var resultsSearch = data.toJSON();
+                    var found = false;
+                    var index = 0;
+                    var idFollowUser;
+                    while(!found){
+                        if(resultsSearch[index].name === nameUserFollow){
+                            idFollowUser = resultsSearch[index].id;
+                            found = true;
+                        }
+                        else{
+                            index++;
+                        }
                     }
-                    else{
-                        index++;
-                    }
+                    router.navigate("/user/"+ idFollowUser, {trigger: true})
                 }
-                router.navigate("/user/"+ idFollowUser, {trigger: true})
-            }
-        })
+            })
+        }
+
     },
     addFriend: function (event) {
         var friend = {"id": this.model.id};
