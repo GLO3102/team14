@@ -16,68 +16,18 @@ body {
 button{
     margin-left: 5%;
 }
-movie h2 {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-}
 
-movie h3 {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-movie p {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-movie a:link {
-    color:green;
-    background-color:transparent;
-    text-decoration:none;
-}
-
-movie a:visited {
-    color: black;
-    background-color:transparent;
-    text-decoration:none;
-}
-
-movie a:hover {
-    color: grey;
-    background-color:transparent;
-    text-decoration:underline;
-}
-
-movie a:active {
-    color: grey;
-    background-color:transparent;
-    text-decoration:underline;
-}
-
-movie .movieInfosContainer {
+.movieInfosContainer {
     display: inline-block;
     margin-bottom: 20px;
 }
 
-movie .description {
-    display: inline-block;
-    vertical-align:top;
-}
 
-movie .rating {
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-movie div.actorsList li {
+div.actorsList li {
     color: black;
 }
 
-movie .movieLink
+.movieLink
 {
     float: right;
 }
