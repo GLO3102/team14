@@ -11,7 +11,7 @@ var WatchlistListView = Backbone.View.extend({
         watchlists.fetch( {
             beforeSend: setHeader,
             success: function() {
-                that.$el.html( that.template( { 'watchlists': watchlists } ) );
+                that.$el.html( that.template( { 'watchlists': watchlists.toJSON() } ) );
             }
         })
 

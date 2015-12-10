@@ -5,11 +5,7 @@ var MoviesWatchListView = Backbone.View.extend({
         template: _.template($("#user-watchlist-movies").html()),
         el:".pageUser",
         render: function(watchlistName,movies){
-            console.log("***************************")
-            console.log(movies);
-            console.log("***************************")
             this.$el.html(this.template({watchlistName: watchlistName, movies: movies}))
-
         }
     }
 )
@@ -32,41 +28,28 @@ var UsersViews = Backbone.View.extend({
            this.showMoviesWatchlist(event.target.id);
         }
         else{
-            var watchlists = new Watchlists();
-            watchlists.initialize(this.model.id)
-            var that = this;
-            watchlists.fetch( {
-                beforeSend:setHeader,
-                success: function() {
-                    that.getWatchListAccount(that, watchlists);
-                    var watchlistArray = watchlists.toJSON();
-                    if(watchlists.length == 0)
-                    {
-                        watchlistArray = "";
-                    }
-                    that.$el.html(that.template({
-                        user: that.model.toJSON(), 'watchlists': watchlistArray
-                    }));
-
-                    $("#followUserButton").hide()
-                    $("#stopFollowUserButton").hide();
-                    $(".eraseButton").hide();
-                    var infoTokenModel = new InfosTokenModel();
-                    infoTokenModel.fetch({
-                        beforeSend: setHeader,
-                        success: function(data){
-                            that.userId = data.id;
-                            if (that.model.id === data.id) {
-                                $(".eraseButton").show()
-                            }
-                            else {
-                                that.searchFriendOnAccountFollow(that.model.attributes.name);
-                            }
-                        }
-                    })
-                }
-            })
+            this.showUserData(this);
         }
+    },
+    showUserData:function(userView){
+        var watchlists = new Watchlists();
+        watchlists.initialize(userView.model.id)
+        var self = userView;
+        watchlists.fetch( {
+            beforeSend:setHeader,
+            success: function() {
+                self.getWatchListAccount(self, watchlists);
+                var watchlistArray = watchlists.toJSON();
+                if(watchlists.length == 0) {
+                    watchlistArray = "";
+                }
+                self.$el.html(self.template({
+                    user: self.model.toJSON(), 'watchlists': watchlistArray
+                }));
+                self.hideButtons();
+                self.checkCurrentUserInfos(self);
+            }
+        })
     },
     showMoviesWatchlist: function(watchlistId){
         var watchlistTarget = new Watchlist;
@@ -80,6 +63,28 @@ var UsersViews = Backbone.View.extend({
                 if(movies.length > 0){
                     var moviesWatchlist = new MoviesWatchListView();
                     moviesWatchlist.render(watchlistName,movies);
+                }
+            }
+        })
+
+    },
+    hideButtons: function(){
+        $("#followUserButton").hide()
+        $("#stopFollowUserButton").hide();
+        $(".eraseButton").hide();
+    },
+    checkCurrentUserInfos: function(userView){
+
+        var infoTokenModel = new InfosTokenModel();
+        infoTokenModel.fetch({
+            beforeSend: setHeader,
+            success: function(data){
+                userView.userId = data.id;
+                if (userView.model.id === data.id) {
+                    $(".eraseButton").show()
+                }
+                else {
+                    userView.searchFriendOnAccountFollow(userView.model.attributes.name);
                 }
             }
         })

@@ -55,10 +55,9 @@
         <br><br>
         <!-- <hr /> -->
         <div class="list-group">
-            <% watchlists.each( function( list ){ %>
+            <% watchlists.forEach( function( list ){ %>
                 <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span
-                        class="glyphicon glyphicon-film"></span>  <span class="watchlistsList"> <%=
-                    list.get("name")%> </span> </a>
+                        class="glyphicon glyphicon-film"></span>   <%=list.name%><span class="badge"><%= list.movies.length %> <span class="watchlistsList">  </span> </a>
             <% }); %>
         </div>
         <div class="container">
@@ -91,7 +90,7 @@
                 <% watchlist.movies.forEach( function( item ){ %>
                 <tr>
                     <th><a id=<%= item.trackId %>><%= item.trackName %></a></th>
-                    <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>">X</button></th>
+                    <th><button class="btn-xs btn-danger deleteMovieFromWL" id="<%= item.trackId%>"><span class="glyphicon glyphicon-remove"></span></button></th>
                     <input type="hidden" name="hiddenMovieId" value="<%= item.trackId%>" />
                 </tr>
                 <% }); %>
