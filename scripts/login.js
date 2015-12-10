@@ -101,6 +101,11 @@ window.onload = function(){
 function login(usermail, password) {
     console.log("u=" + usermail + " p=" + password);
 
+    if(usermail == "" || password == "") {
+        $('#badCredText').text("Make sure to fill in all fields...");
+        return;
+    }
+
     var loginInfo = {
         email : usermail,
         password : password
