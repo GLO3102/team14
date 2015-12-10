@@ -20,7 +20,6 @@ window.onload = function(){
             var password = document.getElementById("userPassword").value;
 
             login(usermail, password);
-
         }
 
         signinButton.onclick = function() {
@@ -31,6 +30,12 @@ window.onload = function(){
             $('#newSigninText').text("");
 
             console.log("n=" + username + "m=" + usermail + " p=" + password);
+
+            if(username == "" || usermail == "" || password == "") {
+                $('#newSigninText').addClass("red");
+                $('#newSigninText').text("Make sure to fill in all fields...");
+                return;
+            }
 
             var loginInfo = {
                 name : username,
