@@ -24,7 +24,7 @@ var WatchlistEditView = Backbone.View.extend({
     'el': '.page',
     'render': function(options) {
         var self = this;
-        //si la requête est faite avec un ID, c'est qu'on veut aller chercher une watchlist en particulier (*Edit
+        //si la requï¿½te est faite avec un ID, c'est qu'on veut aller chercher une watchlist en particulier (*Edit
         // Watchlist*)a
         if(options.id) {
             var watchlist = new Watchlist({id: options.id});
@@ -38,7 +38,7 @@ var WatchlistEditView = Backbone.View.extend({
                 }
             });
         }
-        //sinon, c'est qu'on crée une nouvelle watchlist (*New Watchlist*)
+        //sinon, c'est qu'on crï¿½e une nouvelle watchlist (*New Watchlist*)
         else {
             var template = _.template($("#watchlist-edit-template").html(), {watchlist: null});
             this.$el.html(template);
@@ -57,9 +57,16 @@ var WatchlistEditView = Backbone.View.extend({
 
         var currentId = $('#hiddenWatchlistId').text();
         if(currentId == 0) {
+            var watchlistName = $('#watchlistName').val();
+            var isNameValid = checkWatchlistName(watchlistName);
+            console.log("Name valid: "+isNameValid);
             //c'est alors une nouvelle watchlist
             if(!($('#watchlistName').val().length > 0)) {
                 alert("A watchlist name must contain at least one character.");
+            }
+            else if (!isNameValid) {
+                console.log("is name valid?!");
+                alert("A watchlist with that name already exists.");
             }
             else {
                 var checkValid = watchlists.create({
@@ -76,7 +83,7 @@ var WatchlistEditView = Backbone.View.extend({
             }
         } else {
 
-            //on veut plutôt modifier une watchlist existante
+            //on veut plutï¿½t modifier une watchlist existante
             var watchlist = new Watchlist();
             var checkValid = watchlist.save({
                 id: currentId,
@@ -180,5 +187,21 @@ function displaySearchResults(results) {
         $("#descriptionResult"+i).text(results.results[i-1].longDescription);
         $("#idResult"+i).text(results.results[i-1].trackId);
     }
+};
+
+var checkWatchlistName = function(name) {
+    var nameToCheck = " "+name+" ";
+    var valid = true;
+    console.log("start check name "+nameToCheck);
+    $(".watchlistsList").each(function(index, element) {
+        var currentName = $(element).html();
+        console.log("Current name: -"+currentName+"-");
+        console.log("Name: -"+nameToCheck+"-");
+        if(currentName === nameToCheck) {
+            console.log("am i here?");
+            valid = false;
+        }
+    });
+    return valid;
 };
 
