@@ -69,13 +69,14 @@ var createUMovieRecList = function(recList, type) {
         } else if (type==="actor") {
             subUrl = "actors";
         }
-        var url = "https://umovie.herokuapp.com/unsecure/search/"+subUrl+"?q="+encodeURIComponent(recList[i].name)+"&limit=1";
+        var url = "https://umovie.herokuapp.com/search/"+subUrl+"?q="+encodeURIComponent(recList[i].name)+"&limit=1";
         //var url = "https://umovie.herokuapp.com/unsecure/search/movies?q="+encodeURIComponent("attack of the killer" +
         //        " tomatoes")+"&limit=1";
         $.ajax({
             type: 'GET',
             url: url,
             contentType: 'application/json',
+            beforeSend: setHeader,
             success: function(data) {
                 addResponseToList(uMovieRecList, data, i, recListLength, type);
             }

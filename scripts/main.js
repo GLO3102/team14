@@ -93,11 +93,12 @@ router.on('route:tvshow', function(id){
         $("#PageContent").html(data);
     }).done(function(){
         var tvShowsCollection =  new TvShowsCollection({});
-        tvShowsCollection.url = 'http://umovie.herokuapp.com/unsecure/tvshows/season/' + id;
+        tvShowsCollection.url = 'http://umovie.herokuapp.com/tvshows/season/' + id;
         var tvShowsView = new TvShowsView({
             collection: tvShowsCollection
         });
         tvShowsCollection.fetch({
+            beforeSend: setHeader,
             success: function (model, response) {
 
                 tvShowsView.render();

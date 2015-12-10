@@ -96,11 +96,12 @@ function LoadSearchResults()
                 }
 
                 var moviesSRCollection =  new MoviesSearchResultCollection({});
-                moviesSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/movies?q=' + $('#SearchCriteria').val();
+                moviesSRCollection.url = 'http://umovie.herokuapp.com/search/movies?q=' + $('#SearchCriteria').val();
                 var moviesSRView = new MoviesSearchResultView({
                     collection: moviesSRCollection
                 });
                 moviesSRCollection.fetch({
+                    beforeSend: setHeader,
                     success: function (model, response) {
                         moviesSRView.render();
 
@@ -129,11 +130,12 @@ function LoadSearchResults()
         });
 
         var tvShowsSRCollection = new TvShowsSearchResultCollection({});
-        tvShowsSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/tvshows/seasons?q=' + $('#SearchCriteria').val();
+        tvShowsSRCollection.url = 'http://umovie.herokuapp.com/search/tvshows/seasons?q=' + $('#SearchCriteria').val();
         var tvShowsSRView = new TvShowsSearchResultView({
             collection: tvShowsSRCollection
         });
         tvShowsSRCollection.fetch({
+            beforeSend: setHeader,
             success: function (model, response) {
                 tvShowsSRView.render();
 
@@ -158,11 +160,12 @@ function LoadSearchResults()
         });
 
         var actorsSRCollection = new ActorsSearchResultCollection({});
-        actorsSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/actors?q=' + $('#SearchCriteria').val();
+        actorsSRCollection.url = 'http://umovie.herokuapp.com/search/actors?q=' + $('#SearchCriteria').val();
         var actorsSRView = new ActorsSearchResultView({
             collection: actorsSRCollection
         });
         actorsSRCollection.fetch({
+            beforeSend: setHeader,
             success: function (model, response) {
                 actorsSRView.render();
 
@@ -187,11 +190,12 @@ function LoadSearchResults()
         });
 
         var usersSRCollection = new UsersSearchResultCollection({});
-        usersSRCollection.url = 'http://umovie.herokuapp.com/unsecure/search/users?q=' + $('#SearchCriteria').val();
+        usersSRCollection.url = 'http://umovie.herokuapp.com/search/users?q=' + $('#SearchCriteria').val();
         var usersSRView = new UsersSearchResultView({
             collection: usersSRCollection
         });
         usersSRCollection.fetch({
+            beforeSend: setHeader,
             success: function (model, response) {
                 usersSRView.render();
 

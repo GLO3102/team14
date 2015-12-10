@@ -5,11 +5,11 @@ var actorFunction=function (id) {
 
 
     var actorModel = new ActorModel(['results'].artistId= id);
-    actorModel.url = 'https://umovie.herokuapp.com/unsecure/actors/'+ id;
+    actorModel.url = 'https://umovie.herokuapp.com/actors/'+ id;
 
    // collection movies
     var movieCollection = new ActorMoviesCollection();
-    movieCollection.url='https://umovie.herokuapp.com/unsecure/actors/'+id+'/movies';
+    movieCollection.url='https://umovie.herokuapp.com/actors/'+id+'/movies';
 
     var actorView = new ActorView({
         model: actorModel
@@ -20,15 +20,19 @@ var actorFunction=function (id) {
         collection: movieCollection
     });
 
-
-    // We add `.complete` callback to render the views only after the `fetch()` is completed.
-    actorModel.fetch().complete(function () {
-        actorView.render();
-        var data =JSON.stringify(actorModel);
-    });
-    movieCollection.fetch().complete(function () {
-        movieView.render();
+    actorModel.fetch({
+        beforeSend: setHeader,
+        complete: function () {
+            actorView.render();
+            var data =JSON.stringify(actorModel);
+        }
     });
 
+    movieCollection.fetch({
+        beforeSend: setHeader,
+        complete: function () {
+            movieView.render();
+        }
+    });
 };
 

@@ -1,5 +1,6 @@
 var MovieModel = Backbone.Model.extend({
-    urlRoot: "http://umovie.herokuapp.com/unsecure/movies",
+    urlRoot: "http://umovie.herokuapp.com/movies",
+    beforeSend: setHeader,
     defaults: {
         trackId: "",
         nameId: ""

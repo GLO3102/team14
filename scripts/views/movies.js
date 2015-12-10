@@ -56,8 +56,9 @@ MovieView = Backbone.View.extend({
         $.ajax({
             type: "POST",
 
-            url: "https://umovie.herokuapp.com/unsecure/watchlists/"+idWatchList+"/movies",
+            url: "https://umovie.herokuapp.com/watchlists/"+idWatchList+"/movies",
             data: JSON.stringify(movie),
+            beforeSend: setHeader,
             success: function(data) {
                 router.navigate('watchlists', {trigger:true});
                 alert("The movie " +movie.trackName + " is added to the watchlist : "+ data.name);
