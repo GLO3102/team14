@@ -192,13 +192,9 @@ function displaySearchResults(results) {
 var checkWatchlistName = function(name) {
     var nameToCheck = " "+name+" ";
     var valid = true;
-    console.log("start check name "+nameToCheck);
     $(".watchlistsList").each(function(index, element) {
         var currentName = $(element).html();
-        console.log("Current name: -"+currentName+"-");
-        console.log("Name: -"+nameToCheck+"-");
         if(currentName === nameToCheck) {
-            console.log("am i here?");
             valid = false;
         }
     });

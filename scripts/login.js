@@ -7,8 +7,6 @@ var loginUsername = "umovieUsername";
 var loginUserId = "umovieUserId";
 
 window.onload = function(){
-    console.log("on load called");
-
     $('#badCredText').text("");
     var loginButton = document.getElementById("loginButton");
     var signinButton = document.getElementById("signinButton");
@@ -76,22 +74,15 @@ window.onload = function(){
                     }
                 },
                 success: function(data) {
-                    console.log("request signup succeeded");
-                    console.log(data.token);
                 },
                 fail: function() {
-                    console.log("request signup failed");
                 },
                 always: function() {
-                    console.log("request signup always");
                 }
             });
         }
     }
     else {
-        console.log("load main screen");
-        console.log("Current token is " + getLoginToken());
-        console.log("Current user is " + getCurrentUsername());
         $.get('mainpage.html', function(data) {
             $("#PageContent").html(data);
         });
@@ -99,7 +90,6 @@ window.onload = function(){
 };
 
 function login(usermail, password) {
-    console.log("u=" + usermail + " p=" + password);
 
     var loginInfo = {
         email : usermail,

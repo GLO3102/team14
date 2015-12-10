@@ -32,24 +32,22 @@ var usersSearchResults = [];
 
 var router = new Router();
 router.on('route:home', function() {
-    console.log("home route called");
 });
+
 router.on('route:actor', function(id) {
-    console.log("actor route called");
     $.get('actor.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
         actorFunction(id);
     });
 });
+
 router.on('route:watchlists', function() {
-    console.log("watchlist route called");
     toggleUserMenu(null);
     var userInfo = new  InfosTokenModel();
     userInfo.fetch({
         beforeSend: setHeader,
         success: function(data){
-            console.log("le id est : " + data.id);
             var currentUserId = data.id;
             var watchlistListView = new WatchlistListView();
             watchlistListView.render(currentUserId);
@@ -125,21 +123,16 @@ router.on('route:users', function(id){
     })
 });
 router.on('route:search', function() {
-    console.log("search route called");
     LoadSearchResults();
 });
 router.on('route:logout', function() {
-    console.log("route logout detected");
     deleteAllCookies();
     //router.navigate("", {trigger: true});
     window.location = 'index.html';
 });
 
 if(getLoginToken()) {
-    console.log("cookie has been found");
-    console.log(getLoginToken());
 } else {
-    console.log("cookie not found");
     $.get('login.html', function(data) {
         $("#PageContent").html(data);
     })
