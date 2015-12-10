@@ -372,7 +372,9 @@
         <ul id="movieResultsList">
             <% _.each(movieResults, function(result) { %>
             <li>
-                <span class="movieSearchResultLine"><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span>
+                <span class="movieSearchResultLine">
+                    <span class="movieSearchResultLabel"><a href="<%= '#/movies/' + result.trackId %>"><%= result.trackName %></a> - <%= result.primaryGenreName %></span><button class="AddToWatchlistButton" onclick="AddMovieToWatchlist('<%= result.trackName %>', '<%= result.trackId %>', this);">Add to watchlist</button>
+                </span>
             </li>
             <% }); %>
         </ul>
@@ -399,7 +401,9 @@
         <ul id="ussResultsList">
             <% _.each(usersResults, function(result) { %>
             <li>
-                <span><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %><button onclick="FollowUser('<%= result.id %>');">Follow user</button></span>
+                <span>
+                    <span class="movieSearchResultLabel"><a href="<%= '#/user/' + result.id %>"><%= result.name %></a> - <%= result.email %></span><button onclick="FollowUser('<%= result.id %>');">Follow user</button>
+                </span>
             </li>
             <% }); %>
         </ul>

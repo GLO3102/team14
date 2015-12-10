@@ -74,6 +74,8 @@ function SearchUMovie()
     LoadSearchResults();
 }
 
+var currentUserWatchlists = [];
+
 function LoadSearchResults()
 {
     $.get('search.html', function(data) {
@@ -88,8 +90,10 @@ function LoadSearchResults()
             beforeSend: setHeader,
             success: function (data){
 
-                var watchlists = $('<select />');
+                var watchlists = $('<select class="WatchlistDropdown"/>');
                 var dataArray = JSON.parse(JSON.stringify(data));
+
+                currentUserWatchlists = dataArray;
 
                 for(var i=0; i < dataArray.length; ++i) {
                     $('<option />', {value: dataArray[i].id, text: dataArray[i].name}).appendTo(watchlists);
@@ -234,17 +238,23 @@ function ApplySearchFilter(control)
     for(var i=0; i < moviesSearchResults.length; ++i)
     {
         if (checkedGenres.length == 0) {
-            $('#movieResultsList').append('<li><span><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
-                                                                                                                   + moviesSearchResults[i].primaryGenreName + '</span></li>');
+            $('#movieResultsList').append('<li><span class="movieSearchResultLine"><span class="movieSearchResultLabel"><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
+                + moviesSearchResults[i].primaryGenreName + '</span>'
+                + "<button class=\'AddToWatchlistButton\' onclick=\'AddMovieToWatchlist(\"" + moviesSearchResults[i].trackName + "\"," + moviesSearchResults[i].trackId + ", this);\'>Add to watchlist</button></span>"
+                + '</li>');
         }
         else {
             if (checkedGenres.indexOf(moviesSearchResults[i].primaryGenreName) !== -1)
             {
-                $('#movieResultsList').append('<li><span><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
-                                                                                                                       + moviesSearchResults[i].primaryGenreName + '</span></li>');
+                $('#movieResultsList').append('<li><span class="movieSearchResultLine"><span class="movieSearchResultLabel"><a href=\"#/movies/' + moviesSearchResults[i].trackId + '\">' + moviesSearchResults[i].trackName + '</a> - '
+                                                                                                            + moviesSearchResults[i].primaryGenreName + '</span>'
+                    + "<button class=\'AddToWatchlistButton\' onclick=\'AddMovieToWatchlist(\"" + moviesSearchResults[i].trackName + "\"," + moviesSearchResults[i].trackId + ", this);\'>Add to watchlist</button></span>"
+                    + '</li>');
             }
         }
     }
+
+
 
     $('#tvShowResultsList').empty();
     for(var i=0; i < tvShowsSearchResults.length; ++i)
@@ -277,4 +287,34 @@ function ApplySearchFilter(control)
             }
         }
     }
+
+    var watchlists = $('<select class="WatchlistDropdown"/>');
+    var dataArray = JSON.parse(JSON.stringify(currentUserWatchlists));
+
+    for(var i=0; i < dataArray.length; ++i) {
+        $('<option />', {value: dataArray[i].id, text: dataArray[i].name}).appendTo(watchlists);
+    }
+
+    $(".movieSearchResultLine").append(watchlists);
+}
+
+function AddMovieToWatchlist(movieName, movieId, buttonElement)
+{
+    var index = $('.AddToWatchlistButton').index(buttonElement);
+    var watchlistId = $($('.WatchlistDropdown')[index]).val();
+
+    var movieToAdd = new Object();
+    movieToAdd.trackId = movieId;
+    movieToAdd.trackName = movieName;
+
+    $.ajax({
+        beforeSend: setHeader,
+        type: "POST",
+        url: "https://umovie.herokuapp.com/watchlists/"+watchlistId+"/movies",
+        data: JSON.stringify(movieToAdd),
+        success: function() {
+            router.navigate("/movies/"+ movieId, {trigger: true});
+        },
+        contentType: 'application/json'
+    } );
 }

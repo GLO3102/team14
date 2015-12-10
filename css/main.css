@@ -140,6 +140,12 @@ section {
     list-style-type: none;
 }
 
+.movieSearchResultLabel
+{
+    display: inline-block;
+    width : 30%;
+}
+
 /*******************************************/
 /*           style pour responsive         */
 /*******************************************/
