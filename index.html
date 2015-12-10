@@ -56,7 +56,9 @@
         <!-- <hr /> -->
         <div class="list-group">
             <% watchlists.each( function( list ){ %>
-                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span class="glyphicon glyphicon-film"></span>   <%= list.get("name") %></a>
+                <a href="#/watchlists/<%= list.id %>" class="list-group-item"><span
+                        class="glyphicon glyphicon-film"></span>  <span class="watchlistsList"> <%=
+                    list.get("name")%> </span> </a>
             <% }); %>
         </div>
         <div class="container">
