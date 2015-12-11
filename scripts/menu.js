@@ -78,11 +78,17 @@ var currentUserWatchlists = [];
 
 function LoadSearchResults()
 {
+    var criteria = $('#SearchCriteria').val().trim();
+    if (!criteria)
+    {
+        alert('A search criteria must be entered before clicking.')
+        return;
+    }
+
     $.get('search.html', function(data) {
         $("#PageContent").html(data);
     }).done(function(){
         searchFiltersCategories = [];
-
 
         var watchListMovie = new Watchlists;
         watchListMovie.initialize(getCurrentUserId());
