@@ -14,13 +14,11 @@ var priceFunction = function(data, type) {
     var result = data.items[0];
     var resultProductUrl = result.productUrl;
     var resultPrice = result.salePrice;
-    console.log(type);
     if(type==="Movie") {
         $("#walmartMovieButton").attr("href", resultProductUrl);
         $("#walmartMoviePrice").text(resultPrice);
     }
     else if (type==="Show") {
-        console.log(resultProductUrl);
         $("#walmartShowButton").attr("href", resultProductUrl);
         $("#walmartShowPrice").text(resultPrice);
     }

@@ -236,4 +236,18 @@ var UsersViews = Backbone.View.extend({
         router.navigate("/movies/"+ event.target.id, {trigger: true})
 
     }
-})
+});
+
+function FollowUser(userId) {
+    var userInfo = {"id": userId};
+    $.ajax({
+        type: "POST",
+        url: "http://umovie.herokuapp.com/follow",
+        data: JSON.stringify(userInfo),
+        contentType: "application/json",
+        beforeSend: setHeader,
+        success: function (data, textStatus, jqXHR) {
+            router.navigate("user/" + getCurrentUserId(), {trigger: true})
+        }
+    });
+}
